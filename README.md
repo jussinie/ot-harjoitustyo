@@ -1,8 +1,10 @@
 
-# THIS IS README!
+# Ohjelmistotekniikka, harjoitustyö
 
-This is done **using Markdown**.
+## Tehtävät
 
-*Cool, eh?*
+### Viikko 1
 
+[gitlog.txt](https://github.com/jussinie/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
 
+[komentorivi.txt](https://github.com/jussinie/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
