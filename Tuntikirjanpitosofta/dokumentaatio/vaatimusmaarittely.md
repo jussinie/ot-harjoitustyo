@@ -1,5 +1,5 @@
 
-# Vaatimusmäärittely
+# Vaatimusmäärittely*
 
 ## Sovelluksen tarkoitus
 
@@ -24,5 +24,8 @@ Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä he
     * Esimiehillä on omat tiiminsä, joihin käyttäjiä voi lisätä
     * Esimies näkee oman tiiminsä kirjatut tunnit
     * Esimies voi tulostaa tuntitiedot ulos järjestelmästä
+    * Esimies voi luoda projektin, johon kuuluu erilaisia tehtäviä
+    * Tuntikirjaukseen voi lisätä, mihin projektiin ja tehtävään se kuuluu
+    * Tuntikirjaukseen voi tarvittaessa lisätä kommentin
 
-*to be continued*
+*kyseessä alustava määrittelydokumentti, joten muutoksia (uusia featureita) voi vielä tulla
