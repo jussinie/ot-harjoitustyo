@@ -8,4 +8,9 @@
 Vaatimusmäärittely 0,5
 
 ## Total
-## 0,5h
+
+### Viikko 3
+
+Harjoitustyö 2
+
+## 2,5h
