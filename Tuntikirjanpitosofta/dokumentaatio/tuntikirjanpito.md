@@ -11,6 +11,6 @@ Vaatimusmäärittely 0,5
 
 ### Viikko 3
 
-Harjoitustyö 2
+Harjoitustyö 4
 
-## 2,5h
+## 4,5h
