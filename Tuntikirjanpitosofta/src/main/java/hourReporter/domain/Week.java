@@ -1,12 +1,13 @@
-import java.sql.SQLOutput;
-import java.util.ArrayList;
+package hourReporter.domain;
+
+import hourReporter.domain.Day;
+
 import java.util.HashMap;
-import java.util.Map;
 
 public class Week {
 
     HashMap<String, Day> days;
-    String[] weekdays;
+    public String[] weekdays;
 
     public Week() {
         weekdays = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};

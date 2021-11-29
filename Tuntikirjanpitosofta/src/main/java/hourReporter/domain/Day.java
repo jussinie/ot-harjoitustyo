@@ -1,8 +1,10 @@
+package hourReporter.domain;
+
 import java.util.ArrayList;
 
 public class Day {
 
-    ArrayList<Task> tasksForDay;
+    public ArrayList<Task> tasksForDay;
 
     public Day() {
         tasksForDay = new ArrayList<>();

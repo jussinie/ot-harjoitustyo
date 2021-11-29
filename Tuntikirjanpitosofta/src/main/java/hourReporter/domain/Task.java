@@ -1,3 +1,5 @@
+package hourReporter.domain;
+
 public class Task {
 
     private String taskName;

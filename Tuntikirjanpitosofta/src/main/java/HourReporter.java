@@ -1,12 +1,16 @@
+import hourReporter.domain.User;
+import hourReporter.domain.UserService;
+
 import java.util.Scanner;
 
 public class HourReporter {
 
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
-        UserInterface ui = new UserInterface(reader);
-        ui.initiateUserList();
-        User user = ui.login();
+        UserService userService = new UserService();
+        UserInterface ui = new UserInterface(reader, userService);
+        userService.initiateUserList();
+        User user = userService.login();
         ui.startUI(user);
     }
 }

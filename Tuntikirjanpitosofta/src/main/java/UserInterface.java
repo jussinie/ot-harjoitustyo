@@ -1,9 +1,11 @@
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import hourReporter.domain.Day;
+import hourReporter.domain.User;
+import hourReporter.domain.UserService;
+import hourReporter.domain.Week;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class UserInterface {
 
@@ -11,16 +13,12 @@ public class UserInterface {
     private HashMap<String, String> userCommands;
     private HashMap<String, String> commands;
     private HashMap<String, User> users;
+    private UserService userService;
 
-    public UserInterface(Scanner reader) {
+    public UserInterface(Scanner reader, UserService userService) {
         this.reader = reader;
-        users = new HashMap<>();
+        this.userService = new UserService();
         commands = new HashMap();
-        userCommands = new HashMap<>();
-
-        userCommands.put("1", "Existing user - log in");
-        userCommands.put("2", "Create new user");
-        userCommands.put("0", "Quit program");
 
         commands.put("1", "See your reported hours");
         commands.put("2", "Create a new sheet");
@@ -29,55 +27,10 @@ public class UserInterface {
         commands.put("0", "Quit program");
     }
 
-    public User login() {
-        System.out.println("Program started...");
-        System.out.println("");
-        while(true) {
-            for (Map.Entry<String, String> entry : userCommands.entrySet()) {
-                System.out.println(entry.getKey() + " " + entry.getValue());
-            }
-            System.out.print("Select the number of command you want to run: ");
-            String userCommandInput = reader.nextLine();
-            if (userCommandInput.equals("0")) {
-                System.out.println("Exiting program...");
-                System.exit(0);
-            } else if (userCommandInput.equals("1")) {
-                while (true) {
-                    System.out.println("Give your username");
-                    String usernameInput = reader.nextLine();
-                    if (checkIfUserExists(usernameInput)) {
-                        try {
-                            TimeUnit.SECONDS.sleep(1);
-                            return users.get(usernameInput);
-                        } catch (Exception e) {
-                            System.out.println("Error: " + e.getMessage());
-                        }
-                        break;
-                    } else {
-                        System.out.println("Username doesn't exist.");
-                        System.out.println("0: Exit");
-                        System.out.println("1: Try again");
-                    }
-                }
-            } else if (userCommandInput.equals("2")) {
-                User user = createNewUser();
-                return user;
-            }
-        }
-    }
-
     public void startUI(User user) {
         Week week = new Week();
         while(true) {
-            System.out.println();
-            System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName());
-            System.out.println("Available commands:");
-            System.out.println("****************");
-            for (Map.Entry<String, String> entry : commands.entrySet()) {
-                System.out.println(entry.getKey() + " " + entry.getValue());
-            }
-            System.out.println("****************");
-            System.out.print("Select the number of command you want to run: ");
+            printInfoAndOptions(user);
             String input = reader.nextLine();
             if (input.equals("0")) {
                 System.out.println("Exiting program...");
@@ -93,7 +46,6 @@ public class UserInterface {
             } else if (input.equals("4")) {
                 addHours(week);
             }
-            //for (int i = 0; i < 49; i++) System.out.println("");
         }
     }
 
@@ -130,54 +82,15 @@ public class UserInterface {
         }
     }
 
-    private User createNewUser() {
-        System.out.println("firstname");
-        String firstName = reader.nextLine();
-        System.out.println("lastname");
-        String lastName = reader.nextLine();
-        System.out.println("username");
-        String username = reader.nextLine();
-        System.out.println("role");
-        String role = reader.nextLine();
-        System.out.println("team");
-        String team = reader.nextLine();
-        User user = new User(firstName, lastName, username, role, team);
-        try {
-            user.saveUser();
-        } catch (Exception e) {
-            System.out.println("error: " + e.getMessage());
+    private void printInfoAndOptions(User user) {
+        System.out.println();
+        System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName());
+        System.out.println("Available commands:");
+        System.out.println("****************");
+        for (Map.Entry<String, String> entry : commands.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
         }
-        return user;
-    }
-
-    public boolean checkIfUserExists(String username) {
-        String filename = "users.txt";
-        ArrayList<String> usernames = new ArrayList<>();
-        try (Scanner fileReader = new Scanner(Paths.get(filename))) {
-            while (fileReader.hasNextLine()) {
-                String row = fileReader.nextLine();
-                String[] parts = row.split(",");
-                usernames.add(parts[2]);
-            }
-        } catch (Exception e) {
-            System.out.println("exception: " + e.getMessage());
-        }
-        if (usernames.contains(username)) {
-            return true;
-        }
-        return false;
-    }
-
-    public void initiateUserList() {
-        String filename = "users.txt";
-        try (Scanner fileReader = new Scanner(Paths.get(filename))) {
-            while (fileReader.hasNextLine()) {
-                String row = fileReader.nextLine();
-                String[] parts = row.split(",");
-                users.put(parts[2], new User(parts[0], parts[1], parts[2], parts[3], parts[4]));
-            }
-        } catch (Exception e) {
-            System.out.println("exception: " + e.getMessage());
-        }
+        System.out.println("****************");
+        System.out.print("Select the number of command you want to run: ");
     }
 }

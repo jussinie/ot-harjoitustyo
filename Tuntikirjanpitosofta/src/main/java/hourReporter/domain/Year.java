@@ -1,3 +1,7 @@
+package hourReporter.domain;
+
+import hourReporter.domain.Week;
+
 public class Year {
 
     private Week[] weeks;
