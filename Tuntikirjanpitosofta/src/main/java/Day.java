@@ -9,7 +9,9 @@ public class Day {
     }
 
     public void printDay() {
-        if (tasksForDay.isEmpty()) System.out.println("No tasks booked for this day.");
+        if (tasksForDay.isEmpty()) {
+            System.out.println("No tasks booked for this day.");
+        }
         for (Task t : tasksForDay) {
             System.out.println(t.getTaskName() + ", used " + t.getHours() + " hours");
         }

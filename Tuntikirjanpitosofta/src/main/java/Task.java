@@ -15,5 +15,4 @@ public class Task {
     public double getHours() {
         return this.hours;
     }
-
 }

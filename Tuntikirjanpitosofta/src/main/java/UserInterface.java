@@ -27,9 +27,9 @@ public class UserInterface {
 
     public void startUI() {
         System.out.println("Program started...");
-        System.out.println("");
+        System.out.println();
         Week week = new Week();
-        while(true) {
+        while (true) {
             for (Map.Entry<String, String> entry : userCommands.entrySet()) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
@@ -40,7 +40,7 @@ public class UserInterface {
                 System.exit(0);
             } else if (userCommandInput.equals("1")) {
                 System.out.println("Opening options...");
-                System.out.println("");
+                System.out.println();
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (Exception e) {
@@ -53,7 +53,7 @@ public class UserInterface {
             }
         }
 
-        while(true) {
+        while (true) {
             for (Map.Entry<String, String> entry : commands.entrySet()) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
@@ -77,7 +77,7 @@ public class UserInterface {
     }
 
     private void addHours(Week week) {
-        System.out.println("");
+        System.out.println();
         for (int i = 0; i < 7; i++) {
             System.out.print(week.weekdays[i] + " | ");
         }
