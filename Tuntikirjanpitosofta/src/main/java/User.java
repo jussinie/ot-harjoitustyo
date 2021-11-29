@@ -1,13 +1,24 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class User {
 
     private String firstName;
     private String lastName;
+    private String username;
     private String role;
     private String team;
 
-    public User(String firstName, String lastName, String role, String team) {
+    public User(String firstName, String lastName, String username, String role, String team) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.role = role;
         this.team = team;
     }
@@ -27,4 +38,13 @@ public class User {
     public String getTeam() {
         return this.team;
     }
+
+    public void saveUser() throws IOException {
+        String filename = "users.txt";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
+        writer.append(firstName+","+lastName+","+username+","+role+","+team);
+        writer.newLine();
+        writer.close();
+    }
+
 }

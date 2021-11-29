@@ -1,3 +1,5 @@
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,9 +10,11 @@ public class UserInterface {
     private Scanner reader;
     private HashMap<String, String> userCommands;
     private HashMap<String, String> commands;
+    private HashMap<String, User> users;
 
     public UserInterface(Scanner reader) {
         this.reader = reader;
+        users = new HashMap<>();
         commands = new HashMap();
         userCommands = new HashMap<>();
 
@@ -38,25 +42,34 @@ public class UserInterface {
                 System.out.println("Exiting program...");
                 System.exit(0);
             } else if (userCommandInput.equals("1")) {
-                User user = loginUsingOldUser();
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                    return user;
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
+                while (true) {
+                    System.out.println("Give your username");
+                    String usernameInput = reader.nextLine();
+                    if (checkIfUserExists(usernameInput)) {
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                            return users.get(usernameInput);
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                        break;
+                    } else {
+                        System.out.println("Username doesn't exist.");
+                        System.out.println("0: Exit");
+                        System.out.println("1: Try again");
+                    }
                 }
-                break;
             } else if (userCommandInput.equals("2")) {
-                User user = loginUsingOldUser();
+                User user = createNewUser();
                 return user;
             }
         }
-        return new User("", "", "", "");
     }
 
     public void startUI(User user) {
         Week week = new Week();
         while(true) {
+            System.out.println();
             System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName());
             System.out.println("Available commands:");
             System.out.println("****************");
@@ -117,7 +130,54 @@ public class UserInterface {
         }
     }
 
-    private static User loginUsingOldUser() {
-        return new User("Teppo", "Testikäyttäjä", "Basic", "Test Team");
+    private User createNewUser() {
+        System.out.println("firstname");
+        String firstName = reader.nextLine();
+        System.out.println("lastname");
+        String lastName = reader.nextLine();
+        System.out.println("username");
+        String username = reader.nextLine();
+        System.out.println("role");
+        String role = reader.nextLine();
+        System.out.println("team");
+        String team = reader.nextLine();
+        User user = new User(firstName, lastName, username, role, team);
+        try {
+            user.saveUser();
+        } catch (Exception e) {
+            System.out.println("error: " + e.getMessage());
+        }
+        return user;
+    }
+
+    public boolean checkIfUserExists(String username) {
+        String filename = "users.txt";
+        ArrayList<String> usernames = new ArrayList<>();
+        try (Scanner fileReader = new Scanner(Paths.get(filename))) {
+            while (fileReader.hasNextLine()) {
+                String row = fileReader.nextLine();
+                String[] parts = row.split(",");
+                usernames.add(parts[2]);
+            }
+        } catch (Exception e) {
+            System.out.println("exception: " + e.getMessage());
+        }
+        if (usernames.contains(username)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void initiateUserList() {
+        String filename = "users.txt";
+        try (Scanner fileReader = new Scanner(Paths.get(filename))) {
+            while (fileReader.hasNextLine()) {
+                String row = fileReader.nextLine();
+                String[] parts = row.split(",");
+                users.put(parts[2], new User(parts[0], parts[1], parts[2], parts[3], parts[4]));
+            }
+        } catch (Exception e) {
+            System.out.println("exception: " + e.getMessage());
+        }
     }
 }
