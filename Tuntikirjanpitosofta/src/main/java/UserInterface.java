@@ -25,11 +25,10 @@ public class UserInterface {
         commands.put("0", "Quit program");
     }
 
-    public void startUI() {
+    public User login() {
         System.out.println("Program started...");
-        System.out.println();
-        Week week = new Week();
-        while (true) {
+        System.out.println("");
+        while(true) {
             for (Map.Entry<String, String> entry : userCommands.entrySet()) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
@@ -39,24 +38,32 @@ public class UserInterface {
                 System.out.println("Exiting program...");
                 System.exit(0);
             } else if (userCommandInput.equals("1")) {
-                System.out.println("Opening options...");
-                System.out.println();
+                User user = loginUsingOldUser();
                 try {
                     TimeUnit.SECONDS.sleep(1);
+                    return user;
                 } catch (Exception e) {
                     System.out.println("Error: " + e.getMessage());
                 }
                 break;
             } else if (userCommandInput.equals("2")) {
-                System.out.println("Exiting program...");
-                break;
+                User user = loginUsingOldUser();
+                return user;
             }
         }
+        return new User("", "", "", "");
+    }
 
-        while (true) {
+    public void startUI(User user) {
+        Week week = new Week();
+        while(true) {
+            System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName());
+            System.out.println("Available commands:");
+            System.out.println("****************");
             for (Map.Entry<String, String> entry : commands.entrySet()) {
                 System.out.println(entry.getKey() + " " + entry.getValue());
             }
+            System.out.println("****************");
             System.out.print("Select the number of command you want to run: ");
             String input = reader.nextLine();
             if (input.equals("0")) {
@@ -73,6 +80,7 @@ public class UserInterface {
             } else if (input.equals("4")) {
                 addHours(week);
             }
+            //for (int i = 0; i < 49; i++) System.out.println("");
         }
     }
 
@@ -82,13 +90,34 @@ public class UserInterface {
             System.out.print(week.weekdays[i] + " | ");
         }
         System.out.println("");
-        System.out.println("Select day to which report hours:");
-        String weekInput = reader.nextLine();
-        Day day = week.getOneDay(weekInput);
-        System.out.println("Please insert your task: ");
-        String taskName = reader.nextLine();
-        System.out.println("Please state hours worked (in form x.x).");
-        double workedHours = Double.valueOf(reader.nextLine());
-        day.addTaskToDay(taskName, workedHours);
+        boolean exist = false;
+        boolean cancel = false;
+        String weekInput = "";
+        while (!exist) {
+            System.out.println("Select day to which report hours:");
+            System.out.println("Cancel with 0");
+            weekInput = reader.nextLine();
+            for (int i = 0; i < 7; i++) {
+                if (weekInput.equals(week.weekdays[i])) {
+                    exist = true;
+                }
+            }
+            if (weekInput.equals("0")) {
+                cancel = true;
+                break;
+            }
+        }
+        if (!cancel) {
+            Day day = week.getOneDay(weekInput);
+            System.out.println("Please insert your task: ");
+            String taskName = reader.nextLine();
+            System.out.println("Please state hours worked (in form x.x).");
+            double workedHours = Double.valueOf(reader.nextLine());
+            day.addTaskToDay(taskName, workedHours);
+        }
+    }
+
+    private static User loginUsingOldUser() {
+        return new User("Teppo", "Testikäyttäjä", "Basic", "Test Team");
     }
 }
