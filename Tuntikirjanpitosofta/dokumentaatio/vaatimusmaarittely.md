@@ -11,13 +11,17 @@ Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä he
 
 ## Suunnitellut toiminnallisuudet
 
-    * Käyttäjä / esimies voi luoda itselleen käyttäjätunnuksen
-    * Käyttäjä / esimies voi kirjautua sisään käyttäen tätä tunnusta
-    * Käyttäjä voi luoda itselleen uuden periodin tuntien lisäämistä varten
-    * Käyttäjä voi kirjata tälle periodille tekemänsä tunnit
+    * Käyttäjä / esimies voi luoda itselleen käyttäjätunnuksen => tehty
+    * Käyttäjä / esimies voi kirjautua sisään käyttäen tätä tunnusta => tehty
+    * Käyttäjä voi luoda itselleen uuden periodin tuntien lisäämistä varten => tehty
+    * Käyttäjä voi kirjata tälle periodille tekemänsä tunnit => tehty
     * Käyttäjä näkee vain omat lisäämänsä tunnit
     * Esimies voi hyväksyä käyttäjän lisäämät tunnit
     * Käyttäjä / esimies voi kirjautua ulos sovelluksesta
+
+    => Osa toiminnallisuuksista vielä vajavaisia, 
+    esimerkiksi kaikkia syötteitä ei tarkisteta.
+    => Tietojen tallennus tällä hetkellä tiedostoon, mock-up vaiheessa.
 
 ### Jatkokehitystä
 
