@@ -1,4 +1,4 @@
-package hourReporter.domain;
+package hourreporter.domain;
 
 public class Task {
 

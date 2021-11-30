@@ -1,7 +1,6 @@
-import hourReporter.domain.Day;
-import hourReporter.domain.User;
-import hourReporter.domain.UserService;
-import hourReporter.domain.Week;
+package hourreporter.ui;
+
+import hourreporter.domain.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,26 +9,34 @@ import java.util.Scanner;
 public class UserInterface {
 
     private Scanner reader;
-    private HashMap<String, String> userCommands;
     private HashMap<String, String> commands;
-    private HashMap<String, User> users;
-    private UserService userService;
+    private HashMap<String, String> adminCommands;
 
     public UserInterface(Scanner reader, UserService userService) {
         this.reader = reader;
-        this.userService = new UserService();
+        userService = new UserService();
         commands = new HashMap();
+        adminCommands = new HashMap<>();
 
         commands.put("1", "See your reported hours");
         commands.put("2", "Create a new sheet");
         commands.put("3", "Print hours worked");
         commands.put("4", "Report hours");
+        commands.put("5", "Save your report");
         commands.put("0", "Quit program");
+
+        adminCommands.put("1", "See your reported hours");
+        adminCommands.put("2", "Create a new sheet");
+        adminCommands.put("3", "Print hours worked");
+        adminCommands.put("4", "Report hours");
+        adminCommands.put("5", "See hours from team members || not yet active");
+        adminCommands.put("6", "Accept team members hour sheets || not yet active");
+        adminCommands.put("0", "Quit program");
     }
 
-    public void startUI(User user) {
+    public void startUI(User user, FileService fileService) {
         Week week = new Week();
-        while(true) {
+        while (true) {
             printInfoAndOptions(user);
             String input = reader.nextLine();
             if (input.equals("0")) {
@@ -45,7 +52,23 @@ public class UserInterface {
                 System.out.println("Creating week " + weekNr);
             } else if (input.equals("4")) {
                 addHours(week);
+            } else if (input.equals("5")) {
+                saveHours(week, user, fileService);
             }
+        }
+    }
+
+    private void saveHours(Week week, User user, FileService fileService) {
+        String workWeek = String.valueOf(user.getUserNumber());
+        workWeek.concat(",");
+        double[] workHours = week.getWeeksHoursByDay();
+        for (int i = 0; i < 7; i++) {
+            workWeek = workWeek + "," + week.weekdays[i] + "," + workHours[i];
+        }
+        try {
+            fileService.writeHoursToFile(workWeek);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
@@ -84,13 +107,32 @@ public class UserInterface {
 
     private void printInfoAndOptions(User user) {
         System.out.println();
-        System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName());
+        if (user.getIsTeamLead()) {
+            System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName() + " - TEAM LEAD VIEW");
+        } else {
+            System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName());
+        }
         System.out.println("Available commands:");
         System.out.println("****************");
-        for (Map.Entry<String, String> entry : commands.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+        if (user.getIsTeamLead()) {
+            printAdminCommands();
+        } else {
+            printCommands();
         }
         System.out.println("****************");
         System.out.print("Select the number of command you want to run: ");
     }
+
+    private void printCommands() {
+        for (Map.Entry<String, String> entry : commands.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
+    private void printAdminCommands() {
+        for (Map.Entry<String, String> entry : adminCommands.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
 }

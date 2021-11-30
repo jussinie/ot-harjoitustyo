@@ -1,6 +1,4 @@
-package hourReporter.domain;
-
-import hourReporter.domain.Week;
+package hourreporter.domain;
 
 public class Year {
 

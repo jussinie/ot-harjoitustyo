@@ -1,4 +1,4 @@
-package hourReporter.domain;
+package hourreporter.domain;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-import hourReporter.domain.Day;
+import hourreporter.domain.Day;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

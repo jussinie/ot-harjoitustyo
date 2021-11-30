@@ -1,8 +1,4 @@
-package hourReporter.domain;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+package hourreporter.domain;
 
 public class User {
 
@@ -11,6 +7,8 @@ public class User {
     private String username;
     private String role;
     private String team;
+    private boolean isTeamLead;
+    private long userNumber;
 
     public User(String firstName, String lastName, String username, String role, String team) {
         this.firstName = firstName;
@@ -18,6 +16,10 @@ public class User {
         this.username = username;
         this.role = role;
         this.team = team;
+        this.isTeamLead = false;
+        String fullName = firstName.concat(lastName).concat(username);
+
+        this.userNumber = fullName.hashCode();
     }
 
     public String getFirstName() {
@@ -36,12 +38,19 @@ public class User {
         return this.team;
     }
 
-    public void saveUser() throws IOException {
-        String filename = "users.txt";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true));
-        writer.append(firstName+","+lastName+","+username+","+role+","+team);
-        writer.newLine();
-        writer.close();
+    public String getUsername() {
+        return this.username;
     }
 
+    public long getUserNumber() {
+        return this.userNumber;
+    }
+
+    public boolean getIsTeamLead() {
+        return this.isTeamLead;
+    }
+
+    public void setIsTeamLead() {
+        this.isTeamLead = true;
+    }
 }

@@ -1,12 +1,10 @@
-package hourReporter.domain;
-
-import hourReporter.domain.Day;
+package hourreporter.domain;
 
 import java.util.HashMap;
 
 public class Week {
 
-    HashMap<String, Day> days;
+    private HashMap<String, Day> days;
     public String[] weekdays;
 
     public Week() {
@@ -24,6 +22,14 @@ public class Week {
             System.out.print(" | ");
         }
         System.out.println("");
+    }
+
+    public double[] getWeeksHoursByDay() {
+        double[] weeksHours = new double[7];
+        for (int i = 0; i < 7; i++) {
+            weeksHours[i] = days.get(weekdays[i]).getDaysHours();
+        }
+        return weeksHours;
     }
 
     public double countWorkHours() {
