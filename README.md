@@ -1,14 +1,10 @@
 
-# Ohjelmistotekniikka, harjoitustyö
+# Ohjelmistotekniikka - Tuntikirjanpitosofta
 
-## Tehtävät
+Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtuntinsa. Jokaisella käyttäjällä on oma käyttäjätunnuksensa ja jokainen käyttäjä voi näin hallinnoida omia tuntejaan. Toistaiseksi kaikki toiminnallisuudet eivät vielä toimi ja sovellus on osin puutteellinen, mutta tämä korjaantuu tulevien viikkojen kuluessa. Lisätietoja löytyy vaatimusmäärittelystä.
 
-### Viikko 1
+### Dokumentaatio 
 
-[gitlog.txt](https://github.com/jussinie/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+[Vaatimusmäärittely](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/vaatimusmaarittely.md)
 
-[komentorivi.txt](https://github.com/jussinie/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
-
-Ekan viikon tehtävien muutoksia.
-Tehdään nyt konflikti.
- 
+[Tuntikirjanpito](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/tuntikirjanpito.md)
