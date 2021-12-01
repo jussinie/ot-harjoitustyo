@@ -15,4 +15,8 @@ Harjoitustyö 5
 
 Harjoitustyö 6,0 
 
+### Viikko 5
+
+Harjoitustyö 1,5
+
 ## Total 11,5h
