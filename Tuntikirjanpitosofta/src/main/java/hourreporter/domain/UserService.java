@@ -1,6 +1,9 @@
 package hourreporter.domain;
 
+import hourreporter.dao.UserDao;
+
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +68,7 @@ public class UserService {
         return false;
     }
 
-    public User login() {
+    public User login(UserDao userDao) throws SQLException {
         Scanner reader = new Scanner(System.in);
         System.out.println("Program started...");
         System.out.println("");
@@ -77,7 +80,7 @@ public class UserService {
                 System.out.println("Exiting program...");
                 System.exit(0);
             } else if (userCommandInput.equals("1")) {
-                while (true) {
+                /*while (true) {
                     System.out.println("Give your username");
                     String usernameInput = reader.nextLine();
                     if (checkIfUserExistsInFile(usernameInput)) {
@@ -97,7 +100,8 @@ public class UserService {
                             break;
                         }
                     }
-                }
+                } */
+                return userDao.read(1);
             } else if (userCommandInput.equals("2")) {
                 User user = createNewUser();
                 return user;
