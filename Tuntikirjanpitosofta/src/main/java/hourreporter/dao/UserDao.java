@@ -5,22 +5,34 @@ import hourreporter.domain.User;
 import java.sql.*;
 import java.util.List;
 
-public class UserDao implements Dao<User, Integer> {
+public class UserDao implements Dao<User, String> {
 
     @Override
     public void create(User user) throws SQLException {
+        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
+        PreparedStatement ps = c.prepareStatement("INSERT INTO Users"
+        + " (firstName, lastName, username, role, team, isTeamLead)"
+                + " VALUES (?, ?, ?, ?, ?, ?)");
+        ps.setString(1, user.getFirstName());
+        ps.setString(2, user.getLastName());
+        ps.setString(3, user.getUsername());
+        ps.setString(4, user.getRole());
+        ps.setString(5, user.getTeam());
+        ps.setBoolean(6, user.getIsTeamLead());
 
+        ps.executeUpdate();
+        ps.close();
+        c.close();
     }
 
     @Override
-    public User read(Integer key) throws SQLException {
+    public User read(String username) throws SQLException {
         Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Users WHERE id = ?");
-        ps.setInt(1, key);
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM Users WHERE username = ?");
+        ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
 
-        User user = new User(rs.getString("firstName"),
-                rs.getString("lastName"), rs.getString("username"),
+        User user = new User(rs.getString("firstName"), rs.getString("lastName"), rs.getString("username"),
                 rs.getString("role"), rs.getString("team"));
         ps.close();
         rs.close();
@@ -28,7 +40,7 @@ public class UserDao implements Dao<User, Integer> {
     }
 
     @Override
-    public User update(Integer key) {
+    public User update(String username) {
         return null;
     }
 

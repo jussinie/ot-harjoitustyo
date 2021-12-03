@@ -1,7 +1,9 @@
 package hourreporter.ui;
 
+import hourreporter.dao.WeekDao;
 import hourreporter.domain.*;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -34,8 +36,29 @@ public class UserInterface {
         adminCommands.put("0", "Quit program");
     }
 
-    public void startUI(User user, FileService fileService) {
-        Week week = new Week();
+    public Week selectOrCreateWeek(User user, FileService fileService, Year year) {
+        while (true) {
+            System.out.println("Select 0, 1, 2");
+            String input = reader.nextLine();
+            if (input.equals("0")) {
+                System.out.println("Exiting program...");
+                break;
+            } else if (input.equals("1")) {
+                System.out.println("Which week you want to select?");
+                year.printCreatedWeeks();
+                String selectWeek = reader.nextLine();
+                return year.getWeek(Integer.valueOf(selectWeek));
+            } else if (input.equals("2")) {
+                System.out.println("For which week you want to create your sheet?");
+                System.out.println("This week will be selected after creation.");
+                String weekNr = reader.nextLine();
+                return year.createNewWeek(Integer.valueOf(weekNr), user);
+            }
+        }
+        return null;
+    }
+
+    public void startUI(User user, FileService fileService, Week week, WeekDao wd) {
         while (true) {
             printInfoAndOptions(user);
             String input = reader.nextLine();
@@ -46,30 +69,27 @@ public class UserInterface {
                 week.printWholeWeek();
             } else if (input.equals("3")) {
                 System.out.println(week.countWorkHours());
-            } else if (input.equals("2")) {
-                System.out.println("What week you want to create? ");
-                int weekNr = Integer.valueOf(reader.nextLine());
-                System.out.println("Creating week " + weekNr);
             } else if (input.equals("4")) {
                 addHours(week);
             } else if (input.equals("5")) {
-                saveHours(week, user, fileService);
+                saveHours(week, user, fileService, wd);
             }
         }
     }
 
-    private void saveHours(Week week, User user, FileService fileService) {
+    private void saveHours(Week week, User user, FileService fileService, WeekDao weekdao) {
         String workWeek = String.valueOf(user.getUserNumber());
         workWeek.concat(",");
         double[] workHours = week.getWeeksHoursByDay();
         for (int i = 0; i < 7; i++) {
             workWeek = workWeek + "," + week.weekdays[i] + "," + workHours[i];
         }
-        try {
+
+        /*try {
             fileService.writeHoursToFile(workWeek);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        }
+        } */
     }
 
     private void addHours(Week week) {

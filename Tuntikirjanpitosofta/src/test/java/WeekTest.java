@@ -1,3 +1,4 @@
+import hourreporter.domain.User;
 import hourreporter.domain.Week;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,8 @@ class WeekTest {
 
     @Test
     void weekIsCreatedWithZeroHours() {
-        Week w = new Week();
+        User user = new User("test", "test", "testUser", "test", "test");
+        Week w = new Week(1, user);
         assertEquals(0, w.countWorkHours());
     }
 }

@@ -80,13 +80,14 @@ public class UserService {
                 System.out.println("Exiting program...");
                 System.exit(0);
             } else if (userCommandInput.equals("1")) {
-                /*while (true) {
+                while (true) {
                     System.out.println("Give your username");
                     String usernameInput = reader.nextLine();
-                    if (checkIfUserExistsInFile(usernameInput)) {
+                    User user = userDao.read(usernameInput);
+                    if (user != null) {
                         try {
                             TimeUnit.SECONDS.sleep(1);
-                            return users.get(usernameInput);
+                            return user;
                         } catch (Exception e) {
                             System.out.println("Error: " + e.getMessage());
                         }
@@ -100,10 +101,10 @@ public class UserService {
                             break;
                         }
                     }
-                } */
-                return userDao.read(1);
+                }
             } else if (userCommandInput.equals("2")) {
                 User user = createNewUser();
+                userDao.create(user);
                 return user;
             }
         }

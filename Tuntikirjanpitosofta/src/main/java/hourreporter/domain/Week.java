@@ -6,17 +6,25 @@ public class Week {
 
     private HashMap<String, Day> days;
     public String[] weekdays;
+    private int weekNumber;
+    private long userNumber;
+    private boolean submitted;
+    private boolean accepted;
 
-    public Week() {
+    public Week(int weekNumber, User user) {
+        this.submitted = false;
+        this.accepted = false;
         weekdays = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
         days = new HashMap<>();
         for (int i = 0; i < 7; i++) {
             days.put(weekdays[i], new Day());
         }
+        this.weekNumber = weekNumber;
+        this.userNumber = user.getUserNumber();
     }
 
     public void printWholeWeek() {
-        System.out.println("Reported hours:");
+        System.out.println("Reported hours for week " + this.weekNumber + ": ");
         for (int i = 0; i < 7; i++) {
             System.out.print(weekdays[i] + " : " + days.get(weekdays[i]).getDaysHours());
             System.out.print(" | ");
@@ -40,7 +48,27 @@ public class Week {
         return total;
     }
 
+    public long getUserNumber() {
+        return this.userNumber;
+    }
+
+    public int getWeekNumber() {
+        return this.weekNumber;
+    }
+
+    public void setSubmitted() {
+        this.submitted = true;
+    }
+
+    public void setAccepted() {
+        this.accepted = true;
+    }
+
     public Day getOneDay(String dayAbbreviation) {
         return days.get(dayAbbreviation);
+    }
+
+    public double getDaysHoursForWeek(String dayAbbreviation) {
+        return days.get(dayAbbreviation).getDaysHours();
     }
 }
