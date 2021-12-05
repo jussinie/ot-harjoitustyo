@@ -11,14 +11,15 @@ public class UserDao implements Dao<User, String> {
     public void create(User user) throws SQLException {
         Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
         PreparedStatement ps = c.prepareStatement("INSERT INTO Users"
-        + " (firstName, lastName, username, role, team, isTeamLead)"
-                + " VALUES (?, ?, ?, ?, ?, ?)");
+        + " (firstName, lastName, username, userNumber, role, team, isTeamLead)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, user.getFirstName());
         ps.setString(2, user.getLastName());
         ps.setString(3, user.getUsername());
-        ps.setString(4, user.getRole());
-        ps.setString(5, user.getTeam());
-        ps.setBoolean(6, user.getIsTeamLead());
+        ps.setLong(4, user.getUserNumber());
+        ps.setString(5, user.getRole());
+        ps.setString(6, user.getTeam());
+        ps.setBoolean(7, user.getIsTeamLead());
 
         ps.executeUpdate();
         ps.close();

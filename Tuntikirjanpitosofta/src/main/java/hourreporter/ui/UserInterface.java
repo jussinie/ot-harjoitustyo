@@ -3,6 +3,7 @@ package hourreporter.ui;
 import hourreporter.dao.WeekDao;
 import hourreporter.domain.*;
 
+import java.sql.SQLException;
 import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,27 +39,37 @@ public class UserInterface {
 
     public Week selectOrCreateWeek(User user, FileService fileService, Year year) {
         while (true) {
-            System.out.println("Select 0, 1, 2");
+            System.out.println("1: Create new week");
+            System.out.println("2: Select existing week");
+            System.out.println("0: Quit program");
             String input = reader.nextLine();
             if (input.equals("0")) {
                 System.out.println("Exiting program...");
                 break;
-            } else if (input.equals("1")) {
-                System.out.println("Which week you want to select?");
-                year.printCreatedWeeks();
-                String selectWeek = reader.nextLine();
-                return year.getWeek(Integer.valueOf(selectWeek));
             } else if (input.equals("2")) {
+                if (!year.printCreatedWeeks()) {
+                    System.out.println("Which week you want to select?");
+                    String selectWeek = reader.nextLine();
+                    return year.getWeek(Integer.valueOf(selectWeek));
+                } else {
+                    System.out.println("As there are no weeks created, your selection will be first created week");
+                    System.out.println("This week will be selected after creation.");
+                    String selectWeek = reader.nextLine();
+                    return year.createNewWeek(Integer.valueOf(Integer.valueOf(selectWeek)), user.getUserNumber());
+                }
+            } else if (input.equals("1")) {
                 System.out.println("For which week you want to create your sheet?");
+                System.out.println("You have created these weeks already:");
+                year.printCreatedWeeks();
                 System.out.println("This week will be selected after creation.");
                 String weekNr = reader.nextLine();
-                return year.createNewWeek(Integer.valueOf(weekNr), user);
+                return year.createNewWeek(Integer.valueOf(weekNr), user.getUserNumber());
             }
         }
         return null;
     }
 
-    public void startUI(User user, FileService fileService, Week week, WeekDao wd) {
+    public void startUI(User user, FileService fileService, Week week, WeekDao wd) throws SQLException {
         while (true) {
             printInfoAndOptions(user);
             String input = reader.nextLine();
@@ -77,14 +88,14 @@ public class UserInterface {
         }
     }
 
-    private void saveHours(Week week, User user, FileService fileService, WeekDao weekdao) {
+    private void saveHours(Week week, User user, FileService fileService, WeekDao weekdao) throws SQLException {
         String workWeek = String.valueOf(user.getUserNumber());
         workWeek.concat(",");
         double[] workHours = week.getWeeksHoursByDay();
         for (int i = 0; i < 7; i++) {
             workWeek = workWeek + "," + week.weekdays[i] + "," + workHours[i];
         }
-
+        weekdao.create(week);
         /*try {
             fileService.writeHoursToFile(workWeek);
         } catch (Exception e) {

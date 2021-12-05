@@ -11,7 +11,7 @@ public class Week {
     private boolean submitted;
     private boolean accepted;
 
-    public Week(int weekNumber, User user) {
+    public Week(int weekNumber, long userNumber) {
         this.submitted = false;
         this.accepted = false;
         weekdays = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
@@ -20,7 +20,7 @@ public class Week {
             days.put(weekdays[i], new Day());
         }
         this.weekNumber = weekNumber;
-        this.userNumber = user.getUserNumber();
+        this.userNumber = userNumber;
     }
 
     public void printWholeWeek() {
@@ -69,6 +69,10 @@ public class Week {
     }
 
     public double getDaysHoursForWeek(String dayAbbreviation) {
-        return days.get(dayAbbreviation).getDaysHours();
+        if (days.get(dayAbbreviation) == null) {
+            return 0;
+        } else {
+            return days.get(dayAbbreviation).getDaysHours();
+        }
     }
 }

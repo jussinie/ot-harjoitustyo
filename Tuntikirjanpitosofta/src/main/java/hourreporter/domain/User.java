@@ -18,10 +18,9 @@ public class User {
         this.role = role;
         this.team = team;
         this.isTeamLead = false;
-        this.year = new Year();
         String fullName = firstName.concat(lastName).concat(username);
-
         this.userNumber = fullName.hashCode();
+        this.year = new Year(userNumber);
     }
 
     public String getFirstName() {

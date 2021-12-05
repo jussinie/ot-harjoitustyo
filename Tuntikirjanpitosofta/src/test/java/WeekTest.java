@@ -13,7 +13,7 @@ class WeekTest {
     @Test
     void weekIsCreatedWithZeroHours() {
         User user = new User("test", "test", "testUser", "test", "test");
-        Week w = new Week(1, user);
+        Week w = new Week(1, user.getUserNumber());
         assertEquals(0, w.countWorkHours());
     }
 }
