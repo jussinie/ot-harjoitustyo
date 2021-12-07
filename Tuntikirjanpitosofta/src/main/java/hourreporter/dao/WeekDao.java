@@ -28,6 +28,7 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.executeUpdate();
         ps.close();
         c.close();
+        System.out.println("Week saved!");
     }
 
     @Override

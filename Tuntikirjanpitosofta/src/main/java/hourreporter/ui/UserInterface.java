@@ -58,12 +58,16 @@ public class UserInterface {
             } else if (input.equals("2")) {
                 if (!year.printCreatedWeeks()) {
                     System.out.println("Which week you want to select?");
+                    System.out.println("If you select something that doesn't exist, that week will be created.");
                     String selectWeek = reader.nextLine();
                     if (selectWeek.matches("-?\\d+")) {
-                        return year.getWeek(Integer.valueOf(selectWeek));
+                        if (Integer.valueOf(selectWeek) > 0 && Integer.valueOf(selectWeek) < 53) {
+                            if (year.getWeek(Integer.valueOf(selectWeek)) == null) return year.createNewWeek(Integer.valueOf(selectWeek), user.getUserNumber());
+                            else return year.getWeek(Integer.valueOf(selectWeek));
+                        }
                     }
                 } else {
-                    System.out.println("As there are no weeks created, your selection will be first created week");
+                    System.out.println("As there are no weeks created, your selection will be first created week.");
                     System.out.println("This week will be selected after creation.");
                     String selectWeek = reader.nextLine();
                     return year.createNewWeek(Integer.valueOf(Integer.valueOf(selectWeek)), user.getUserNumber());
@@ -91,6 +95,8 @@ public class UserInterface {
                 break;
             } else if (input.equals("1")) {
                 week.printWholeWeek();
+            } else if (input.equals("2")) {
+                selectOrCreateWeek(user, us);
             } else if (input.equals("3")) {
                 System.out.println(week.countWorkHours());
             } else if (input.equals("4")) {
@@ -182,6 +188,8 @@ public class UserInterface {
         System.out.println();
         while (true) {
             printUserCommands();
+            System.out.println();
+            System.out.println();
             System.out.print("Select the number of command you want to run: ");
             String userCommandInput = reader.nextLine();
             if (userCommandInput.equals("0")) {
@@ -190,8 +198,10 @@ public class UserInterface {
             } else if (userCommandInput.equals("1")) {
                 while (true) {
                     System.out.println("Give your username");
+                    System.out.println("0 returns");
                     String usernameInput = reader.nextLine();
                     try {
+                        if (usernameInput.equals("0")) break;
                         User user = us.getUd().read(usernameInput);
                         if (user != null) {
                             TimeUnit.SECONDS.sleep(1);
