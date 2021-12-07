@@ -19,9 +19,8 @@ Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä he
     * Esimies voi hyväksyä käyttäjän lisäämät tunnit
     * Käyttäjä / esimies voi kirjautua ulos sovelluksesta
 
-    => Osa toiminnallisuuksista vielä vajavaisia, 
-    esimerkiksi kaikkia syötteitä ei tarkisteta.
-    => Tietojen tallennus tällä hetkellä tiedostoon, mock-up vaiheessa.
+    => Osa toiminnallisuuksista vielä vajavaisia,kaikkia syötteitä ei tarkisteta.
+    => Tietojen tallennus siirretty tiedostosta sql-tietokantaan
 
 ### Jatkokehitystä
 
