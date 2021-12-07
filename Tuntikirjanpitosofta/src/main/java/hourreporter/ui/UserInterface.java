@@ -57,7 +57,7 @@ public class UserInterface {
                 break;
             } else if (input.equals("2")) {
                 if (!year.printCreatedWeeks()) {
-                    System.out.println("Which week you want to select?");
+                    System.out.println("Which week you want to select? (1-52)");
                     System.out.println("If you select something that doesn't exist, that week will be created.");
                     String selectWeek = reader.nextLine();
                     if (selectWeek.matches("-?\\d+")) {
@@ -67,13 +67,13 @@ public class UserInterface {
                         }
                     }
                 } else {
-                    System.out.println("As there are no weeks created, your selection will be first created week.");
+                    System.out.println("As there are no weeks created, your selection (1-52) will be first created week.");
                     System.out.println("This week will be selected after creation.");
                     String selectWeek = reader.nextLine();
                     return year.createNewWeek(Integer.valueOf(Integer.valueOf(selectWeek)), user.getUserNumber());
                 }
             } else if (input.equals("1")) {
-                System.out.println("For which week you want to create your sheet?");
+                System.out.println("For which week you want to create your sheet? (1-52)");
                 System.out.println("You have created these weeks already:");
                 year.printCreatedWeeks();
                 System.out.println("This week will be selected after creation.");
