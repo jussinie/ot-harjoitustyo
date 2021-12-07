@@ -8,3 +8,5 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 [Vaatimusmäärittely](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/vaatimusmaarittely.md)
 
 [Tuntikirjanpito](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/tuntikirjanpito.md)
+
+[Release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/viikko5)
