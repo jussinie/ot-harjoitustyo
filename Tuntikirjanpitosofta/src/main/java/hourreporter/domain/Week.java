@@ -32,12 +32,20 @@ public class Week {
         System.out.println("");
     }
 
+    public void setDay(String dayAbbreviation, double hours) {
+        days.get(dayAbbreviation).addTaskToDay("dummy", hours);
+    }
+
     public double[] getWeeksHoursByDay() {
         double[] weeksHours = new double[7];
         for (int i = 0; i < 7; i++) {
             weeksHours[i] = days.get(weekdays[i]).getDaysHours();
         }
         return weeksHours;
+    }
+
+    public HashMap<String, Day> getDays() {
+        return this.days;
     }
 
     public double countWorkHours() {
@@ -63,6 +71,10 @@ public class Week {
     public void setAccepted() {
         this.accepted = true;
     }
+
+    public boolean getSubmitted() { return this.submitted; }
+
+    public boolean getAccepted() { return this.accepted; }
 
     public Day getOneDay(String dayAbbreviation) {
         return days.get(dayAbbreviation);

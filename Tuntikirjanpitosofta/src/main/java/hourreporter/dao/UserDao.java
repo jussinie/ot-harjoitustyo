@@ -5,7 +5,7 @@ import hourreporter.domain.User;
 import java.sql.*;
 import java.util.List;
 
-public class UserDao implements Dao<User, String> {
+public class UserDao implements Dao<User, String, Long> {
 
     @Override
     public void create(User user) throws SQLException {
@@ -41,7 +41,7 @@ public class UserDao implements Dao<User, String> {
     }
 
     @Override
-    public User update(String username) {
+    public User update(User user, String username, Long userNumber) {
         return null;
     }
 

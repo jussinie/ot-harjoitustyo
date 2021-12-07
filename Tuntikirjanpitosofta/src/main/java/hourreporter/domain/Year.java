@@ -13,12 +13,17 @@ public class Year {
     public Week createNewWeek(int weekNr, long userNumber) {
         if (weekNr > 0 && weekNr <= 52) {
             this.weeks[weekNr] = new Week(weekNr, userNumber);
+            return this.weeks[weekNr];
         }
-        return this.weeks[weekNr];
+        return null;
     }
 
     public Week getWeek(int weekNr) {
         return this.weeks[weekNr];
+    }
+
+    public int size() {
+        return this.weeks.length;
     }
 
     public boolean printCreatedWeeks() {

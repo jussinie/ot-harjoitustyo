@@ -6,6 +6,6 @@
 
 <suppressions>
     <suppress files="hourreporter.ui.UserInterface.java" checks="[a-zA-Z0-9]*"/>
-   <!-- <suppress files="todoapp.ui.GuiHelper.java" checks="[a-zA-Z0-9]*"/> -->
+    <suppress files="hourreporter.domain.FileService.java" checks="[a-zA-Z0-9]*"/>
 </suppressions>
 

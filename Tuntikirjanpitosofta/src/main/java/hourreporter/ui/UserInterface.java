@@ -4,22 +4,25 @@ import hourreporter.dao.WeekDao;
 import hourreporter.domain.*;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class UserInterface {
 
     private Scanner reader;
     private HashMap<String, String> commands;
     private HashMap<String, String> adminCommands;
+    private HashMap<String, String> userCommands;
+    private UserService us;
 
-    public UserInterface(Scanner reader, UserService userService) {
+    public UserInterface(Scanner reader, UserService us) {
         this.reader = reader;
-        userService = new UserService();
         commands = new HashMap();
         adminCommands = new HashMap<>();
+        userCommands = new HashMap<>();
+        this.us = us;
 
         commands.put("1", "See your reported hours");
         commands.put("2", "Create a new sheet");
@@ -35,10 +38,16 @@ public class UserInterface {
         adminCommands.put("5", "See hours from team members || not yet active");
         adminCommands.put("6", "Accept team members hour sheets || not yet active");
         adminCommands.put("0", "Quit program");
+
+        userCommands.put("1", "Existing user - log in");
+        userCommands.put("2", "Create new user");
+        userCommands.put("0", "Quit program");
     }
 
-    public Week selectOrCreateWeek(User user, FileService fileService, Year year) {
+    public Week selectOrCreateWeek(User user, UserService us) throws SQLException {
+        Year year = us.loadSavedWeeksForUser(user.getUserNumber(), us.getWd());
         while (true) {
+            System.out.println("Welcome " + user.getFirstName() + "! What do you want to do?");
             System.out.println("1: Create new week");
             System.out.println("2: Select existing week");
             System.out.println("0: Quit program");
@@ -50,7 +59,9 @@ public class UserInterface {
                 if (!year.printCreatedWeeks()) {
                     System.out.println("Which week you want to select?");
                     String selectWeek = reader.nextLine();
-                    return year.getWeek(Integer.valueOf(selectWeek));
+                    if (selectWeek.matches("-?\\d+")) {
+                        return year.getWeek(Integer.valueOf(selectWeek));
+                    }
                 } else {
                     System.out.println("As there are no weeks created, your selection will be first created week");
                     System.out.println("This week will be selected after creation.");
@@ -69,7 +80,9 @@ public class UserInterface {
         return null;
     }
 
-    public void startUI(User user, FileService fileService, Week week, WeekDao wd) throws SQLException {
+    public void startUI() throws SQLException {
+        User user = login();
+        Week week = selectOrCreateWeek(user, us);
         while (true) {
             printInfoAndOptions(user);
             String input = reader.nextLine();
@@ -83,24 +96,18 @@ public class UserInterface {
             } else if (input.equals("4")) {
                 addHours(week);
             } else if (input.equals("5")) {
-                saveHours(week, user, fileService, wd);
+                saveHours(week, user);
             }
         }
     }
 
-    private void saveHours(Week week, User user, FileService fileService, WeekDao weekdao) throws SQLException {
-        String workWeek = String.valueOf(user.getUserNumber());
-        workWeek.concat(",");
-        double[] workHours = week.getWeeksHoursByDay();
-        for (int i = 0; i < 7; i++) {
-            workWeek = workWeek + "," + week.weekdays[i] + "," + workHours[i];
+    private void saveHours(Week week, User user) throws SQLException {
+        if (week.countWorkHours() == 0) {
+            us.getWd().create(week);
+        } else {
+            us.getWd().create(week);
+            //weekdao.update(week, week.getWeekNumber(), user.getUserNumber());
         }
-        weekdao.create(week);
-        /*try {
-            fileService.writeHoursToFile(workWeek);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        } */
     }
 
     private void addHours(Week week) {
@@ -136,7 +143,86 @@ public class UserInterface {
         }
     }
 
-    private void printInfoAndOptions(User user) {
+    private User inputForUserCreation() {
+        Scanner reader = new Scanner(System.in);
+        String confirmation = "no";
+        while (confirmation.equals("no")) {
+            System.out.println("First Name");
+            String firstName = reader.nextLine();
+            System.out.println("Last Name");
+            String lastName = reader.nextLine();
+            System.out.println("Username");
+            String username = reader.nextLine();
+            System.out.println("Role");
+            String role = reader.nextLine();
+            System.out.println("Team");
+            String team = reader.nextLine();
+            User user = new User(firstName, lastName, username, role, team);
+            System.out.println("Are you team lead? Yes / No ");
+            String answer = reader.nextLine();
+            if (answer.equals("Yes") || answer.equals("yes")) {
+                user.setIsTeamLead();
+            }
+            System.out.println("Are you happy with the input?");
+            System.out.println("First name: " + firstName + ", last name: " + lastName + ", username: " + username);
+            System.out.println("Role: " + role + ", team: " + team + ", team lead: " + answer);
+            System.out.println("yes | no");
+            confirmation = reader.nextLine();
+            if (confirmation.equals("yes")) {
+                confirmation = "yes";
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private User login() {
+        Scanner reader = new Scanner(System.in);
+        System.out.println("Program started...");
+        System.out.println();
+        while (true) {
+            printUserCommands();
+            System.out.print("Select the number of command you want to run: ");
+            String userCommandInput = reader.nextLine();
+            if (userCommandInput.equals("0")) {
+                System.out.println("Exiting program...");
+                System.exit(0);
+            } else if (userCommandInput.equals("1")) {
+                while (true) {
+                    System.out.println("Give your username");
+                    String usernameInput = reader.nextLine();
+                    try {
+                        User user = us.getUd().read(usernameInput);
+                        if (user != null) {
+                            TimeUnit.SECONDS.sleep(1);
+                            return user;
+                        } else {
+                            System.out.println("Username doesn't exist.");
+                            System.out.println("0: Exit");
+                            System.out.println("1: Try again");
+                            String usernameAgainOrExit = reader.nextLine();
+                            if (usernameAgainOrExit.equals("0")) {
+                                break;
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Did not find anything or something went wrong.");
+                        System.out.println("Please try again");
+                    }
+                }
+            } else if (userCommandInput.equals("2")) {
+                User user = inputForUserCreation();
+                try {
+                    us.getUd().create(user);
+                    return user;
+                } catch (Exception e) {
+                    System.out.println("Creating a new user did not work. Please try again.");
+                }
+            }
+        }
+    }
+
+    public void printInfoAndOptions(User user) {
         System.out.println();
         if (user.getIsTeamLead()) {
             System.out.println("Logged in as " + user.getFirstName() + " " + user.getLastName() + " - TEAM LEAD VIEW");
@@ -162,6 +248,12 @@ public class UserInterface {
 
     private void printAdminCommands() {
         for (Map.Entry<String, String> entry : adminCommands.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
+    public void printUserCommands() {
+        for (Map.Entry<String, String> entry : userCommands.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
     }
