@@ -11,7 +11,7 @@ public class UserDao implements Dao<User, String, Long> {
     public void create(User user) throws SQLException {
         Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
         PreparedStatement ps = c.prepareStatement("INSERT INTO Users"
-        + " (firstName, lastName, username, userNumber, role, team, isTeamLead)"
+            + " (firstName, lastName, username, userNumber, role, team, isTeamLead)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, user.getFirstName());
         ps.setString(2, user.getLastName());

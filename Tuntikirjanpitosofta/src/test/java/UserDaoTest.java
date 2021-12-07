@@ -15,7 +15,7 @@ public class UserDaoTest {
             dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporterTest.db");
             Statement s = dbConn.createStatement();
             s.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, userNumber LONG, username TEXT, role TEXT, team TEXT, isTeamLead BOOLEAN)");
-            s.execute("INSERT INTO Users (firstName, lastName, username, role, team, isTeamLead, userNumber) VALUES ('test', 'person', 'testPerson', 'admin', 'adminTeam', false, -2107266002)");
+            s.execute("INSERT INTO Users (firstName, lastName, username, role, team, isTeamLead, userNumber) VALUES ('test', 'person', 'testPerson', 'admin', 'adminteam', false, -2107266002)");
         } catch (Exception e) {
         }
     }

@@ -72,9 +72,13 @@ public class Week {
         this.accepted = true;
     }
 
-    public boolean getSubmitted() { return this.submitted; }
+    public boolean getSubmitted() {
+        return this.submitted;
+    }
 
-    public boolean getAccepted() { return this.accepted; }
+    public boolean getAccepted() {
+        return this.accepted;
+    }
 
     public Day getOneDay(String dayAbbreviation) {
         return days.get(dayAbbreviation);

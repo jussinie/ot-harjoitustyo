@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class HourReporter {
 
-    public static void main(String[] args) throws SQLException{
+    public static void main(String[] args) throws SQLException {
         DatabaseManager db = new DatabaseManager();
         UserDao ud = new UserDao();
         WeekDao wd = new WeekDao();
