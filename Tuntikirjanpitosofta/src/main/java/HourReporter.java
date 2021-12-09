@@ -17,8 +17,6 @@ public class HourReporter {
         Scanner reader = new Scanner(System.in);
         UserService userService = new UserService(ud, wd);
         UserInterface ui = new UserInterface(reader, userService);
-        //year.createNewWeek(1, user.getUserNumber());
-        //year.createNewWeek(2, user.getUserNumber());
         ui.startUI();
     }
 }

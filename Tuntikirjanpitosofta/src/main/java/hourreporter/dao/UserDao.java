@@ -27,7 +27,7 @@ public class UserDao implements Dao<User, String, Long> {
     }
 
     @Override
-    public User read(String username) throws SQLException {
+    public User read(String username, Long userNumber) throws SQLException {
         Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
         PreparedStatement ps = c.prepareStatement("SELECT * FROM Users WHERE username = ?");
         ps.setString(1, username);

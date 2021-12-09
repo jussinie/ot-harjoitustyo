@@ -3,6 +3,7 @@ package hourreporter.dao;
 import hourreporter.domain.Week;
 import hourreporter.domain.Year;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,19 +33,24 @@ public class WeekDao implements Dao<Week, Integer, Long> {
     }
 
     @Override
-    public Week read(Integer userNumber) throws SQLException {
+    public Week read(Integer weekNumber, Long userNumber) throws SQLException {
         Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks WHERE userNumber = ?");
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks WHERE userNumber = ? AND weekNumber = ?");
         ps.setLong(1, userNumber);
-        ResultSet rs = ps.executeQuery();
-        Year year = new Year(userNumber);
-        while (!rs.first()) {
-            year.createNewWeek(rs.getInt("weekNumber"), rs.getLong("userNumber"));
+        ps.setInt(2, weekNumber);
+        ps.executeUpdate();
+        ResultSet rs = ps.getResultSet();
+        if (rs.next()) {
+            Week week = new Week(weekNumber, userNumber);
+            week.setDay("Mon", rs.getDouble("monday"));
+            week.setDay("Tue", rs.getDouble("tuesday"));
+            ps.close();
+            rs.close();
+            return week;
         }
-
         ps.close();
         rs.close();
-        return year.getWeek(1);
+        return null;
     }
 
     @Override
@@ -60,8 +66,7 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.setDouble(7, week.getOneDay("Sun").getDaysHours());
         ps.setLong(8, userNumber);
         ps.setInt(9, weekNumber);
-        ResultSet rs = ps.executeQuery();
-        System.out.println(rs.getMetaData());
+        ps.executeUpdate();
         ps.close();
         c.close();
         return week;

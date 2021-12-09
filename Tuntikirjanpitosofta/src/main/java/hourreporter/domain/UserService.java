@@ -5,7 +5,6 @@ import hourreporter.dao.WeekDao;
 
 import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 public class UserService {
 

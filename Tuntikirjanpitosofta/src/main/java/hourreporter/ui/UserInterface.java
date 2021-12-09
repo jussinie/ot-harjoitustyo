@@ -102,17 +102,17 @@ public class UserInterface {
             } else if (input.equals("4")) {
                 addHours(week);
             } else if (input.equals("5")) {
-                saveHours(week, user);
+                saveHours(week);
             }
         }
     }
 
-    private void saveHours(Week week, User user) throws SQLException {
-        if (week.countWorkHours() == 0) {
-            us.getWd().create(week);
+    private void saveHours(Week week) throws SQLException {
+        Week oldWeek = us.getWd().read(week.getWeekNumber(), week.getUserNumber());
+        if (week.countWorkHours() != oldWeek.countWorkHours()) {
+            us.getWd().update(week, week.getWeekNumber(), week.getUserNumber());
         } else {
             us.getWd().create(week);
-            //weekdao.update(week, week.getWeekNumber(), user.getUserNumber());
         }
     }
 
@@ -202,7 +202,7 @@ public class UserInterface {
                     String usernameInput = reader.nextLine();
                     try {
                         if (usernameInput.equals("0")) break;
-                        User user = us.getUd().read(usernameInput);
+                        User user = us.getUd().read(usernameInput, 0L);
                         if (user != null) {
                             TimeUnit.SECONDS.sleep(1);
                             return user;

@@ -28,7 +28,7 @@ public class FakeWeekDao extends WeekDao {
     }
 
     @Override
-    public Week read(Integer integer) throws SQLException {
+    public Week read(Integer integer, Long userNumber) throws SQLException {
         return null;
     }
 
