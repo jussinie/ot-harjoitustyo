@@ -32,7 +32,9 @@ public class UserDao implements Dao<User, String, Long> {
         PreparedStatement ps = c.prepareStatement("SELECT * FROM Users WHERE username = ?");
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
-
+        if (!rs.next()) {
+            return null;
+        }
         User user = new User(rs.getString("firstName"), rs.getString("lastName"), rs.getString("username"),
                 rs.getString("role"), rs.getString("team"));
         ps.close();

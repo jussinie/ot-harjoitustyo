@@ -80,10 +80,28 @@ public class Week {
         return this.accepted;
     }
 
+    /**
+     * Method returns one day from the week.
+     * Possible abbreviations are:
+     * "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun".
+     *
+     * @param dayAbbreviation
+     * @return selected Day object.
+     */
     public Day getOneDay(String dayAbbreviation) {
         return days.get(dayAbbreviation);
     }
 
+    /**
+     * Method returns hours booked for specific day from this week.
+     * If no Day object exists, 0 is returned. \\n
+     *
+     * Possible abbreviations are:
+     * "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun".
+     *
+     * @param dayAbbreviation
+     * @return
+     */
     public double getDaysHoursForWeek(String dayAbbreviation) {
         if (days.get(dayAbbreviation) == null) {
             return 0;

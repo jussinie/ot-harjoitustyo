@@ -3,16 +3,21 @@ package hourreporter.dao;
 import hourreporter.domain.Week;
 import hourreporter.domain.Year;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class WeekDao implements Dao<Week, Integer, Long> {
 
+    String connString;
+
+    public WeekDao() {
+        this.connString = "jdbc:sqlite:hourreporter.db";
+    }
+
     @Override
     public void create(Week week) throws SQLException {
-        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
+        Connection c = DriverManager.getConnection(connString);
         PreparedStatement ps = c.prepareStatement("INSERT INTO Weeks"
                 + " (userNumber, weekNumber, monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -25,7 +30,6 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.setDouble(7, week.getDaysHoursForWeek("Fri"));
         ps.setDouble(8, week.getDaysHoursForWeek("Sat"));
         ps.setDouble(9, week.getDaysHoursForWeek("Sun"));
-
         ps.executeUpdate();
         ps.close();
         c.close();
@@ -34,29 +38,28 @@ public class WeekDao implements Dao<Week, Integer, Long> {
 
     @Override
     public Week read(Integer weekNumber, Long userNumber) throws SQLException {
-        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks WHERE userNumber = ? AND weekNumber = ?");
-        ps.setLong(1, userNumber);
-        ps.setInt(2, weekNumber);
-        ps.executeUpdate();
-        ResultSet rs = ps.getResultSet();
-        if (rs.next()) {
-            Week week = new Week(weekNumber, userNumber);
-            week.setDay("Mon", rs.getDouble("monday"));
-            week.setDay("Tue", rs.getDouble("tuesday"));
-            ps.close();
-            rs.close();
-            return week;
+        Connection c = DriverManager.getConnection(connString);
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks WHERE weekNumber = ? AND userNumber = ?");
+        ps.setInt(1, weekNumber);
+        ps.setLong(2, userNumber);
+        ResultSet rs = ps.executeQuery();
+        if (!rs.next()) {
+            return null;
         }
+        Week w = new Week(weekNumber, userNumber);
+        w.setDay("Mon", rs.getDouble("monday"));
+        w.setDay("Wed", rs.getDouble("wednesday"));
         ps.close();
         rs.close();
-        return null;
+        c.close();
+        return w;
     }
 
     @Override
     public Week update(Week week, Integer weekNumber, Long userNumber) throws SQLException {
-        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-        PreparedStatement ps = c.prepareStatement("UPDATE Weeks SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE userNumber = ? AND weekNumber = ?");
+        Connection c = DriverManager.getConnection(connString);
+        //PreparedStatement ps = c.prepareStatement("UPDATE Weeks SET tuesday = 12.5");
+        PreparedStatement ps = c.prepareStatement("UPDATE Weeks SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE weekNumber = ? AND userNumber = ?");
         ps.setDouble(1, week.getOneDay("Mon").getDaysHours());
         ps.setDouble(2, week.getOneDay("Tue").getDaysHours());
         ps.setDouble(3, week.getOneDay("Wed").getDaysHours());
@@ -64,8 +67,10 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.setDouble(5, week.getOneDay("Fri").getDaysHours());
         ps.setDouble(6, week.getOneDay("Sat").getDaysHours());
         ps.setDouble(7, week.getOneDay("Sun").getDaysHours());
-        ps.setLong(8, userNumber);
-        ps.setInt(9, weekNumber);
+        ps.setInt(8, weekNumber);
+        ps.setLong(9, userNumber);
+        //ResultSet rs = ps.executeQuery();
+        //System.out.println(rs.getMetaData());
         ps.executeUpdate();
         ps.close();
         c.close();
@@ -75,7 +80,7 @@ public class WeekDao implements Dao<Week, Integer, Long> {
     @Override
     public List<Week> list() throws SQLException {
         ArrayList<Week> weeks = new ArrayList<>();
-        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
+        Connection c = DriverManager.getConnection(connString);
         PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {

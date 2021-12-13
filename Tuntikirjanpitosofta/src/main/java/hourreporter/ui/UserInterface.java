@@ -24,20 +24,15 @@ public class UserInterface {
         userCommands = new HashMap<>();
         this.us = us;
 
+        commands.put("0", "Quit program");
         commands.put("1", "See your reported hours");
-        commands.put("2", "Create a new sheet");
-        commands.put("3", "Print hours worked");
+        commands.put("2", "Create a new sheet | Remember to save current one!");
+        commands.put("3", "Print hours worked for the whole week");
         commands.put("4", "Report hours");
         commands.put("5", "Save your report");
-        commands.put("0", "Quit program");
 
-        adminCommands.put("1", "See your reported hours");
-        adminCommands.put("2", "Create a new sheet");
-        adminCommands.put("3", "Print hours worked");
-        adminCommands.put("4", "Report hours");
-        adminCommands.put("5", "See hours from team members || not yet active");
-        adminCommands.put("6", "Accept team members hour sheets || not yet active");
-        adminCommands.put("0", "Quit program");
+        adminCommands.put("6", "See hours from team members || not yet active");
+        adminCommands.put("7", "Accept team members hour sheets || not yet active");
 
         userCommands.put("1", "Existing user - log in");
         userCommands.put("2", "Create new user");
@@ -96,7 +91,7 @@ public class UserInterface {
             } else if (input.equals("1")) {
                 week.printWholeWeek();
             } else if (input.equals("2")) {
-                selectOrCreateWeek(user, us);
+                week = selectOrCreateWeek(user, us);
             } else if (input.equals("3")) {
                 System.out.println(week.countWorkHours());
             } else if (input.equals("4")) {
@@ -109,7 +104,7 @@ public class UserInterface {
 
     private void saveHours(Week week) throws SQLException {
         Week oldWeek = us.getWd().read(week.getWeekNumber(), week.getUserNumber());
-        if (week.countWorkHours() != oldWeek.countWorkHours()) {
+        if (oldWeek != null) {
             us.getWd().update(week, week.getWeekNumber(), week.getUserNumber());
         } else {
             us.getWd().create(week);
@@ -241,10 +236,9 @@ public class UserInterface {
         }
         System.out.println("Available commands:");
         System.out.println("****************");
+        printCommands();
         if (user.getIsTeamLead()) {
             printAdminCommands();
-        } else {
-            printCommands();
         }
         System.out.println("****************");
         System.out.print("Select the number of command you want to run: ");
