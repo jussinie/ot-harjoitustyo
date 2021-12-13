@@ -2,6 +2,7 @@ import hourreporter.dao.FakeWeekDao;
 import hourreporter.dao.UserDao;
 import hourreporter.domain.User;
 import hourreporter.domain.UserService;
+import hourreporter.domain.UserServiceOld;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

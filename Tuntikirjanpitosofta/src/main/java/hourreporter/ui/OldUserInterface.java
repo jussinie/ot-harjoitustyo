@@ -8,15 +8,15 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class UserInterface {
+public class OldUserInterface {
 
     private Scanner reader;
     private HashMap<String, String> commands;
     private HashMap<String, String> adminCommands;
     private HashMap<String, String> userCommands;
-    private UserServiceOld us;
+    private UserService us;
 
-    public UserInterface(Scanner reader, UserServiceOld us) {
+    public OldUserInterface(Scanner reader, UserService us) {
         this.reader = reader;
         commands = new HashMap();
         adminCommands = new HashMap<>();
@@ -38,7 +38,7 @@ public class UserInterface {
         userCommands.put("0", "Quit program");
     }
 
-    public Week selectOrCreateWeek(User user, UserServiceOld us) throws SQLException {
+    public Week selectOrCreateWeek(User user, UserService us) throws SQLException {
         Year year = us.loadSavedWeeksForUser(user.getUserNumber(), us.getWd());
         while (true) {
             System.out.println("Welcome " + user.getFirstName() + "! What do you want to do?");

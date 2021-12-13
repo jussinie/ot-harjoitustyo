@@ -15,9 +15,9 @@ public class HourReporter {
         WeekDao wd = new WeekDao();
         db.initiateConnectionToDb();
         Scanner reader = new Scanner(System.in);
-        UserService userService = new UserService(ud, wd);
-        UserInterface ui = new UserInterface(reader, userService);
-        ui.startUI();
+        //UserServiceOld userService = new UserServiceOld(ud, wd);
+        //UserInterface ui = new UserInterface(reader, userService);
+        //ui.startUI();
     }
 }
 

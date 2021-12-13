@@ -1,7 +1,6 @@
 package hourreporter.dao;
 
 import hourreporter.domain.Week;
-import hourreporter.domain.Year;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.executeUpdate();
         ps.close();
         c.close();
-        System.out.println("Week saved!");
+        System.out.println("domain.Week saved!");
     }
 
     @Override

@@ -48,6 +48,15 @@ public class Week {
         return this.days;
     }
 
+    public double getFullWeeksHours() {
+        double total = 0;
+        double[] allDays = getWeeksHoursByDay();
+        for (int i = 0; i < 7; i++) {
+            total = total + allDays[i];
+        }
+        return total;
+    }
+
     public double countWorkHours() {
         double total = 0.0;
         for (Day d : days.values()) {

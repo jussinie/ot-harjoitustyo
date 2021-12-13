@@ -28,7 +28,10 @@ public class Day {
     }
 
     public void addTaskToDay(String taskName, double hours) {
-        tasksForDay.add(new Task(taskName, hours));
+        if (tasksForDay.size() == 0) {
+            tasksForDay.add(new Task(taskName, hours));
+        }
+        tasksForDay.set(0, new Task(taskName, hours));
     }
 
 }
