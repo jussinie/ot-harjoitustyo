@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,8 +54,11 @@ public class WeekSelectionPageController {
         application.setWeekCreationScene();
     }
 
-    public void proceedToWeekSelection() throws Exception {
-        application.setWeekSelectionScene();
+
+    @FXML
+    private void goBackToLandingPage() {
+        userService.logout();
+        application.setLandingPageScene();
     }
 
     @FXML
@@ -116,13 +120,27 @@ public class WeekSelectionPageController {
             } else {
                 displayedString = "You have created weeks ";
                 for (Week w : weeks) {
-                    displayedString = displayedString + ", " + String.valueOf(w.getWeekNumber());
+                    displayedString = displayedString + " " + String.valueOf(w.getWeekNumber()) + ", ";
                 }
             }
-            displayedString = displayedString + ".";
-            createdWeeks.setText(displayedString);
+            StringBuffer sb= new StringBuffer(displayedString);
+            sb.deleteCharAt(sb.length()-1);
+            sb.deleteCharAt(sb.length()-1);
+            sb = sb.append('.');
+            String newString = sb.toString();
+            createdWeeks.setText(newString);
         } else {
             displayedString = "You have not yet created and saved any weeks.";
+        }
+    }
+
+    @FXML
+    public void openWebpage() {
+        String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
+        try {
+            new ProcessBuilder("x-www-browser", url).start();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -138,4 +156,8 @@ public class WeekSelectionPageController {
         listView.setItems(FXCollections.observableList(helper));
     } */
 
+    @FXML
+    private void quitProgram() {
+        System.exit(0);
+    }
 }

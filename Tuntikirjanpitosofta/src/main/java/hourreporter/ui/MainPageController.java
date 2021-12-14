@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class MainPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -34,6 +36,7 @@ public class MainPageController {
 
     @FXML
     private void goBackToLandingPage() {
+        userService.logout();
         application.setLandingPageScene();
     }
 
@@ -44,11 +47,22 @@ public class MainPageController {
     }
 
     @FXML
-    private void exitButtonClicked() {
+    private void quitProgram() {
         System.exit(0);
     }
 
+    @FXML
+    public void openWebpage() {
+        String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
+        try {
+            new ProcessBuilder("x-www-browser", url).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setWelcomeText() {
-        welcomeText.setText("Welcome, " + userService.getUser().getFirstName() + " " + userService.getUser().getLastName());
+        welcomeText.setText("Welcome, " + userService.getUser().getFirstName() + " " + userService.getUser().getLastName() + "\n"
+                + "Select from the top left what you want to do");
     }
 }

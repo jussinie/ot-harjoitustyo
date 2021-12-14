@@ -10,6 +10,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class UserCreationController {
     private ReporterGraphUI application;
     private UserService us;
@@ -90,4 +92,13 @@ public class UserCreationController {
         System.exit(0);
     }
 
+    @FXML
+    public void openWebpage() {
+        String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
+        try {
+            new ProcessBuilder("x-www-browser", url).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

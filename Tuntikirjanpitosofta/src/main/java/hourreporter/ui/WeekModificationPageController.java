@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class WeekModificationPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -54,6 +56,12 @@ public class WeekModificationPageController {
         application.setWeekSelectionScene();
     }
 
+    @FXML
+    private void goBackToLandingPage() {
+        userService.logout();
+        application.setLandingPageScene();
+    }
+
     public void showWeeksHours() {
         nowModifying.setText("Now modifying Week " + userService.getWeek().getWeekNumber());
         mondayHours.setText(String.valueOf(userService.getWeek().getDaysHoursForWeek("Mon")));
@@ -80,4 +88,18 @@ public class WeekModificationPageController {
         showWeeksHours();
     }
 
+    @FXML
+    public void openWebpage() {
+        String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
+        try {
+            new ProcessBuilder("x-www-browser", url).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void quitProgram() {
+        System.exit(0);
+    }
 }

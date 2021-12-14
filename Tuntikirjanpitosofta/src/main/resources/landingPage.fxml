@@ -17,6 +17,11 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem onAction="#openWebpage" mnemonicParsing="false" text="User manual" />
+                    </items>
+                </Menu>
                 <Menu mnemonicParsing="false" text="Quit">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#quitProgram" text="Quit" />

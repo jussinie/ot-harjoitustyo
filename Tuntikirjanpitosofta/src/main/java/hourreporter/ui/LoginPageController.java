@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.io.IOException;
+
 public class LoginPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -71,6 +73,16 @@ public class LoginPageController {
     @FXML
     private void goBackToLandingPage() {
         application.setLandingPageScene();
+    }
+
+    @FXML
+    public void openWebpage() {
+        String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
+        try {
+            new ProcessBuilder("x-www-browser", url).start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
