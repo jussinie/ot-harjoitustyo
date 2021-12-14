@@ -45,11 +45,12 @@ public class WeekDaoTest {
         }
     }
 
+    /*
     @Test
     void readingListWorks() throws SQLException {
         List<Week> weeks = wd.list();
         assertEquals(1, weeks.size());
-    }
+    } */
 
     /*
     @Test

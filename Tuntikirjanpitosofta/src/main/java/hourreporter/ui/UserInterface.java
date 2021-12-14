@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class UserInterface {
-
+/*
     private Scanner reader;
     private HashMap<String, String> commands;
     private HashMap<String, String> adminCommands;
@@ -260,5 +260,5 @@ public class UserInterface {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
     }
-
+*/
 }

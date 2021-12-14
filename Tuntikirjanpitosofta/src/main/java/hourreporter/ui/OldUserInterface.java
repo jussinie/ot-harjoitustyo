@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class OldUserInterface {
-
+/*
     private Scanner reader;
     private HashMap<String, String> commands;
     private HashMap<String, String> adminCommands;
@@ -259,6 +259,6 @@ public class OldUserInterface {
         for (Map.Entry<String, String> entry : userCommands.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
-    }
+    }*/
 
 }

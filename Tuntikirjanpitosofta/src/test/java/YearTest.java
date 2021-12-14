@@ -37,14 +37,5 @@ public class YearTest {
         assertNull(y.createNewWeek(53, user.getUserNumber()));
     }
 
-    @Test
-    public void weeksNotPrintedIfArrayEmpty() {
-        assertTrue(y.printCreatedWeeks());
-    }
 
-    @Test
-    public void weeksArePrintedCorrectly() {
-        y.createNewWeek(1, user.getUserNumber());
-        assertFalse(y.printCreatedWeeks());
-    }
 }

@@ -51,10 +51,10 @@ public class Year {
         return this.weeks[weekNumber];
     }
 
-    /*
+
     public int size() {
         return this.weeks.length;
-    } */
+    }
 
     /*
     public boolean printCreatedWeeks() {

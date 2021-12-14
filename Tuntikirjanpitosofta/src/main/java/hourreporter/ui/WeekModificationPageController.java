@@ -63,7 +63,7 @@ public class WeekModificationPageController {
         fridayHours.setText(String.valueOf(userService.getWeek().getDaysHoursForWeek("Fri")));
         saturdayHours.setText(String.valueOf(userService.getWeek().getDaysHoursForWeek("Sat")));
         sundayHours.setText(String.valueOf(userService.getWeek().getDaysHoursForWeek("Sun")));
-        summaryLabel.setText("Your total hours for the week: " + userService.getWeek().getFullWeeksHours() + " | Balance: " + (userService.getWeek().getFullWeeksHours()-37.5));
+        summaryLabel.setText("Your total hours for the week: " + userService.getWeek().countWorkHours() + " | Balance: " + (userService.getWeek().countWorkHours()-37.5));
     }
 
     public void saveWeeksHours() throws Exception {
