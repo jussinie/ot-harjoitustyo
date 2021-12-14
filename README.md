@@ -14,7 +14,8 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
-
+Ohjelmasta voi luoda JAR-paketin komennolla 
+> mvn package
 
 ### Testaus
 Testit voidaan suorittaa komennolla
@@ -31,3 +32,9 @@ Checkstylen voi suorittaa komennolla
 > mvn jxr:jxr checkstyle:checkstyle
 
 Checkstyle-määrittelyt löytyvät tiedostosta [checkstyle.xml](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/checkstyle.xml)
+
+### Dokumentaatio
+JavaDoc-dokumentaation voi luoda komennolla
+> mvn javadoc:javadoc
+
+Komento luo polkuun target/site/apidocs tiedoston index.html, jonka voi avata haluamallaan selaimella.
