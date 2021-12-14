@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
     <groupId>org.example</groupId>
-    <artifactId>ReporterGraphicalUI</artifactId>
+    <artifactId>Tuntikirjanpitosofta</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <mainClass>application.ui.NewMain</mainClass>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -70,8 +70,10 @@
                 <configuration>
                     <excludes>
                         <!-- hourReporter vanha nimi, näkyi jacocossa tuplana -->
+                        <!-- UserServiceOld vanha nimi, näkyi jacocossa tuplana -->
                         <exclude>hourReporter/**/*</exclude>
                         <exclude>hourreporter/ui/*</exclude>
+                        <exclude>hourreporter/domain/UserServiceOld</exclude>
                     </excludes>
                 </configuration>
                 <executions>

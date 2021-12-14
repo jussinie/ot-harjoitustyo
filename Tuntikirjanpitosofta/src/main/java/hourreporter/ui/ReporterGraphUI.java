@@ -30,7 +30,7 @@ public class ReporterGraphUI extends Application {
         us = new UserService(ud, wd);
 
         // Create Scene for landing page
-        FXMLLoader landingPageLoader = new FXMLLoader(getClass().getResource("../../landingPage.fxml"));
+        FXMLLoader landingPageLoader = new FXMLLoader(getClass().getResource("/landingPage.fxml"));
         Parent landingPagePane = landingPageLoader.load();
         LandingPageController landingPageController = landingPageLoader.getController();
         // injektoi tässä sovelluslogiikka LPC.setUserService(userService);
@@ -38,7 +38,7 @@ public class ReporterGraphUI extends Application {
         landingPageScene = new Scene(landingPagePane);
 
         // Create Scene for user creation page
-        FXMLLoader userCreationLoader = new FXMLLoader(getClass().getResource("../../userCreation.fxml"));
+        FXMLLoader userCreationLoader = new FXMLLoader(getClass().getResource("/userCreation.fxml"));
         Parent userCreationPane = userCreationLoader.load();
         UserCreationController userCreationController = userCreationLoader.getController();
         userCreationController.setUserService(us);
@@ -46,7 +46,7 @@ public class ReporterGraphUI extends Application {
         userCreationScene = new Scene(userCreationPane);
 
         // Create Scene for login page
-        FXMLLoader loginPageLoader = new FXMLLoader(getClass().getResource("../../loginPage.fxml"));
+        FXMLLoader loginPageLoader = new FXMLLoader(getClass().getResource("/loginPage.fxml"));
         Parent loginPagePane = loginPageLoader.load();
         LoginPageController loginPageController = loginPageLoader.getController();
         loginPageController.setUserService(us);
@@ -92,7 +92,7 @@ public class ReporterGraphUI extends Application {
 
     public void initializeMainPageScene() throws Exception {
         // Create Scene for main page
-        FXMLLoader mainPageLoader = new FXMLLoader(getClass().getResource("../../hourReporterMainPage.fxml"));
+        FXMLLoader mainPageLoader = new FXMLLoader(getClass().getResource("/hourReporterMainPage.fxml"));
         Parent mainPagePane = mainPageLoader.load();
         MainPageController mainPageController = mainPageLoader.getController();
         mainPageController.setUserService(us);
@@ -103,7 +103,7 @@ public class ReporterGraphUI extends Application {
 
     public void initializeWeekCreationScene() throws Exception {
         // Create Scene for creating new weeks but use main page controller
-        FXMLLoader weekCreationPageLoader = new FXMLLoader(getClass().getResource("../../weekCreationPage.fxml"));
+        FXMLLoader weekCreationPageLoader = new FXMLLoader(getClass().getResource("/weekCreationPage.fxml"));
         Parent weekCreationPane = weekCreationPageLoader.load();
         WeekCreationPageController weekCreationPageController = weekCreationPageLoader.getController();
         weekCreationPageController.setUserService(us);
@@ -113,18 +113,18 @@ public class ReporterGraphUI extends Application {
 
     public void initializeWeekSelectionScene() throws Exception {
         // Create Scene for creating new weeks but use main page controller
-        FXMLLoader weekSelectionPageLoader = new FXMLLoader(getClass().getResource("../../weekSelectionPage.fxml"));
+        FXMLLoader weekSelectionPageLoader = new FXMLLoader(getClass().getResource("/weekSelectionPage.fxml"));
         Parent weekSelectionPane = weekSelectionPageLoader.load();
         WeekSelectionPageController weekSelectionPageController = weekSelectionPageLoader.getController();
         weekSelectionPageController.setUserService(us);
         weekSelectionPageController.setApplication(this);
-        weekSelectionPageController.setWeekList();
+        weekSelectionPageController.setCreatedWeeks();
         weekSelectionScene = new Scene(weekSelectionPane);
     }
 
     public void initializeWeekModifyingScene() throws Exception {
         // Create Scene for creating new weeks but use main page controller
-        FXMLLoader weekModificationPageLoader = new FXMLLoader(getClass().getResource("../../weekModificationPage.fxml"));
+        FXMLLoader weekModificationPageLoader = new FXMLLoader(getClass().getResource("/weekModificationPage.fxml"));
         Parent weekModificationPane = weekModificationPageLoader.load();
         WeekModificationPageController weekModificationPageController = weekModificationPageLoader.getController();
         weekModificationPageController.setUserService(us);

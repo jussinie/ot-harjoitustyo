@@ -26,15 +26,14 @@ public class WeekSelectionPageController {
     private UserService userService;
     private List<Week> weeks;
 
-    public WeekSelectionPageController() throws Exception {
-        weeks = userService.getAllWeeks();
-    }
-
     @FXML
     private TextField weekInput;
 
     @FXML
     private Label errorMessage;
+
+    @FXML
+    private Label createdWeeks;
 
     @FXML
     private ListView<String> listView;
@@ -104,6 +103,30 @@ public class WeekSelectionPageController {
         listView.setItems(FXCollections.observableList(helper));
     }
 
+    public void setCreatedWeeks() throws Exception {
+        List<Week> weeks = userService.getAllWeeks();
+        String displayedString = "";
+        if (!weeks.isEmpty()) {
+            if (weeks.size() == 1) {
+                displayedString = "You have created week ";
+                for (Week w : weeks) {
+                    displayedString = displayedString + String.valueOf(w.getWeekNumber());
+                }
+                createdWeeks.setText(displayedString);
+            } else {
+                displayedString = "You have created weeks ";
+                for (Week w : weeks) {
+                    displayedString = displayedString + ", " + String.valueOf(w.getWeekNumber());
+                }
+            }
+            displayedString = displayedString + ".";
+            createdWeeks.setText(displayedString);
+        } else {
+            displayedString = "You have not yet created and saved any weeks.";
+        }
+    }
+
+    /*
     public void initialize() throws Exception {
         //List<Week> weeks = userService.getAllWeeks();
         List<String> helper = new ArrayList<>();
@@ -113,6 +136,6 @@ public class WeekSelectionPageController {
         //weekNumbers.addAll(helper);
         //List<String> values = Arrays.asList(helper);
         listView.setItems(FXCollections.observableList(helper));
-    }
+    } */
 
 }

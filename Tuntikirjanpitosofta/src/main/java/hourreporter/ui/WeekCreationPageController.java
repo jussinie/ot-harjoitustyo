@@ -31,7 +31,13 @@ public class WeekCreationPageController {
 
     @FXML
     private void goBackToLandingPage() {
+        userService.logout();
         application.setLandingPageScene();
+    }
+
+    @FXML
+    private void quitProgram() {
+        System.exit(0);
     }
 
     public void proceedToWeekSelection() throws Exception {
@@ -43,7 +49,7 @@ public class WeekCreationPageController {
     private void handleWeekCreation() throws Exception {
         if (weekInput.getText().matches("-?\\d+")) {
             int weekNumber = Integer.parseInt(weekInput.getText());
-            userService.createWeek(userService, weekNumber);
+            userService.createWeek(weekNumber);
             System.out.println("Week created!");
             application.initializeWeekModifyingScene();
             application.setWeekModificationScene();

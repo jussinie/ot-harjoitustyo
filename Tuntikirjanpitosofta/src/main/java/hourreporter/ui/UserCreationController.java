@@ -85,7 +85,8 @@ public class UserCreationController {
         application.setMainPageScene();
     }
 
-    public void exitButtonClicked() {
+    @FXML
+    private void quitProgram() {
         System.exit(0);
     }
 

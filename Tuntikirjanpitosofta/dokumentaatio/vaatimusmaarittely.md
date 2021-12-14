@@ -15,10 +15,11 @@ Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä he
     * Käyttäjä / esimies voi kirjautua sisään käyttäen tätä tunnusta => tehty
     * Käyttäjä voi luoda itselleen uuden periodin tuntien lisäämistä varten => tehty
     * Käyttäjä voi kirjata tälle periodille tekemänsä tunnit => tehty
-    * Käyttäjä näkee vain omat lisäämänsä tunnit
+    * Käyttäjä näkee vain omat lisäämänsä tunnit => tehty
     * Esimies voi hyväksyä käyttäjän lisäämät tunnit
-    * Käyttäjä / esimies voi kirjautua ulos sovelluksesta
+    * Käyttäjä / esimies voi kirjautua ulos sovelluksesta => tehty
 
+    => Viikko 6: Tekstikäyttöliittymä korvattu graafisella käyttöliittymällä.
     => Osa toiminnallisuuksista vielä vajavaisia,kaikkia syötteitä ei tarkisteta.
     => Tietojen tallennus siirretty tiedostosta sql-tietokantaan
 

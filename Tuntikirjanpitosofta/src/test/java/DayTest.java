@@ -21,8 +21,7 @@ class DayTest {
     @Test
     void hoursAreCalculatedCorrectly() {
         d.addTaskToDay("test", 2.5);
-        d.addTaskToDay("another test", 2.5);
-        assertEquals(5, d.getDaysHours());
+        assertEquals(2.5, d.getDaysHours());
     }
 
     @Test

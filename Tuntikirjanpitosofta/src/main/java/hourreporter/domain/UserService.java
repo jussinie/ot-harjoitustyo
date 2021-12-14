@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class provides all the services and methods for the UI. It is also used to access the database through the DAO
+ * objects that are injected to it upon creation.
+ */
 public class UserService {
 
     public HashMap<String, User> users;
@@ -71,8 +75,8 @@ public class UserService {
         return weeks;
     }
 
-    public void createWeek(UserService us, int weekNumber) throws SQLException {
-        Year year = us.loadSavedWeeksForUser(user.getUserNumber(), us.getWd());
+    public void createWeek(int weekNumber) throws SQLException {
+        Year year = loadSavedWeeksForUser(user.getUserNumber(), getWd());
         if (weekNumber > 0 && weekNumber < 53) {
             if (wd.read(weekNumber, user.getUserNumber()) == null) {
                 year.createNewWeek(weekNumber, user.getUserNumber());
@@ -98,7 +102,7 @@ public class UserService {
         if (oldWeek != null) {
             wd.update(week, week.getWeekNumber(), week.getUserNumber());
         } else {
-            wd.create(week);
+            createWeek(week.getWeekNumber());
         }
     }
 
@@ -152,6 +156,10 @@ public class UserService {
 
     public Week getWeek() {
         return week;
+    }
+
+    public void logout() {
+        this.user = null;
     }
 
     public void setWeek(Week week) {

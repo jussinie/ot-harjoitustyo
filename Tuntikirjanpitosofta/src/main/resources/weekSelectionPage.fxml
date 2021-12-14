@@ -20,7 +20,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem id="createWeek" mnemonicParsing="false" text="Create new week" />
+              <MenuItem id="createWeek" onAction="#proceedToWeekCreation" mnemonicParsing="false" text="Create new week" />
                   <MenuItem id="selectWeek" mnemonicParsing="false" onAction="#handleWeekSelection" text="Select existing week" />
             </items>
           </Menu>
@@ -50,6 +50,7 @@
                </font>
             </Label>
             <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="75.0" prefWidth="342.0" />
+            <Label fx:id="createdWeeks" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="343.0" wrapText="true" />
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="344.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="10.0" prefWidth="226.0" />

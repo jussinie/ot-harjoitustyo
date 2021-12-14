@@ -1,8 +1,10 @@
 package hourreporter.ui;
 
+import hourreporter.domain.UserService;
+import javafx.fxml.FXML;
+
 public class LandingPageController {
     private ReporterGraphUI application;
-
 
     public void goToLogin() {
         application.setLoginPageScene();
@@ -16,7 +18,8 @@ public class LandingPageController {
         this.application = application;
     }
 
-    public void exitButtonClicked() {
+    @FXML
+    private void quitProgram() {
         System.exit(0);
     }
 

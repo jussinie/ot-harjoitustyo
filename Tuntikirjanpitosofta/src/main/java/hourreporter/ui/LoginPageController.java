@@ -23,6 +23,7 @@ public class LoginPageController {
     public void handleLogin() throws Exception {
         userService.login(username.getText());
         if (userService.getUser() != null) {
+            username.setText("");
             proceedToMainPage();
         }
         // Could not work this threading in Java FX out myself.
@@ -73,7 +74,7 @@ public class LoginPageController {
     }
 
     @FXML
-    private void exitButtonClicked() {
+    private void quitProgram() {
         System.exit(0);
     }
 }
