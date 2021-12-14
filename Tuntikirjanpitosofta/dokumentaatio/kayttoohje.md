@@ -35,3 +35,16 @@ Huomaa, että voit avata nämä ohjeet milloin tahansa Help-valikon alta klikkaa
 
 ![userManual](https://user-images.githubusercontent.com/64590570/146062691-958dd176-266c-476a-858e-7f23a932b965.png)
 
+### Viikon luominen
+
+Viikko luodaan alla olevassa näkymässä, valitsemalla viikon numero 1-52 ja painamalla nappia Create. Jos viikko on jo luotu, sitä ei ylikirjoiteta vaan se valitaan työstettäväksi seuraavaan näkymään. 
+
+![weekCreation](https://user-images.githubusercontent.com/64590570/146063350-86f477ac-d86b-4edf-98b4-cdea9b0dbf2c.png)
+
+Kun viikko on valittu, se näytetään seuraavassa näkymässä. 
+
+![weekModification](https://user-images.githubusercontent.com/64590570/146063387-8c44dbea-a4a0-4e6f-9034-36d3539f7087.png)
+
+Tässä näkymässä käyttäjä voi muokata tuntejaan ja tallentaa ne painamalla Save-näppäintä.
+
+
