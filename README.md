@@ -14,7 +14,7 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
-Ohjelmasta voi luoda Jar-paketin komennolla 
+Ohjelmasta voi luoda Jar-paketin komennolla. Huomaa, että kaikki mvn-komennot tulee antaa kansiossa, jossa on pom.xml-tiedosto (eli kansiossa Tuntikirjanpitosofta). 
 > mvn package
 
 Jar-paketti ajetaan komennolla
