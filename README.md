@@ -10,3 +10,24 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 [Tuntikirjanpito](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/tuntikirjanpito.md)
 
 [Release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/viikko5)
+
+## Komentorivitoiminnot
+
+### Ohjelman suorittaminen
+
+
+### Testaus
+Testit voidaan suorittaa komennolla
+> mvn test
+
+Testikattavuusraportin luominen onnistuu komennolla 
+> mvn test jacoco:report 
+
+tai lyhyemmin 
+> mvn jacoco:report
+
+jos testit on jo valmiiksi ajettu. Testikattavuusraportti löytyy polusta target/site/jacoco/. Index.html-tiedoston voi avata haluamallaan selaimella. 
+Checkstylen voi suorittaa komennolla 
+> mvn jxr:jxr checkstyle:checkstyle
+
+Checkstyle-määrittelyt löytyvät tiedostosta [checkstyle.xml](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/checkstyle.xml)
