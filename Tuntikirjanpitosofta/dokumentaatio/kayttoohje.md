@@ -31,7 +31,7 @@ Kirjautumisen jälkeen olet kotisivullasi. Vasemmasta ylänurkasta valikon File 
 
 ![mainPage](https://user-images.githubusercontent.com/64590570/146062498-ffef2746-bb27-48e1-bbb6-852a3c6a2bf9.png)
 
-Huomaa, että voit avata nämä ohjeet milloin tahansa Help-valikon alta klikkaamalla. 
+Huomaa, että voit avata nämä ohjeet milloin tahansa Help-valikon alta klikkaamalla kohtaa User manual. 
 
 ![userManual](https://user-images.githubusercontent.com/64590570/146062691-958dd176-266c-476a-858e-7f23a932b965.png)
 
