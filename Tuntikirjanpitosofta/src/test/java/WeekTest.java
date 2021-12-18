@@ -63,4 +63,12 @@ class WeekTest {
         assertTrue(w.getAccepted());
     }
 
+    @Test
+    void daysHoursAreReturnedCorrectly() {
+        w.setDay("Mon", 5.5);
+        assertEquals(5.5, w.getDaysHoursForWeek("Mon"));
+    }
+
+
+
 }

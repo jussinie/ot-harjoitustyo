@@ -29,12 +29,12 @@ public class FakeWeekDao extends WeekDao {
 
     @Override
     public Week read(Integer integer, Long userNumber) throws SQLException {
-        return null;
+        return new Week(1, 100L);
     }
 
     @Override
     public Week update(Week week, Integer weekNumber, Long Usernumber) {
-        return null;
+        return new Week(1, 100L);
     }
 
     @Override

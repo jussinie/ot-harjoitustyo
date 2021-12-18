@@ -82,16 +82,6 @@ public class Week {
         return this.days;
     }
 
-    /*
-    public double getFullWeeksHours() {
-        double total = 0;
-        double[] allDays = getWeeksHoursByDay();
-        for (int i = 0; i < 7; i++) {
-            total = total + allDays[i];
-        }
-        return total;
-    } */
-
     /**
      * Returns all hours that are saved by this particular user for this week.
      * @return Single double value containing the sum of worked hours for this week.

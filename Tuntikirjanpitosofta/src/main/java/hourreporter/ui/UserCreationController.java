@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
@@ -37,7 +39,7 @@ public class UserCreationController {
     @FXML
     private Label errorMessage;
 
-    public void handleUserCreation(ActionEvent event) throws Exception {
+    public void handleUserCreation() throws Exception {
         us.createUser(firstName.getText(), lastName.getText(), username.getText(), role.getText(), team.getText());
         if (us.getUser() != null) {
             firstName.setText("");
@@ -67,6 +69,12 @@ public class UserCreationController {
             });
             errorMessage.setText("Username exists already! Please use another one.");
             new Thread(sleeper).start();
+        }
+    }
+
+    public void handleEnterPressed(KeyEvent k) throws Exception {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            handleUserCreation();
         }
     }
 

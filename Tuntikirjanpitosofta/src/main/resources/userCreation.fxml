@@ -58,11 +58,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="firstName" />
-                        <TextField fx:id="lastName" GridPane.rowIndex="1" />
-                        <TextField fx:id="username" GridPane.rowIndex="2" />
-                        <TextField fx:id="role" GridPane.rowIndex="3" />
-                        <TextField fx:id="team" GridPane.rowIndex="4" />
+                        <TextField fx:id="firstName" onKeyPressed="#handleEnterPressed"/>
+                        <TextField fx:id="lastName" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
+                        <TextField fx:id="username" GridPane.rowIndex="2" onKeyPressed="#handleEnterPressed"/>
+                        <TextField fx:id="role" GridPane.rowIndex="3" onKeyPressed="#handleEnterPressed"/>
+                        <TextField fx:id="team" GridPane.rowIndex="4" onKeyPressed="#handleEnterPressed"/>
                         <Label maxWidth="-Infinity" prefHeight="24.0" prefWidth="108.0" text="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <padding>
                               <Insets left="10.0" />
@@ -104,14 +104,9 @@
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <items>
-                    <MenuItem onAction="#openWebpage" mnemonicParsing="false" text="User manual" />
+                    <MenuItem mnemonicParsing="false" onAction="#openWebpage" text="User manual" />
                 </items>
             </Menu>
         </menus>
