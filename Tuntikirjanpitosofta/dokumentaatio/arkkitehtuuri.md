@@ -4,7 +4,7 @@
 
 Alla olevaan graafiseen arkkitehtuurikuvaukseen on merkitty ohjelman luokat ja luokkien muuttujat, poikkeuksena käyttöliittymä (luokkia ei erikseen merkitty) ja tietokantatoimintoja kuvaava osuus DAO, jossa muuttujien sijaan on merkitty tietokannan käsittelyyn käytetyt metodit.
 
-### Graafinen äyttöliittymä ###
+### Graafinen käyttöliittymä ###
 
 Sovellukseen on luotu graafinen käyttöliittymä JavaFX:ää hyödyntäen. Käyttöliittymä koostuu ReporterGraphUI-luokasta, joka huolehtii kontrollereiden luomisesta ja graafisen käyttöliittymän käynnistämisestä. Se sisältää myös metodit eri näkymien asettamiseen Scene-olioon. Tämän luokan ja kontrolleriluokkien lisäksi jokaisella näkymällä on oma fxml-määrittelytiedostonsa, jossa graafisen käyttöliittymän näkymä on kuvattu xml-muodossa. 
 
