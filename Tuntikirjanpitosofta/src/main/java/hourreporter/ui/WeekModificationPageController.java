@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class WeekModificationPageController {
     private ReporterGraphUI application;
@@ -39,6 +41,9 @@ public class WeekModificationPageController {
     @FXML
     private Label summaryLabel;
 
+    @FXML
+    private Label errorMessage;
+
     public void setApplication(ReporterGraphUI application) {
         this.application = application;
     }
@@ -48,16 +53,19 @@ public class WeekModificationPageController {
     }
 
     public void proceedToWeekCreation() throws Exception {
+        setErrorMessageToEmpty();
         application.setWeekCreationScene();
     }
 
     public void proceedToWeekSelection() throws Exception {
+        setErrorMessageToEmpty();
         application.initializeWeekSelectionScene();
         application.setWeekSelectionScene();
     }
 
     @FXML
     private void goBackToLandingPage() {
+        setErrorMessageToEmpty();
         userService.logout();
         application.setLandingPageScene();
     }
@@ -76,16 +84,26 @@ public class WeekModificationPageController {
 
     public void saveWeeksHours() throws Exception {
         Week week = userService.getWeek();
-        week.setDay("Mon", Double.parseDouble(mondayHours.getText()));
-        week.setDay("Tue", Double.parseDouble(tuesdayHours.getText()));
-        week.setDay("Wed", Double.parseDouble(wednesdayHours.getText()));
-        week.setDay("Thu", Double.parseDouble(thursdayHours.getText()));
-        week.setDay("Fri", Double.parseDouble(fridayHours.getText()));
-        week.setDay("Sat", Double.parseDouble(saturdayHours.getText()));
-        week.setDay("Sun", Double.parseDouble(sundayHours.getText()));
-        userService.setWeek(week);
-        userService.saveHours(week);
-        showWeeksHours();
+        HashMap<String, String> hourInputForInspection = new HashMap<>();
+        hourInputForInspection.put("Mon", mondayHours.getText());
+        hourInputForInspection.put("Tue", tuesdayHours.getText());
+        hourInputForInspection.put("Wed", wednesdayHours.getText());
+        hourInputForInspection.put("Thu", thursdayHours.getText());
+        hourInputForInspection.put("Fri", fridayHours.getText());
+        hourInputForInspection.put("Sat", saturdayHours.getText());
+        hourInputForInspection.put("Sun", sundayHours.getText());
+
+        if (userService.inspectInput(hourInputForInspection)) {
+            for (Map.Entry<String, String> entry : hourInputForInspection.entrySet()) {
+                week.setDay(entry.getKey(), Double.parseDouble(entry.getValue()));
+                userService.setWeek(week);
+                userService.saveHours(week);
+                showWeeksHours();
+                errorMessage.setText("");
+            }
+        } else {
+            errorMessage.setText("Please check your input. Hours have to be reported in form X.X");
+        }
     }
 
     @FXML
@@ -101,5 +119,9 @@ public class WeekModificationPageController {
     @FXML
     private void quitProgram() {
         System.exit(0);
+    }
+
+    public void setErrorMessageToEmpty() {
+        errorMessage.setText("");
     }
 }

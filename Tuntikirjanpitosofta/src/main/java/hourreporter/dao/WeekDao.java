@@ -57,7 +57,6 @@ public class WeekDao implements Dao<Week, Integer, Long> {
     @Override
     public Week update(Week week, Integer weekNumber, Long userNumber) throws SQLException {
         Connection c = DriverManager.getConnection(connString);
-        //PreparedStatement ps = c.prepareStatement("UPDATE Weeks SET tuesday = 12.5");
         PreparedStatement ps = c.prepareStatement("UPDATE Weeks SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE weekNumber = ? AND userNumber = ?");
         ps.setDouble(1, week.getOneDay("Mon").getDaysHours());
         ps.setDouble(2, week.getOneDay("Tue").getDaysHours());
@@ -68,8 +67,6 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.setDouble(7, week.getOneDay("Sun").getDaysHours());
         ps.setInt(8, weekNumber);
         ps.setLong(9, userNumber);
-        //ResultSet rs = ps.executeQuery();
-        //System.out.println(rs.getMetaData());
         ps.executeUpdate();
         ps.close();
         c.close();

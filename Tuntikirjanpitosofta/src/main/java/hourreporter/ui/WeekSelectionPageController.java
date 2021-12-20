@@ -65,7 +65,7 @@ public class WeekSelectionPageController {
     private void handleWeekSelection() throws Exception {
         if (weekInput.getText().matches("-?\\d+")) {
             int weekNumber = Integer.parseInt(weekInput.getText());
-            userService.openExistingWeek(userService, weekNumber);
+            userService.openExistingWeek(weekNumber);
             application.initializeWeekModifyingScene();
             application.setWeekModificationScene();
         } else {

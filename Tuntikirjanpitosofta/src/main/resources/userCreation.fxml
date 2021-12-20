@@ -58,11 +58,11 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="firstName" onKeyPressed="#handleEnterPressed"/>
-                        <TextField fx:id="lastName" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
-                        <TextField fx:id="username" GridPane.rowIndex="2" onKeyPressed="#handleEnterPressed"/>
-                        <TextField fx:id="role" GridPane.rowIndex="3" onKeyPressed="#handleEnterPressed"/>
-                        <TextField fx:id="team" GridPane.rowIndex="4" onKeyPressed="#handleEnterPressed"/>
+                        <TextField fx:id="firstName" onKeyPressed="#handleEnterPressed" />
+                        <TextField fx:id="lastName" onKeyPressed="#handleEnterPressed" GridPane.rowIndex="1" />
+                        <TextField fx:id="username" onKeyPressed="#handleEnterPressed" GridPane.rowIndex="2" />
+                        <TextField fx:id="role" onKeyPressed="#handleEnterPressed" GridPane.rowIndex="3" />
+                        <TextField fx:id="team" onKeyPressed="#handleEnterPressed" GridPane.rowIndex="4" />
                         <Label maxWidth="-Infinity" prefHeight="24.0" prefWidth="108.0" text="First Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <padding>
                               <Insets left="10.0" />

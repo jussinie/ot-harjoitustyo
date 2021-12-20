@@ -44,15 +44,6 @@ public class Week {
         this.userNumber = userNumber;
     }
 
-    public void printWholeWeek() {
-        System.out.println("Reported hours for week " + this.weekNumber + ": ");
-        for (int i = 0; i < 7; i++) {
-            System.out.print(weekdays[i] + " : " + days.get(weekdays[i]).getDaysHours());
-            System.out.print(" | ");
-        }
-        System.out.println("");
-    }
-
     /**
      * As tasks are not yet used in the application, dummy task is added to the given Day instance with given hours.
      * @param dayAbbreviation Day abbreviation Mon, Tue, Wed, Thu, Fri, Sat or Sun.

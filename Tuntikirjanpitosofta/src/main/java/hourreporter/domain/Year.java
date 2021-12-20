@@ -56,32 +56,5 @@ public class Year {
         return this.weeks.length;
     }
 
-    /*
-    public boolean printCreatedWeeks() {
-        boolean isEmpty = true;
-        for (int i = 0; i < 52; i++) {
-            if (this.weeks[i] != null) {
-                isEmpty = false;
-            }
-        }
-        if (isEmpty) {
-            System.out.println("There are no weeks created yet!");
-        } else {
-            System.out.println("*******************************");
-            for (int i = 1; i < weeks.length; i++) {
-                if (weeks[i] == null) {
-                    System.out.print(" ");
-                } else {
-                    System.out.print(i + " ");
-                }
-                if (i % 12 == 0) {
-                    System.out.println();
-                }
-            }
-            System.out.println();
-            System.out.println("*******************************");
-        }
-        return isEmpty;
-    } */
 }
 

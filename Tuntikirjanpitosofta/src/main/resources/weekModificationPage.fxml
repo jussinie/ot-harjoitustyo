@@ -26,12 +26,12 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <items>
-                    <MenuItem onAction="#openWebpage" mnemonicParsing="false" text="User manual" />
+                    <MenuItem mnemonicParsing="false" onAction="#openWebpage" text="User manual" />
                 </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Quit / logout">
             <items>
-              <MenuItem onAction="#goBackToLandingPage" mnemonicParsing="false" text="Log out" />
+              <MenuItem mnemonicParsing="false" onAction="#goBackToLandingPage" text="Log out" />
                 <MenuItem mnemonicParsing="false" onAction="#quitProgram" text="Quit" />
             </items>
           </Menu>
@@ -89,6 +89,7 @@
                </padding>
             </GridPane>
             <Label fx:id="summaryLabel" />
+            <Label fx:id="errorMessage" />
             <Button mnemonicParsing="false" onAction="#saveWeeksHours" text="Save">
                <VBox.margin>
                   <Insets top="15.0" />

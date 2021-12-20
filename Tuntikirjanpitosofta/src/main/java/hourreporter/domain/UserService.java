@@ -1,11 +1,14 @@
 package hourreporter.domain;
 
+import hourreporter.dao.FakeUserDao;
+import hourreporter.dao.FakeWeekDao;
 import hourreporter.dao.UserDao;
 import hourreporter.dao.WeekDao;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class provides all the services and methods for the UI. It is also used to access the database through the DAO
@@ -25,21 +28,34 @@ public class UserService {
         this.wd = wd;
     }
 
+    /**
+     * Method creates an instance of User class, attaches this to UserService instance and saves the user to the database.
+     *
+     * @param firstName first name of the user.
+     * @param lastName last name of the user.
+     * @param username username of the user.
+     * @param role User's role at work.
+     * @param team User's team at work.
+     */
     public void createUser(String firstName, String lastName, String username, String role, String team) {
         User inputtedUser = new User(firstName, lastName, username, role, team);
         try {
             User existingUser = ud.read(inputtedUser.getUsername(), 0L);
-            System.out.println("Reading works");
             if (existingUser == null) {
                 ud.create(inputtedUser);
                 this.user = inputtedUser;
-                System.out.println("User created succesfully!");
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
 
+    /**
+     * This method reads the user from database, using the provided username and attaches the User instance to the UserService instance.
+     * If the username doesn't exist, nothing is read from the database.
+     *
+     * @param username user's username.
+     */
     public void login(String username) {
         try {
             User user = ud.read(username, 0L);
@@ -51,8 +67,13 @@ public class UserService {
         }
     }
 
-    // Milloin tämä suoritetaan?
-    public Year loadSavedWeeksForUser(long userNumber, WeekDao wd) throws SQLException {
+    /**
+     *
+     * @param userNumber
+     * @return
+     * @throws SQLException if the SQL operation fails.
+     */
+    public Year loadSavedWeeksForUser(long userNumber) throws SQLException {
         Year year = new Year(userNumber);
         List<Week> weeks = wd.list();
         for (Week w : weeks) {
@@ -70,13 +91,23 @@ public class UserService {
         return year;
     }
 
-    public List<Week> getAllWeeks() throws Exception {
+    /**
+     * Method to return a list of all weeks for user who has logged in.
+     * @return List of Week instances.
+     * @throws SQLException if the SQL operation fails.
+     */
+    public List<Week> getAllWeeks() throws SQLException {
         List<Week> weeks = wd.list();
         return weeks;
     }
 
+    /**
+     * Method to create a Week instance and save it into the database.
+     * @param weekNumber Integer value for week number.
+     * @throws SQLException if the SQL operation fails.
+     */
     public void createWeek(int weekNumber) throws SQLException {
-        Year year = loadSavedWeeksForUser(user.getUserNumber(), getWd());
+        Year year = loadSavedWeeksForUser(user.getUserNumber());
         if (weekNumber > 0 && weekNumber < 53) {
             if (wd.read(weekNumber, user.getUserNumber()) == null) {
                 year.createNewWeek(weekNumber, user.getUserNumber());
@@ -86,8 +117,14 @@ public class UserService {
         }
     }
 
-    public void openExistingWeek(UserService userService, int weekNumber) throws SQLException {
-        Year year = userService.loadSavedWeeksForUser(user.getUserNumber(), userService.getWd());
+    /**
+     * This method pulls a Week instance from the database and attaches it as a variable to UserService instance,
+     * i.e. for the logged user.
+     * @param weekNumber Integer value to identify the week that has to be loaded from the database.
+     * @throws SQLException if the SQL operation fails.
+     */
+    public void openExistingWeek(int weekNumber) throws SQLException {
+        Year year = loadSavedWeeksForUser(user.getUserNumber());
         if (weekNumber > 0 && weekNumber < 53) {
             if (wd.read(weekNumber, user.getUserNumber()) == null) {
                 week = year.createNewWeek(weekNumber, user.getUserNumber());
@@ -97,6 +134,30 @@ public class UserService {
         }
     }
 
+    /**
+     * Method to check the double input for hours. Returns true if there are erroneous inputs,
+     * i.e. not all the given strings can be parsed as double.
+     * @param hours inputted string for reported hours. Should be in format X.X
+     * @return true if input is in correct format, false if input is in incorrect format.
+     */
+    public boolean inspectInput(HashMap<String, String> hours) {
+        boolean correct = true;
+        for (Map.Entry entry : hours.entrySet()) {
+            try {
+                Double.parseDouble(entry.getValue().toString());
+            } catch (Exception e) {
+                correct = false;
+            }
+        }
+        return correct;
+    }
+
+    /**
+     * Method to save Week instance to the database. Method checks if week exists
+     * in the database and updates the row if it does. Otherwise new row will be created.
+     * @param week
+     * @throws SQLException if the SQL operation fails.
+     */
     public void saveHours(Week week) throws SQLException {
         Week oldWeek = wd.read(week.getWeekNumber(), week.getUserNumber());
         if (oldWeek != null) {
@@ -106,64 +167,41 @@ public class UserService {
         }
     }
 
-    /*
-    public Week selectWeek(User user, UserService us) throws SQLException {
-        Year year = us.loadSavedWeeksForUser(user.getUserNumber(), us.getWd());
-        while (true) {
-
-        } else if (input.equals("2")) {
-            if (!year.printCreatedWeeks()) {
-                System.out.println("Which week you want to select? (1-52)");
-                System.out.println("If you select something that doesn't exist, that week will be created.");
-                String selectWeek = reader.nextLine();
-                if (selectWeek.matches("-?\\d+")) {
-                    if (Integer.valueOf(selectWeek) > 0 && Integer.valueOf(selectWeek) < 53) {
-                        if (year.getWeek(Integer.valueOf(selectWeek)) == null) return year.createNewWeek(Integer.valueOf(selectWeek), user.getUserNumber());
-                        else return year.getWeek(Integer.valueOf(selectWeek));
-                    }
-                }
-            } else {
-                System.out.println("As there are no weeks created, your selection (1-52) will be first created week.");
-                System.out.println("This week will be selected after creation.");
-                String selectWeek = reader.nextLine();
-                return year.createNewWeek(Integer.valueOf(Integer.valueOf(selectWeek)), user.getUserNumber());
-            }
-        } else if (input.equals("1")) {
-            System.out.println("For which week you want to create your sheet? (1-52)");
-            System.out.println("You have created these weeks already:");
-            year.printCreatedWeeks();
-            System.out.println("This week will be selected after creation.");
-            String weekNr = reader.nextLine();
-            return year.createNewWeek(Integer.valueOf(weekNr), user.getUserNumber());
-        }
-    } */
-
-    public HashMap<String, User> getUsers() {
-        return this.users;
-    }
-
-    public UserDao getUd() {
-        return ud;
-    }
-
-    public WeekDao getWd() {
-        return wd;
-    }
-
+    /**
+     * Method to return the User object attached to the UserService object.
+     * @return User object.
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Method to return the Week object attached to the UserService object.
+     * @return Week object.
+     */
     public Week getWeek() {
         return week;
     }
 
+    /**
+     * Method to set the User object in this UserService instance to null.
+     * Together with controllers returning the Scene to the landing page this effectively "logs out" the current user.
+     */
     public void logout() {
         this.user = null;
     }
 
+    /**
+     * Method to attach the current Week instance as a variable for this UserService object.
+     * Enables the maintenance of this Week instance.
+     * @param week Week instance that will be attached as a variable for this UserService instance.
+     */
     public void setWeek(Week week) {
         this.week = week;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

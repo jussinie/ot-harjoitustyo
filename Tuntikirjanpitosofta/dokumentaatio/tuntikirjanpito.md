@@ -18,4 +18,7 @@ Viikko | Tunnit | Mitä tein
 6 | | Koodin tarvittava refaktorointi
 6 | | UI:n ja muun sovelluslogiikan päivitys
 6 | 1,5 | Käyttöohjeiden laatiminen, UI:n hienosäätö, näkymien konfigurointi
-| |**Yhteensä 38,5** |
+7 | 2 | Testien uudelleen kirjoittaminen
+7 | 2 | Dokumentaatio - arkkitehtuurikuvaus
+
+| |**Yhteensä 42,5** |

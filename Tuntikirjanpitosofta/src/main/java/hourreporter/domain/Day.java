@@ -19,16 +19,6 @@ public class Day {
         tasksForDay = new ArrayList<>();
     }
 
-    /*
-    public void printDay() {
-        if (tasksForDay.isEmpty()) {
-            System.out.println("No tasks booked for this day.");
-        }
-        for (Task t : tasksForDay) {
-            System.out.println(t.getTaskName() + ", used " + t.getHours() + " hours");
-        }
-    } */
-
     /**
      * Method returns all the hours from all the tasks for one day.
      * @return total hours worked for one day.
