@@ -9,6 +9,10 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 
 [Tuntikirjanpito](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/tuntikirjanpito.md)
 
+[Käyttöohje](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md))
+
+[Arkkitehtuuri](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/arkkitehtuuri.md)
+
 [Release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
