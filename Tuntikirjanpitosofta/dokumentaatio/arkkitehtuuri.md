@@ -2,19 +2,23 @@
 
 ## Rakenne ##
 
-Alla olevaan graafiseen arkkitehtuurikuvaukseen on merkitty ohjelman luokat ja luokkien muuttujat, poikkeuksena käyttöliittymä (luokkia ei erikseen merkitty) ja tietokantatoimintoja kuvaava osuus DAO, jossa muuttujien sijaan on merkitty tietokannan käsittelyyn käytetyt metodit.
+Alla olevaan graafiseen arkkitehtuurikuvaukseen on merkitty ohjelman luokat ja luokkien muuttujat, poikkeuksena käyttöliittymä (luokkia ei erikseen merkitty) ja tietokantatoimintoja kuvaava osuus DAO, jossa muuttujien sijaan on merkitty tietokannan käsittelyyn käytetyt metodit. Arkkitehtuuridiagrammi on nähtävissä kokonaisuudessaan täällä: [arkkitehtuuri] (https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/arkkitehtuuri.md)
 
-### Graafinen äyttöliittymä ###
+### Graafinen käyttöliittymä ###
 
 Sovellukseen on luotu graafinen käyttöliittymä JavaFX:ää hyödyntäen. Käyttöliittymä koostuu ReporterGraphUI-luokasta, joka huolehtii kontrollereiden luomisesta ja graafisen käyttöliittymän käynnistämisestä. Se sisältää myös metodit eri näkymien asettamiseen Scene-olioon. Tämän luokan ja kontrolleriluokkien lisäksi jokaisella näkymällä on oma fxml-määrittelytiedostonsa, jossa graafisen käyttöliittymän näkymä on kuvattu xml-muodossa. 
 
 ### Sovelluslogiikka ###
 
-Sovelluslogiikasta vasta ensisijaisesti UserService-luokka, yhdessä muiden alla näkyvien luokkien kanssa. Kaikki sovelluslogiikan metodit ovat UserService-luokan metodeja.
+Sovelluslogiikasta vastaa ensisijaisesti UserService-luokka, yhdessä muiden alla näkyvien luokkien kanssa. Kaikki sovelluslogiikan metodit ovat UserService-luokan metodeja.
+
+![domain](https://user-images.githubusercontent.com/64590570/146805075-7011bd86-9c95-420d-95f8-93e81b825d86.png)
 
 ### Tietojen pysyväistallennus ###
 
 Tämä sovellus käyttää tietojen pysyväistallennukseen sqlite-tietokantaa. Ohjelmisto luo ensimmäisellä käynnistyskerralla tiedoston hourreporter.db, joka sisältää tietojen tallennukseen käytetyn sqlite-tietokannan. Ensimmäisellä käynnistyskerralla luodaan myös taulut Users ja Weeks käyttäjien ja viikkojen tallennusta varten. 
+
+![dao](https://user-images.githubusercontent.com/64590570/146805097-2f0435ec-fe5e-4dbd-82f9-9e1901896003.png)
 
 Ohjelmassa on yksi tietokantakyselyitä abstrahoiva rajapinta DAO ja rajapinnan toteuttavat luokat UserDao ja WeekDao. Kumpikin luokka sisältää samat metodit **create, read, update ja list**. 
 
