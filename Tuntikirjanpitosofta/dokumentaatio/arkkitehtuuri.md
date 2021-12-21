@@ -10,7 +10,7 @@ Sovellukseen on luotu graafinen käyttöliittymä JavaFX:ää hyödyntäen. Käy
 
 ### Sovelluslogiikka ###
 
-Sovelluslogiikasta vasta ensisijaisesti UserService-luokka, yhdessä muiden alla näkyvien luokkien kanssa. Kaikki sovelluslogiikan metodit ovat UserService-luokan metodeja.
+Sovelluslogiikasta vastaa ensisijaisesti UserService-luokka, yhdessä muiden alla näkyvien luokkien kanssa. Kaikki sovelluslogiikan metodit ovat UserService-luokan metodeja.
 
 ![domain](https://user-images.githubusercontent.com/64590570/146805075-7011bd86-9c95-420d-95f8-93e81b825d86.png)
 
