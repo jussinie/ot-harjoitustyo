@@ -27,12 +27,4 @@ public class FakeUserDao extends UserDao {
         return null;
 
     }
-
-    public User update() throws SQLException {
-        return null;
-    }
-
-    public List list() throws SQLException {
-        return null;
-    }
 }

@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.sql.Connection;
+
 public class ReporterGraphUI extends Application {
     private Stage window;
     private Scene landingPageScene;
@@ -23,10 +25,8 @@ public class ReporterGraphUI extends Application {
 
     @Override
     public void init() throws Exception {
-        UserDao ud = new UserDao();
+        UserDao ud = new UserDao("prod");
         WeekDao wd = new WeekDao();
-        DatabaseManager db = new DatabaseManager();
-        db.initiateConnectionToDb();
         us = new UserService(ud, wd);
 
         // Create Scene for landing page
@@ -62,6 +62,9 @@ public class ReporterGraphUI extends Application {
         window.show();
     }
 
+    /**
+     * This method sets
+     */
     public void setLandingPageScene() {
         window.setScene(landingPageScene);
     }

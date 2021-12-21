@@ -1,3 +1,4 @@
+import hourreporter.dao.DatabaseManager;
 import hourreporter.dao.FakeUserDao;
 import hourreporter.dao.FakeWeekDao;
 import hourreporter.dao.UserDao;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;

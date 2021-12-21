@@ -15,7 +15,7 @@ public class WeekDaoTest {
     Connection dbConn;
     WeekDao wd;
     FakeWeekDao fwd = new FakeWeekDao();
-    UserDao ud = new UserDao();
+    UserDao ud = new UserDao("test");
 
     @BeforeEach
     public void initiateConnectionToDb() throws SQLException {

@@ -7,10 +7,33 @@ import java.util.List;
 
 public class UserDao implements Dao<User, String, Long> {
 
+    private String testOrProd;
+    private Connection dbConn;
+
+    public UserDao() {
+
+    }
+
+    public UserDao(String testOrProd) {
+        this.testOrProd = testOrProd;
+        try {
+            if (testOrProd.equals("test")) {
+                dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporterTest.db");
+            } else if (testOrProd.equals("prod")) {
+                dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
+            }
+            Statement s = dbConn.createStatement();
+            s.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, userNumber LONG, username TEXT, role TEXT, team TEXT, isTeamLead BOOLEAN)");
+            s.execute("CREATE TABLE IF NOT EXISTS Weeks (id INTEGER PRIMARY KEY, userNumber LONG, weekNumber INTEGER, monday DOUBLE, tuesday DOUBLE, wednesday DOUBLE, thursday DOUBLE, friday DOUBLE, saturday DOUBLE, sunday DOUBLE)");
+        } catch (Exception e) {
+            System.out.println("UserDao could not connect to DB.");
+        }
+
+    }
+
     @Override
     public void create(User user) throws SQLException {
-        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-        PreparedStatement ps = c.prepareStatement("INSERT INTO Users"
+        PreparedStatement ps = dbConn.prepareStatement("INSERT INTO Users"
             + " (firstName, lastName, username, userNumber, role, team, isTeamLead)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, user.getFirstName());
@@ -23,13 +46,12 @@ public class UserDao implements Dao<User, String, Long> {
 
         ps.executeUpdate();
         ps.close();
-        c.close();
+        //dbConn.close();
     }
 
     @Override
     public User read(String username, Long userNumber) throws SQLException {
-        Connection c = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Users WHERE username = ?");
+        PreparedStatement ps = dbConn.prepareStatement("SELECT * FROM Users WHERE username = ?");
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         if (!rs.next()) {
@@ -48,8 +70,12 @@ public class UserDao implements Dao<User, String, Long> {
     }
 
     @Override
-    public List<User> list() throws SQLException {
+    public List<User> list() {
         return null;
+    }
+
+    public Connection getDbConn() {
+        return this.dbConn;
     }
 
 }
