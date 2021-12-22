@@ -1,3 +1,4 @@
+import hourreporter.dao.WeekDao;
 import hourreporter.domain.Day;
 import hourreporter.domain.User;
 import hourreporter.domain.Week;
@@ -69,6 +70,9 @@ class WeekTest {
         assertEquals(5.5, w.getDaysHoursForWeek("Mon"));
     }
 
-
+    @Test
+    void zeroIsReturnedIfDaysGetReturnsNull() {
+        assertEquals(0, w.getDaysHoursForWeek("nonexisting"));
+    }
 
 }

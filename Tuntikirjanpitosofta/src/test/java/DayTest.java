@@ -30,9 +30,4 @@ class DayTest {
         assertEquals("test task", d.tasksForDay.get(0).getTaskName());
         assertEquals(7.5, d.tasksForDay.get(0).getHours());
     }
-
-    /*@Test
-    void printDayPrintsIfTasksNotEmpty() {
-        assertEquals("No tasks booked for this day.", d.printDay());
-    }*/
 }

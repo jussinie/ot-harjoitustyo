@@ -20,6 +20,7 @@ Viikko | Tunnit | Mitä tein
 6 | 1,5 | Käyttöohjeiden laatiminen, UI:n hienosäätö, näkymien konfigurointi
 7 | 2 | Testien uudelleen kirjoittaminen
 7 | 2 | Dokumentaatio - arkkitehtuurikuvaus
-7 | 1 | Testien uudelleen kirjoittaminen
+7 | 3 | Testien uudelleen kirjoittaminen
+7 | 1,5 | Logon luonti, käyttöliittymän visuaalisuuden päivitys
 
-| | **Yhteensä 43,5** |
+| | **Yhteensä 47,0** |

@@ -7,10 +7,13 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hourreporter.ui.LoginPageController">
    <top>
@@ -18,7 +21,7 @@
            <menus>
                <Menu mnemonicParsing="false" text="Help">
                    <items>
-                       <MenuItem onAction="#openWebpage" mnemonicParsing="false" text="User manual" />
+                       <MenuItem mnemonicParsing="false" onAction="#openWebpage" text="User manual" />
                    </items>
                </Menu>
                <Menu mnemonicParsing="false" text="Quit">
@@ -27,31 +30,45 @@
                    </items>
                </Menu>
            </menus>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
        </MenuBar>
    </top>
    <center>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="107.0" prefWidth="521.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="161.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="224.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="161.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Give your username" />
-            <Button mnemonicParsing="false" onAction="#handleLogin" text="Log in" GridPane.columnIndex="2" />
-            <TextField fx:id="username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" GridPane.halignment="CENTER">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </TextField>
-            <Label fx:id="errorMessage" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#goBackToLandingPage" text="Go back" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ImageView fitHeight="150.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@hourReporterLogo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="100.0" />
+               </VBox.margin>
+            </ImageView>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="107.0" prefWidth="521.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="140.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="171.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="403.0" minWidth="10.0" prefWidth="89.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Give your username" />
+                  <Button mnemonicParsing="false" onAction="#handleLogin" text="Log in" GridPane.columnIndex="2" />
+                  <TextField fx:id="username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleEnterPressed" prefHeight="24.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </TextField>
+                  <Label fx:id="errorMessage" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#goBackToLandingPage" text="Go back" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
          </children>
-      </GridPane>
+      </VBox>
    </center>
 </BorderPane>

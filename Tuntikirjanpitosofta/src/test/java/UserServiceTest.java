@@ -1,21 +1,19 @@
-import hourreporter.dao.DatabaseManager;
 import hourreporter.dao.FakeUserDao;
 import hourreporter.dao.FakeWeekDao;
-import hourreporter.dao.UserDao;
 import hourreporter.domain.User;
 import hourreporter.domain.UserService;
 import hourreporter.domain.Week;
-import org.junit.jupiter.api.AfterEach;
+import hourreporter.domain.Year;
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserServiceTest {
 
@@ -42,9 +40,7 @@ public class UserServiceTest {
         week.setDay("Sun", 0.0);
         us.setWeek(week);
         fwd.create(week);
-        //System.setOut(new PrintStream(outputStreamCaptor));
     }
-
 
     @Test
     void creatingUserWorks() {
@@ -54,23 +50,23 @@ public class UserServiceTest {
         String role = "admin";
         String team = "test team";
         User user1 = new User(firstName, lastName, username, role, team);
-        assertNull(fud.read(username));
-        fud.create(user1);
-        User user2 = fud.read(username);
-        assertEquals(user1.getFirstName(), user2.getFirstName());
+        us.createUser(firstName, lastName, username, role, team);
+        //User user2 = fud.read(username);
+        assertEquals("person2", fud.read("testPerson2", 1L).getLastName());
     }
 
     @Test
-    void loginWorks() {
+    void loginWorksWithCorrectUsername() {
         us.login("testPerson");
         assertEquals("testPerson", us.getUser().getUsername());
     }
 
+    /*
     @Test
     void openingExistingWeekWorks() throws SQLException {
         us.openExistingWeek(1);
         assertEquals(0.0, us.getWeek().countWorkHours());
-    }
+    } */
 
     @Test
     void inspectInputWorksWithDoubles() {
@@ -96,10 +92,35 @@ public class UserServiceTest {
     }
 
     @Test
-    void savingHoursWorksAsExpected() {
-
+    void savingHoursWorksForNewWeek() throws SQLException {
+        Week newWeek = new Week(43, 3L);
+        us.saveHours(newWeek);
+        Week loadedWeek = fwd.read(43, 3L);
+        System.out.println(loadedWeek.getWeekNumber());
+        assertEquals(43, fwd.read(43, 3L).getWeekNumber());
     }
 
+    @Test
+    void savingHoursWorksForExistingWeek() {
+        Week existingWeek = fwd.read(1, 2072563456L);
+        existingWeek.setDay("Sun", 7.5);
+        fwd.create(existingWeek);
+        assertEquals(7.5, fwd.read(1, 2072563456L).getDaysHoursForWeek("Sun"));
+    }
+
+    @Test
+    void loadingUsersHoursWork() {
+        Year year = new Year(100L);
+        List<Week> weeks = new ArrayList<>();
+        weeks = fwd.list();
+        for (Week w : weeks) {
+            System.out.println(w.getWeekNumber());
+            System.out.println(Arrays.toString(w.getWeeksHoursByDay()));
+            year.createNewWeek(w.getWeekNumber(), -2107266002);
+            System.out.println(year.getWeek(1).getDaysHoursForWeek("Wed"));
+        }
+        assertEquals(0.0, year.getWeek(1).getDaysHoursForWeek("Sun"));
+    }
     /*
     @Test
     void userServiceIsCreatedCorrectly() {
@@ -113,6 +134,12 @@ public class UserServiceTest {
         User user = us.users.get("testPerson");
         assertEquals("test", user.getFirstName());
     } */
+
+    @Test
+    void logoutWorks() {
+        us.logout();
+        assertNull(us.getUser());
+    }
 
     /*
     @AfterEach

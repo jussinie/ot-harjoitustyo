@@ -1,6 +1,5 @@
 package hourreporter.ui;
 
-import hourreporter.dao.DatabaseManager;
 import hourreporter.dao.UserDao;
 import hourreporter.dao.WeekDao;
 import hourreporter.domain.UserService;
@@ -9,8 +8,6 @@ import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.sql.Connection;
 
 public class ReporterGraphUI extends Application {
     private Stage window;
@@ -26,7 +23,7 @@ public class ReporterGraphUI extends Application {
     @Override
     public void init() throws Exception {
         UserDao ud = new UserDao("prod");
-        WeekDao wd = new WeekDao();
+        WeekDao wd = new WeekDao("prod");
         us = new UserService(ud, wd);
 
         // Create Scene for landing page

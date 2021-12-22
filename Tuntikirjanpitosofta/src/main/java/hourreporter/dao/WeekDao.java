@@ -8,16 +8,32 @@ import java.util.List;
 
 public class WeekDao implements Dao<Week, Integer, Long> {
 
-    String connString;
+    private String testOrProd;
+    private Connection dbConn;
 
     public WeekDao() {
-        this.connString = "jdbc:sqlite:hourreporter.db";
+
+    }
+
+    public WeekDao(String testOrProd) {
+        this.testOrProd = testOrProd;
+        try {
+            if (testOrProd.equals("test")) {
+                dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporterTest.db");
+            } else if (testOrProd.equals("prod")) {
+                dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
+            }
+            Statement s = dbConn.createStatement();
+            s.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, userNumber LONG, username TEXT, role TEXT, team TEXT, isTeamLead BOOLEAN)");
+            s.execute("CREATE TABLE IF NOT EXISTS Weeks (id INTEGER PRIMARY KEY, userNumber LONG, weekNumber INTEGER, monday DOUBLE, tuesday DOUBLE, wednesday DOUBLE, thursday DOUBLE, friday DOUBLE, saturday DOUBLE, sunday DOUBLE)");
+        } catch (Exception e) {
+            System.out.println("WeekDao could not connect to DB.");
+        }
     }
 
     @Override
     public void create(Week week) throws SQLException {
-        Connection c = DriverManager.getConnection(connString);
-        PreparedStatement ps = c.prepareStatement("INSERT INTO Weeks"
+        PreparedStatement ps = dbConn.prepareStatement("INSERT INTO Weeks"
                 + " (userNumber, weekNumber, monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         ps.setLong(1, week.getUserNumber());
@@ -31,14 +47,11 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.setDouble(9, week.getDaysHoursForWeek("Sun"));
         ps.executeUpdate();
         ps.close();
-        c.close();
-        System.out.println("domain.Week saved!");
     }
 
     @Override
     public Week read(Integer weekNumber, Long userNumber) throws SQLException {
-        Connection c = DriverManager.getConnection(connString);
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks WHERE weekNumber = ? AND userNumber = ?");
+        PreparedStatement ps = dbConn.prepareStatement("SELECT * FROM Weeks WHERE weekNumber = ? AND userNumber = ?");
         ps.setInt(1, weekNumber);
         ps.setLong(2, userNumber);
         ResultSet rs = ps.executeQuery();
@@ -47,17 +60,20 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         }
         Week w = new Week(weekNumber, userNumber);
         w.setDay("Mon", rs.getDouble("monday"));
+        w.setDay("Tue", rs.getDouble("tuesday"));
         w.setDay("Wed", rs.getDouble("wednesday"));
+        w.setDay("Thu", rs.getDouble("thursday"));
+        w.setDay("Fri", rs.getDouble("friday"));
+        w.setDay("Sat", rs.getDouble("saturday"));
+        w.setDay("Sun", rs.getDouble("sunday"));
         ps.close();
         rs.close();
-        c.close();
         return w;
     }
 
     @Override
     public Week update(Week week, Integer weekNumber, Long userNumber) throws SQLException {
-        Connection c = DriverManager.getConnection(connString);
-        PreparedStatement ps = c.prepareStatement("UPDATE Weeks SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE weekNumber = ? AND userNumber = ?");
+        PreparedStatement ps = dbConn.prepareStatement("UPDATE Weeks SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE weekNumber = ? AND userNumber = ?");
         ps.setDouble(1, week.getOneDay("Mon").getDaysHours());
         ps.setDouble(2, week.getOneDay("Tue").getDaysHours());
         ps.setDouble(3, week.getOneDay("Wed").getDaysHours());
@@ -69,15 +85,13 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.setLong(9, userNumber);
         ps.executeUpdate();
         ps.close();
-        c.close();
         return week;
     }
 
     @Override
     public List<Week> list() throws SQLException {
         ArrayList<Week> weeks = new ArrayList<>();
-        Connection c = DriverManager.getConnection(connString);
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM Weeks");
+        PreparedStatement ps = dbConn.prepareStatement("SELECT * FROM Weeks");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             Week w = new Week(rs.getInt("weekNumber"), rs.getLong("userNumber"));
@@ -93,5 +107,8 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.close();
         rs.close();
         return weeks;
+    }
+    public Connection getDbConn() {
+        return this.dbConn;
     }
 }

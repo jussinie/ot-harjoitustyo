@@ -15,6 +15,7 @@ public class FakeWeekDao extends WeekDao {
         weeks = new ArrayList<>();
     }
 
+    @Override
     public void create(Week week) {
         weeks.add(week);
     }
@@ -22,7 +23,7 @@ public class FakeWeekDao extends WeekDao {
     @Override
     public Week read(Integer weekNumber, Long userNumber) {
         for (Week w : weeks) {
-            if (w.getWeekNumber() == weekNumber && w.getUserNumber() == userNumber) {
+            if (w.getWeekNumber() == weekNumber) {
                 return w;
             }
         }

@@ -7,12 +7,13 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hourreporter.ui.WeekModificationPageController">
    <top>
@@ -36,19 +37,22 @@
             </items>
           </Menu>
         </menus>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
       </MenuBar>
    </top>
    <right>
       <Label BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="439.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="439.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="59.0" prefWidth="342.0" text="Hour Reporter Software">
-               <font>
-                  <Font name="Arial Black" size="25.0" />
-               </font>
-            </Label>
+            <ImageView fitHeight="150.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@hourReporterLogo.png" />
+               </image>
+            </ImageView>
             <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="75.0" prefWidth="342.0" />
             <Label fx:id="nowModifying" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="249.0" text="Label" />
             <GridPane>

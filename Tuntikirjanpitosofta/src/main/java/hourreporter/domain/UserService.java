@@ -20,7 +20,6 @@ public class UserService {
     public HashMap<String, User> users;
     private UserDao ud;
     private WeekDao wd;
-    private Connection dbConn;
     private User user;
     private Week week;
 

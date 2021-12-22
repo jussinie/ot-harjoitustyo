@@ -28,7 +28,6 @@ public class UserDao implements Dao<User, String, Long> {
         } catch (Exception e) {
             System.out.println("UserDao could not connect to DB.");
         }
-
     }
 
     @Override

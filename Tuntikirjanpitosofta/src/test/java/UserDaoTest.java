@@ -1,8 +1,6 @@
-import hourreporter.dao.DatabaseManager;
 import hourreporter.dao.UserDao;
 import hourreporter.domain.User;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,7 +67,7 @@ public class UserDaoTest {
         DatabaseMetaData dbmd = ud.getDbConn().getMetaData();
         assertEquals("jdbc:sqlite:hourreporter.db", dbmd.getURL());
     }
-    
+
     /*
     @AfterAll
     public static void cleanDatabase() throws SQLException {
