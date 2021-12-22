@@ -1,3 +1,5 @@
+package domainTests;
+
 import hourreporter.domain.User;
 import hourreporter.domain.Year;
 import org.junit.Before;

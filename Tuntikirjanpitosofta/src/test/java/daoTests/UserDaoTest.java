@@ -1,3 +1,5 @@
+package daoTests;
+
 import hourreporter.dao.UserDao;
 import hourreporter.domain.User;
 import org.junit.Before;

@@ -1,3 +1,5 @@
+package domainTests;
+
 import hourreporter.dao.FakeUserDao;
 import hourreporter.dao.FakeWeekDao;
 import hourreporter.domain.User;

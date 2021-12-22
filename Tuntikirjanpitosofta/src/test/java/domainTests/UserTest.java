@@ -1,3 +1,5 @@
+package domainTests;
+
 import hourreporter.domain.User;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;

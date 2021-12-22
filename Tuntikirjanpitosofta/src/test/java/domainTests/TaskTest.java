@@ -1,3 +1,5 @@
+package domainTests;
+
 import hourreporter.domain.Task;
 import org.junit.jupiter.api.Test;
 

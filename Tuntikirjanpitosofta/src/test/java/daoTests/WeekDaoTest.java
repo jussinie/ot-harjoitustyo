@@ -1,3 +1,5 @@
+package daoTests;
+
 import hourreporter.dao.WeekDao;
 import hourreporter.domain.Week;
 import org.junit.Before;
