@@ -2,7 +2,7 @@
 
 ## Rakenne ##
 
-Alla olevaan graafiseen arkkitehtuurikuvaukseen on merkitty ohjelman luokat ja luokkien muuttujat, poikkeuksena käyttöliittymä (luokkia ei erikseen merkitty) ja tietokantatoimintoja kuvaava osuus DAO, jossa muuttujien sijaan on merkitty tietokannan käsittelyyn käytetyt metodit. Arkkitehtuuridiagrammi on nähtävissä kokonaisuudessaan täällä: [arkkitehtuuri] (https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/arkkitehtuuri.md)
+Alla olevaan graafiseen arkkitehtuurikuvaukseen on merkitty ohjelman luokat ja luokkien muuttujat, poikkeuksena käyttöliittymä (luokkia ei erikseen merkitty) ja tietokantatoimintoja kuvaava osuus DAO, jossa muuttujien sijaan on merkitty tietokannan käsittelyyn käytetyt metodit. Arkkitehtuuridiagrammi on nähtävissä kokonaisuudessaan täällä: [arkkitehtuuri](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/arkkitehtuuri.md)
 
 ### Graafinen käyttöliittymä ###
 
