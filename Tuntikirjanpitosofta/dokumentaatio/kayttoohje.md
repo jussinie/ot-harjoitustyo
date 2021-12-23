@@ -19,7 +19,7 @@ Sovelluksen käynnistyttyä olet aloitussivulla. Tällä sivulla voit valita kir
 
 Jos klikkasit Existing user - Log in sinun tulee syöttää olemassaoleva käyttäjätunnuksesi kenttään ja klikata log in -nappia. Vaihtoehtoisesti voit kirjautua sisään painamalla Enteriä. Voit myös palata aloitussivulle painamalla Go back. 
 
-![loginPage](https://user-images.githubusercontent.com/64590570/147268859-18ee2c0c-86f2-4fd8-b31e-bfe2754947fc.png)
+![loginScreen](https://user-images.githubusercontent.com/64590570/147269314-2fa8efea-d361-4763-b563-59f68316e8a4.png)
 
 Mikäli käyttäjätunnusta ei ole olemassa, ohjelma kertoo siitä virheviestillä.
 
