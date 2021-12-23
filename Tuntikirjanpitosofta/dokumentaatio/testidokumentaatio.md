@@ -18,6 +18,10 @@ ja testikattavuusraporttia voi sen jälkeen tutkia haluamallaan selaimella. Rapo
 
 ### Checkstyle ### 
 
-Projektissa käytetään myös Checkstyleä, jotta koodi pysyy hyvin luettavana ja oikein muotoiltuna. Checkstylestä enemmän täällä: [checkstyle](https://checkstyle.org/). Alla viimeisin Checkstyle-raportti.
+Projektissa käytetään myös Checkstyleä, jotta koodi pysyy hyvin luettavana ja oikein muotoiltuna. Checkstylestä enemmän täällä: [checkstyle](https://checkstyle.org/). Checkstyle-raportin voi tuottaa komennolla
+> mvn jxr:jxr checkstyle:checkstyle
+
+Valmis raportti checkstyle.html löytyy polusta ./target/site/. 
+Alla viimeisin Checkstyle-raportti.
 
 ![checkstyle](https://user-images.githubusercontent.com/64590570/147101720-cccf2ff6-981d-4f03-a134-614b383be193.png)
