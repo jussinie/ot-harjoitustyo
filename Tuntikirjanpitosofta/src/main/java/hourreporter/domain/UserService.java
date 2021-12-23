@@ -46,7 +46,7 @@ public class UserService {
                 }
             } else {
                 return "userExists";
-                }
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

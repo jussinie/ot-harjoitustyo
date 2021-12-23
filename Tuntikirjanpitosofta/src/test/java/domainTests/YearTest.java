@@ -2,7 +2,6 @@ package domainTests;
 
 import hourreporter.domain.User;
 import hourreporter.domain.Year;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +37,4 @@ public class YearTest {
     public void newWeekNotCreatedWithBiggerThan52() {
         assertNull(y.createNewWeek(53, user.getUserNumber()));
     }
-
-
 }

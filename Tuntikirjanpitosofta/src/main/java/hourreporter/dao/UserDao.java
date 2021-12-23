@@ -38,7 +38,6 @@ public class UserDao implements Dao<User, String, Long> {
 
         ps.executeUpdate();
         ps.close();
-        //dbConn.close();
     }
 
     @Override

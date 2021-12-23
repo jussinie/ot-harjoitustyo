@@ -22,5 +22,9 @@ Viikko | Tunnit | Mitä tein
 7 | 2 | Dokumentaatio - arkkitehtuurikuvaus
 7 | 3 | Testien uudelleen kirjoittaminen
 7 | 1,5 | Logon luonti, käyttöliittymän visuaalisuuden päivitys
+7 | 1 | Käyttöliittymän hiominen, bugien poistaminen, syötteiden tarkistukset
+7 | 1 | Konfiguraatiotiedoston lisääminen tietokantaan yhdistämiseksi
+7 | 0,5 | Testien refaktorointi
 
-| | **Yhteensä 47,0** |
+
+| | **Yhteensä 50,0** |

@@ -6,14 +6,10 @@ import hourreporter.domain.User;
 import hourreporter.domain.UserService;
 import hourreporter.domain.Week;
 import hourreporter.domain.Year;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,14 +17,11 @@ public class UserServiceTest {
 
     // Tips on how to test printing: https://www.baeldung.com/java-testing-system-out-println
 
-    UserService us;
+    public UserService us;
     FakeUserDao fud = new FakeUserDao();
     FakeWeekDao fwd = new FakeWeekDao();
-    //private final PrintStream standardOut = System.out;
-    //private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    @BeforeEach
-    void setUp() {
+    public UserServiceTest() {
         us = new UserService(fud, fwd);
         us.createUser("test", "person", "testPerson", "admin", "adminTeam");
         us.setUser(new User("test", "person", "testPerson", "admin", "adminTeam"));
@@ -53,7 +46,6 @@ public class UserServiceTest {
         String team = "test team";
         User user1 = new User(firstName, lastName, username, role, team);
         us.createUser(firstName, lastName, username, role, team);
-        //User user2 = fud.read(username);
         assertEquals("person2", fud.read("testPerson2", 1L).getLastName());
     }
 
@@ -62,13 +54,6 @@ public class UserServiceTest {
         us.login("testPerson");
         assertEquals("testPerson", us.getUser().getUsername());
     }
-
-    /*
-    @Test
-    void openingExistingWeekWorks() throws SQLException {
-        us.openExistingWeek(1);
-        assertEquals(0.0, us.getWeek().countWorkHours());
-    } */
 
     @Test
     void inspectInputWorksWithDoubles() {
@@ -97,8 +82,6 @@ public class UserServiceTest {
     void savingHoursWorksForNewWeek() throws SQLException {
         Week newWeek = new Week(43, 3L);
         us.saveHours(newWeek);
-        Week loadedWeek = fwd.read(43, 3L);
-        System.out.println(loadedWeek.getWeekNumber());
         assertEquals(43, fwd.read(43, 3L).getWeekNumber());
     }
 
@@ -116,37 +99,14 @@ public class UserServiceTest {
         List<Week> weeks = new ArrayList<>();
         weeks = fwd.list();
         for (Week w : weeks) {
-            System.out.println(w.getWeekNumber());
-            System.out.println(Arrays.toString(w.getWeeksHoursByDay()));
             year.createNewWeek(w.getWeekNumber(), -2107266002);
-            System.out.println(year.getWeek(1).getDaysHoursForWeek("Wed"));
         }
         assertEquals(0.0, year.getWeek(1).getDaysHoursForWeek("Sun"));
     }
-    /*
-    @Test
-    void userServiceIsCreatedCorrectly() {
-        assertEquals("test", us.users.get("testPerson").getFirstName());
-        assertEquals("person", us.users.get("testPerson").getLastName());
-    }
-
-    /*
-    @Test
-    void getUsersWorks() {
-        User user = us.users.get("testPerson");
-        assertEquals("test", user.getFirstName());
-    } */
 
     @Test
     void logoutWorks() {
         us.logout();
         assertNull(us.getUser());
     }
-
-    /*
-    @AfterEach
-    public void restoreOut() {
-        System.setOut(standardOut);
-    } */
-
 }

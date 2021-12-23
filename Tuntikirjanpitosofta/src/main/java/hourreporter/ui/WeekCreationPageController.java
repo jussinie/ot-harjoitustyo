@@ -98,7 +98,5 @@ public class WeekCreationPageController {
             e.printStackTrace();
         }
     }
-
-
 }
 

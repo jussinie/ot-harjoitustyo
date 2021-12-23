@@ -3,9 +3,6 @@ package daoTests;
 import hourreporter.dao.DatabaseSelector;
 import hourreporter.dao.UserDao;
 import hourreporter.domain.User;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,7 +28,6 @@ public class UserDaoTest {
         } catch (Exception e) {
         }
         User user = ud.read("testPerson", -2107266002L);
-        //assertEquals(-2107266002L, user.getUserNumber());
         assertEquals("testPerson", user.getUsername());
     }
 

@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.*;
 import java.util.List;
 
-
 public class WeekDaoTest {
 
     WeekDao wd;
@@ -49,7 +48,6 @@ public class WeekDaoTest {
     @Test
     public void readingFromDBWorks() throws SQLException {
         Week week = wd.read(52, 2L);
-        //assertEquals(-2107266002L, user.getUserNumber());
         assertEquals(52, week.getWeekNumber());
     }
 
@@ -85,13 +83,6 @@ public class WeekDaoTest {
         Week updatedWeekFromDB = wd.read(52, 2L);
         assertEquals(7.5, updatedWeekFromDB.getDaysHoursForWeek("Sun"));
     }
-
-    @Test
-    public void listReturnsNull() throws SQLException {
-        List<Week> weeks = wd.list();
-        //assertNull(ud.list());
-    }
-
 
     @Test
     public void canCreateConnectionToProd() throws SQLException {

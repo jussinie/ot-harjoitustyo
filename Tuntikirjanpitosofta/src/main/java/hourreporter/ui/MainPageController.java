@@ -3,8 +3,6 @@ package hourreporter.ui;
 import hourreporter.domain.UserService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-
 import java.io.IOException;
 
 public class MainPageController {

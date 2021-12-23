@@ -1,6 +1,5 @@
 package domainTests;
 
-import hourreporter.dao.WeekDao;
 import hourreporter.domain.Day;
 import hourreporter.domain.User;
 import hourreporter.domain.Week;
@@ -45,14 +44,6 @@ class WeekTest {
         days.get("Fri").addTaskToDay("test task 2", 5.5);
         assertEquals(10.5, w.countWorkHours());
     }
-
-    /*
-    @Test
-    void settingNewDayWorks() {
-        w.setDay("Mon", 7.5);
-        Day d = w.getOneDay("Mon");
-        assertEquals("dummy", d.tasksForDay.get(0).getTaskName());
-    } */
 
     @Test
     void setSubmittedWorks() {

@@ -1,7 +1,6 @@
 package hourreporter.dao;
 
 import hourreporter.domain.Week;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
