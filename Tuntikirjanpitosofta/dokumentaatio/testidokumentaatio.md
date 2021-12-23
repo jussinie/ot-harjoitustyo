@@ -14,7 +14,7 @@ Testattaessa tietokannan toimintaa hallinnoivia luokkia käytössä on tuotantot
 
 Sovelluksen koodi on ladattu Helsingin Yliopiston tarjoamalle Cubbli Linux virtuaalityöasemalle komennolla git fetch. Koodista on sen jälkeen luotu ajettava jar-paketti onnistuneesti komennolla mvn package. Myös ohjelman suoritus onnistuu oletetusti [käynnistysohjeissa]() kerrotulla tavalla joko tuotanto- tai testitilaan. 
 
-Sovelluksen syötteitä (konstruktorit [UserCreation](), [login](), [weekModification](), [weekCreation]() ja [weekSelection]() on testattu manuaalisesti eikä sovellus kaadu virheellisiin syötteisiin. 
+Sovelluksen syötteitä (konstruktorit [UserCreation](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/src/main/java/hourreporter/ui/UserCreationController.java), [login](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/src/main/java/hourreporter/ui/LoginPageController.java), [weekModification](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/src/main/java/hourreporter/ui/WeekModificationPageController.java), [weekCreation](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/src/main/java/hourreporter/ui/WeekCreationPageController.java) ja [weekSelection](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/src/main/java/hourreporter/ui/WeekSelectionPageController.java) on testattu manuaalisesti eikä sovellus kaadu virheellisiin syötteisiin. 
 
 ### Testien ajaminen ja testiraportin tarkastelu ### 
 
