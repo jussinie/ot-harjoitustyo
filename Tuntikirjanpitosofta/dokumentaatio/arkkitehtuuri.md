@@ -10,7 +10,11 @@ Sovellukseen on luotu graafinen käyttöliittymä JavaFX:ää hyödyntäen. Käy
 
 ### Sovelluslogiikka ###
 
-Sovelluslogiikasta vastaa ensisijaisesti UserService-luokka, yhdessä muiden alla näkyvien luokkien kanssa. Kaikki sovelluslogiikan metodit ovat UserService-luokan metodeja.
+Sovelluslogiikasta vastaa ensisijaisesti UserService-luokka, yhdessä muiden alla näkyvien luokkien kanssa. Kaikki sovelluslogiikan metodit ovat UserService-luokan metodeja. Se siis huolehtii käyttäjien luomisesta ja tallentamisesta sekä viikkojen luomisesta ja tallentamisesta. UserService myös lataa tarvittavat tiedot tietokannasta käyttäen injektoituja UserDao ja WeekDao -olioita. Ohessa myös esimerkinomaisesti käyttäjän luomista ja ensimmäisen viikon luomista kuvaava sekvenssikaavio: 
+
+![sekvenssikaavio](https://user-images.githubusercontent.com/64590570/147269688-935b11ee-52b0-413a-9cf1-29e426ff5d03.png)
+
+Alla visualisaatio sovelluslogiikasta huolehtivista luokista.
 
 ![domain](https://user-images.githubusercontent.com/64590570/146805075-7011bd86-9c95-420d-95f8-93e81b825d86.png)
 
@@ -20,7 +24,7 @@ Tämä sovellus käyttää tietojen pysyväistallennukseen sqlite-tietokantaa. O
 
 ![dao](https://user-images.githubusercontent.com/64590570/146805097-2f0435ec-fe5e-4dbd-82f9-9e1901896003.png)
 
-Ohjelmassa on yksi tietokantakyselyitä abstrahoiva rajapinta DAO ja rajapinnan toteuttavat luokat UserDao ja WeekDao. Kumpikin luokka sisältää samat metodit **create, read, update ja list**. 
+Ohjelmassa on yksi tietokantakyselyitä abstrahoiva rajapinta DAO ja rajapinnan toteuttavat luokat UserDao ja WeekDao. Kumpikin luokka sisältää samat metodit **create, read, update ja list**. Huomaa, että kuviosta puuttuu luokka DatabaseSelector, jolla valitaan käyttäjän määrittelemä tietokanta config.txt-tiedostosta. 
 
 ## Tulevaisuuden kehityskohteet ##
 
