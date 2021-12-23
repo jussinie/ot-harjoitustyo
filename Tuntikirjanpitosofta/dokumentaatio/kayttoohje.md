@@ -2,14 +2,20 @@
 
 ## Sovelluksen käynnistäminen
 
-Lataa uusin [release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/viikko6) ja suorita se komennolla 
-> java -jar HourReporter.jar
+Lataa uusin [release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/loppupalautus). Jos haluat suorittaa sovelluksen tuotantotilassa, käytä komentoa
+> java -jar HourReporter.jar prod
+
+ja mikäli testitilassa, käytä komentoa
+
+> java -jar HourReporter.jar test
+
+Viimeisenä annettu parametri määrittelee sen, mihin tietokantaan yhteys muodostetaan. Tietokantaa voi vaihtaa muokkaamalla konfiguraatiotiedostoa [config.txt](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/config.txt), mikä tekee ohjelmasta helposti konfiguroitavan ja laajennettavan. 
 
 ### Käynnistyksen jälkeen
 
 Sovelluksen käynnistyttyä olet aloitussivulla. Tällä sivulla voit valita kirjaudutko sisään olemassaolevalla käyttäjätunnuksella (Existing user - Log in), luotko uuden käyttäjätunnuksen (New user - Create account) vai poistutko ohjelmasta. 
 
-![landingPage](https://user-images.githubusercontent.com/64590570/146057538-de2d1ce7-00c3-446d-8144-1202d52d3605.png)
+![landingPage](https://user-images.githubusercontent.com/64590570/147268001-dd4a3770-08b2-467d-a5ea-c79c520d01eb.png)
 
 Jos klikkasit Existing user - Log in sinun tulee syöttää olemassaoleva käyttäjätunnuksesi kenttään ja klikata log in -nappia. Vaihtoehtoisesti voit kirjautua sisään painamalla Enteriä. Voit myös palata aloitussivulle painamalla Go back. 
 
