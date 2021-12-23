@@ -1,29 +1,35 @@
 
-# Vaatimusmäärittely*
+# Vaatimusmäärittely
 
 ## Sovelluksen tarkoitus
 
-Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt tuntinsa. Jokaisella käyttäjällä on oma käyttäjätunnuksensa ja jokainen käyttäjä voi näin hallinnoida omia tuntejaan. 
+Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt tuntinsa. Jokaisella käyttäjällä on oma käyttäjätunnuksensa ja jokainen käyttäjä voi näin hallinnoida omia tuntejaan. Käyttäjä voi luoda järjestelmään uuden viikon itselleen ja alkaa tallentaa siihen tunteja. Käyttäjä voi myös ladata aiemmin luomansa viikon ja jatkaa tuntien kirjaamista kyseiselle viikolle. Tällä hetkellä maksimiajanjakso, jolle tunteja voi tallentaa on yksi vuosi / 52 viikkoa. 
 
-## Käyttäjät
+### Suunnittelufilosofia
+
+Sovelluksessa on huomattavan paljon erilaisia luokkia ja monimutkaisia rakenteita tehtävien, tuntien, päivien, viikkojen ja vuosien hallintaan suhteessa siihen, mitä kurssin päättävässä releasessa käyttäjä voi tehdä. Tämä johtuu siitä, että sovellus on suunniteltu siten, että sitä on jatkossa helppo laajentaa, koska se sisältää kaikki rakenteet, joiden päälle voi rakentaa tuntikirjanpidon useille vuosille. Kaikkia arkkitehtuurin mahdollistavia featureja ei siis ole otettu vielä tässä vaiheessa käyttöön rajallisesta ohjelmointiajasta johtuen. 
+
+Sovelluksen juuresta löytyy myös konfiguraatiotiedosto config.txt, joka mahdollistaa käyttäjälle tietokantojen vaihtamisen niin testi- kuin tuotantotietokannan osalta. Testitiedosto sisältää ohjeet oikealle syntaksille.
+
+### Käyttäjät
 
 Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä heidän esimiehiään, jotka voivat hyväksyä tai hylätä nämä kirjatut tunnit. 
 
-## Suunnitellut toiminnallisuudet
+### Sovelluksen toiminnallisuudet
 
-    * Käyttäjä / esimies voi luoda itselleen käyttäjätunnuksen => tehty
-    * Käyttäjä / esimies voi kirjautua sisään käyttäen tätä tunnusta => tehty
-    * Käyttäjä voi luoda itselleen uuden periodin tuntien lisäämistä varten => tehty
-    * Käyttäjä voi kirjata tälle periodille tekemänsä tunnit => tehty
-    * Käyttäjä näkee vain omat lisäämänsä tunnit => tehty
+    * Käyttäjä / esimies voi luoda itselleen käyttäjätunnuksen
+    * Käyttäjä / esimies voi kirjautua sisään käyttäen tätä tunnusta
+    * Käyttäjä voi luoda itselleen uuden periodin (viikon) tuntien lisäämistä varten
+    * Käyttäjä voi kirjata tälle periodille tekemänsä tunnit
+    * Käyttäjä näkee vain omat lisäämänsä tunnit
+    * Käyttäjä / esimies voi kirjautua ulos sovelluksesta
+    
+### Toiminnallisuudet, jotka siirretty alkuperäisestä suunnitelmasta tuleviin sprintteihin
+
     * Esimies voi hyväksyä käyttäjän lisäämät tunnit
-    * Käyttäjä / esimies voi kirjautua ulos sovelluksesta => tehty
+    * Oma näkymä, jos roolina team lead (ei eksplisiittinen vaatimus alussa, mutta implisiittisesti tarvittava)
 
-    => Viikko 6: Tekstikäyttöliittymä korvattu graafisella käyttöliittymällä.
-    => Osa toiminnallisuuksista vielä vajavaisia,kaikkia syötteitä ei tarkisteta.
-    => Tietojen tallennus siirretty tiedostosta sql-tietokantaan
-
-### Jatkokehitystä
+### Pitkän aikavälin jatkokehitystä
 
     * Esimiehillä on omat tiiminsä, joihin käyttäjiä voi lisätä
     * Esimies näkee oman tiiminsä kirjatut tunnit
@@ -31,5 +37,3 @@ Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä he
     * Esimies voi luoda projektin, johon kuuluu erilaisia tehtäviä
     * Tuntikirjaukseen voi lisätä, mihin projektiin ja tehtävään se kuuluu
     * Tuntikirjaukseen voi tarvittaessa lisätä kommentin
-
-*kyseessä alustava määrittelydokumentti, joten muutoksia (uusia featureita) voi vielä tulla
