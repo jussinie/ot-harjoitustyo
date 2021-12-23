@@ -47,24 +47,17 @@
                     <MenuItem mnemonicParsing="false" onAction="#openWebpage" text="User manual" />
                 </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Quit">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#quitProgram" text="Quit" />
+                </items>
+            </Menu>
         </menus>
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>
       </MenuBar>
    </top>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="74.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#handleUserCreation" text="Create user and log in" />
-            <Button mnemonicParsing="false" onAction="#goBackToLandingPage" text="Cancel">
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin></Button>
-            <Label fx:id="errorMessage" />
-         </children>
-      </HBox>
-   </bottom>
    <center>
       <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
@@ -73,7 +66,7 @@
                   <Image url="@hourReporterLogo.png" />
                </image>
             </ImageView>
-            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+            <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="232.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -123,4 +116,21 @@
          </children>
       </VBox>
    </center>
+   <bottom>
+      <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="39.0" prefWidth="600.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleUserCreation" text="Create user and log in" />
+                  <Button mnemonicParsing="false" onAction="#goBackToLandingPage" text="Cancel">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Label fx:id="errorMessage" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="600.0" />
+         </children>
+      </VBox>
+   </bottom>
 </BorderPane>

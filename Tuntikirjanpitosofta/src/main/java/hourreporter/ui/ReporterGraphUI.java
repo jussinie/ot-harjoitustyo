@@ -1,5 +1,6 @@
 package hourreporter.ui;
 
+import hourreporter.dao.DatabaseSelector;
 import hourreporter.dao.UserDao;
 import hourreporter.dao.WeekDao;
 import hourreporter.domain.UserService;
@@ -22,8 +23,10 @@ public class ReporterGraphUI extends Application {
 
     @Override
     public void init() throws Exception {
-        UserDao ud = new UserDao("prod");
-        WeekDao wd = new WeekDao("prod");
+        DatabaseSelector dbs = new DatabaseSelector();
+        String connectionString = dbs.getConnectionString(String.valueOf(this.getParameters()));
+        UserDao ud = new UserDao(connectionString);
+        WeekDao wd = new WeekDao(connectionString);
         us = new UserService(ud, wd);
 
         // Create Scene for landing page
@@ -52,7 +55,7 @@ public class ReporterGraphUI extends Application {
     }
 
     @Override
-    public void start(Stage window) throws Exception {
+    public void start(Stage window) {
         this.window = window;
         window.setTitle("Hour Reporter");
         setLandingPageScene();
@@ -78,7 +81,7 @@ public class ReporterGraphUI extends Application {
         window.setScene(mainPageScene);
     }
 
-    public void setWeekCreationScene() throws Exception {
+    public void setWeekCreationScene() {
         window.setScene(weekCreationScene);
     }
 

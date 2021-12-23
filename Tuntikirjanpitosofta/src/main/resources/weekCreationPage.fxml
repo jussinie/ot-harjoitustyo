@@ -37,13 +37,16 @@
             </items>
           </Menu>
         </menus>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
       </MenuBar>
    </top>
    <right>
       <Label BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="342.0" prefWidth="400.0" BorderPane.alignment="TOP_CENTER">
          <children>
             <ImageView fitHeight="150.0" fitWidth="405.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -65,7 +68,7 @@
                </VBox.margin>
                <children>
                   <Label text="Which week you want to create?" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <TextField fx:id="weekInput" GridPane.columnIndex="1" />
+                  <TextField fx:id="weekInput" GridPane.columnIndex="1" onKeyPressed="#handleEnterPressed" />
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleWeekCreation" text="Create" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <Label prefHeight="42.0" prefWidth="226.0" text="This week will be selected after creation." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>

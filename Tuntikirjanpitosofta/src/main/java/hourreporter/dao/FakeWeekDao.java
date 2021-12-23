@@ -1,9 +1,6 @@
 package hourreporter.dao;
 
-import hourreporter.domain.User;
 import hourreporter.domain.Week;
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +24,6 @@ public class FakeWeekDao extends WeekDao {
                 return w;
             }
         }
-        return null;
-    }
-
-    public Week update() {
         return null;
     }
 

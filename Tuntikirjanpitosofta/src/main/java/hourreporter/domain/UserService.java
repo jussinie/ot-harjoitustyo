@@ -1,15 +1,9 @@
 package hourreporter.domain;
 
-import hourreporter.dao.FakeUserDao;
-import hourreporter.dao.FakeWeekDao;
 import hourreporter.dao.UserDao;
 import hourreporter.dao.WeekDao;
-
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class provides all the services and methods for the UI. It is also used to access the database through the DAO
@@ -38,17 +32,25 @@ public class UserService {
      * @param role User's role at work.
      * @param team User's team at work.
      */
-    public void createUser(String firstName, String lastName, String username, String role, String team) {
+    public String createUser(String firstName, String lastName, String username, String role, String team) {
         User inputtedUser = new User(firstName, lastName, username, role, team);
         try {
             User existingUser = ud.read(inputtedUser.getUsername(), 0L);
             if (existingUser == null) {
-                ud.create(inputtedUser);
-                this.user = inputtedUser;
-            }
+                if (firstName.length() < 2 || lastName.length() < 2 || username.length() < 2) {
+                    return "checkInput";
+                } else {
+                    ud.create(inputtedUser);
+                    this.user = inputtedUser;
+                    return "ok";
+                }
+            } else {
+                return "userExists";
+                }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return "checkInput";
     }
 
     /**
@@ -97,9 +99,16 @@ public class UserService {
      * @return List of Week instances.
      * @throws SQLException if the SQL operation fails.
      */
-    public List<Week> getAllWeeks() throws SQLException {
-        List<Week> weeks = wd.list();
-        return weeks;
+    public List<Week> getAllWeeks(Long userNumber) throws SQLException {
+        List<Week> allWeeks = wd.list();
+        List<Week> weeksForLoggedUser = new ArrayList<>();
+        for (Week w : allWeeks) {
+            if (w.getUserNumber() == userNumber) {
+                weeksForLoggedUser.add(w);
+            }
+        }
+        Collections.sort(weeksForLoggedUser);
+        return weeksForLoggedUser;
     }
 
     /**

@@ -69,12 +69,12 @@
                </VBox.margin>
                <children>
                   <Label text="Which week you want to select?" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <TextField fx:id="weekInput" GridPane.columnIndex="1" />
+                  <TextField fx:id="weekInput" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" />
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleWeekSelection" text="Select" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <Label prefHeight="42.0" prefWidth="226.0" text="If this week doesn't exist, it will be created and selected." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
-            <Label fx:id="errorMessage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="343.0" />
+            <Label fx:id="errorMessage" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="495.0" />
          </children>
       </VBox>
    </center>

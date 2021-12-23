@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Class to represent and store Weeks.
  */
-public class Week {
+public class Week implements Comparable<Week> {
 
     /**
      * Hashmap to store weekdays' string abbreviations and corresponding Day instance.
@@ -42,6 +42,16 @@ public class Week {
         }
         this.weekNumber = weekNumber;
         this.userNumber = userNumber;
+    }
+
+    /**
+     * This method makes it possible to implement Comparable interface and sort Weeks using the week number.
+     * @param other instance of a Week class that is compared to the created class
+     * @return integer value depending of the difference in week numbers.
+     */
+    @Override
+    public int compareTo(Week other) {
+        return this.weekNumber - other.getWeekNumber();
     }
 
     /**

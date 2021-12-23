@@ -5,6 +5,8 @@ import hourreporter.domain.Week;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -52,7 +54,7 @@ public class WeekModificationPageController {
         this.userService = userService;
     }
 
-    public void proceedToWeekCreation() throws Exception {
+    public void proceedToWeekCreation() {
         setErrorMessageToEmpty();
         application.setWeekCreationScene();
     }
@@ -113,6 +115,13 @@ public class WeekModificationPageController {
             new ProcessBuilder("x-www-browser", url).start();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleEnterPressed(KeyEvent k) throws Exception {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            saveWeeksHours();
         }
     }
 

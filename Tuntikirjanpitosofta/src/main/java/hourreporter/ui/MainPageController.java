@@ -12,13 +12,8 @@ public class MainPageController {
     private UserService userService;
 
     @FXML
-    private Label errorMessage;
-
-    @FXML
     private Label welcomeText;
 
-    @FXML
-    private TextField weekInput;
 
     public void setApplication(ReporterGraphUI application) {
         this.application = application;
@@ -63,6 +58,6 @@ public class MainPageController {
 
     public void setWelcomeText() {
         welcomeText.setText("Welcome, " + userService.getUser().getFirstName() + " " + userService.getUser().getLastName() + "\n"
-                + "Select from the top left what you want to do");
+                + "Select from the top left what you want to do.");
     }
 }

@@ -1,8 +1,11 @@
 package daoTests;
 
+import hourreporter.dao.DatabaseSelector;
 import hourreporter.dao.UserDao;
 import hourreporter.domain.User;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,22 +16,20 @@ public class UserDaoTest {
     User testUserForCreate;
     UserDao ud;
 
-    public UserDaoTest() throws SQLException {
+    public UserDaoTest() {
         testUserForCreate = new User("creation", "testing", "creationTesting", "tester", "test team");
-        ud = new UserDao("test");
+        DatabaseSelector dbs = new DatabaseSelector();
+        String databaseString = dbs.getConnectionString("test");
+        ud = new UserDao(databaseString);
     }
 
-    @Before
-    public void initiateConnectionToDb() throws SQLException {
+    @Test
+    public void readingFromDBWorks() throws SQLException {
         try {
             Statement s = ud.getDbConn().createStatement();
             s.execute("INSERT INTO Users (firstName, lastName, username, role, team, isTeamLead, userNumber) VALUES ('test', 'person', 'testPerson', 'admin', 'adminteam', false, -2107266002)");
         } catch (Exception e) {
         }
-    }
-
-    @Test
-    public void readingFromDBWorks() throws SQLException {
         User user = ud.read("testPerson", -2107266002L);
         //assertEquals(-2107266002L, user.getUserNumber());
         assertEquals("testPerson", user.getUsername());
@@ -65,16 +66,8 @@ public class UserDaoTest {
 
     @Test
     public void canCreateConnectionToProd() throws SQLException {
-        ud = new UserDao("prod");
+        ud = new UserDao("jdbc:sqlite:hourreporter.db");
         DatabaseMetaData dbmd = ud.getDbConn().getMetaData();
         assertEquals("jdbc:sqlite:hourreporter.db", dbmd.getURL());
     }
-
-    /*
-    @AfterAll
-    public static void cleanDatabase() throws SQLException {
-        DatabaseManager db = new DatabaseManager();
-        dbConn.prepareStatement("TRUNCATE TABLE Users");
-    } */
-
 }

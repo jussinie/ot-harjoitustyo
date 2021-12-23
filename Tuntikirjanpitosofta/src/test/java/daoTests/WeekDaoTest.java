@@ -1,8 +1,8 @@
 package daoTests;
 
+import hourreporter.dao.DatabaseSelector;
 import hourreporter.dao.WeekDao;
 import hourreporter.domain.Week;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.sql.*;
@@ -23,7 +23,9 @@ public class WeekDaoTest {
         testWeekForCreate.setDay("Fri", 6.0);
         testWeekForCreate.setDay("Sat", 3.0);
         testWeekForCreate.setDay("Sun", 5.0);
-        wd = new WeekDao("test");
+        DatabaseSelector dbs = new DatabaseSelector();
+        String databaseString = dbs.getConnectionString("test");
+        wd = new WeekDao(databaseString);
         Week week = new Week(1, 1);
         week.setDay("Mon", 7.5);
         week.setDay("Tue", 7.5);
@@ -43,30 +45,6 @@ public class WeekDaoTest {
         week2.setDay("Sun", 2.0);
         wd.create(week2);
     }
-
-    /*
-    @Before
-    public void initiateConnectionToDb() throws SQLException {
-        Week week = new Week(1, 1);
-        week.setDay("Mon", 7.5);
-        week.setDay("Tue", 7.5);
-        week.setDay("Wed", 2.5);
-        week.setDay("Thu", 3.5);
-        week.setDay("Fri", 0.0);
-        week.setDay("Sat", 0.0);
-        week.setDay("Sun", 0.0);
-        wd.create(week);
-        Week week2 = new Week(2, 1);
-        week2.setDay("Mon", 7.5);
-        week2.setDay("Tue", 7.5);
-        week2.setDay("Wed", 2.5);
-        week2.setDay("Thu", 3.5);
-        week2.setDay("Fri", 2.0);
-        week2.setDay("Sat", 2.0);
-        week2.setDay("Sun", 2.0);
-        wd.create(week2);
-    } */
-
 
     @Test
     public void readingFromDBWorks() throws SQLException {
@@ -111,28 +89,15 @@ public class WeekDaoTest {
     @Test
     public void listReturnsNull() throws SQLException {
         List<Week> weeks = wd.list();
-
         //assertNull(ud.list());
     }
 
 
     @Test
     public void canCreateConnectionToProd() throws SQLException {
-        wd = new WeekDao("prod");
+        wd = new WeekDao("jdbc:sqlite:hourreporter.db");
         DatabaseMetaData dbmd = wd.getDbConn().getMetaData();
         assertEquals("jdbc:sqlite:hourreporter.db", dbmd.getURL());
     }
-    /*
-    @AfterAll
-    static void cleanUp() throws SQLException {
-        try {
-            Connection dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-            Statement s = dbConn.createStatement();
-            s.execute("DROP TABLE Weeks");
-            dbConn.close();
-        } catch (Exception e) {
-
-        }
-    } */
 
 }

@@ -1,6 +1,5 @@
 package hourreporter.ui;
 
-import hourreporter.domain.UserService;
 import javafx.fxml.FXML;
 
 import java.io.IOException;

@@ -1,0 +1,10 @@
+# Please do not touch this file if you don't know what you are doing.
+# Line starting with # is a comment line and will not be processed.
+# Below is the configuration for the databases. By changing the string after sqlite: you can change the database.
+# If the syntax in this file does not comply to the standard
+# test;<connectionStringToTestDatabase>
+# prod;<connectionStringToProductionDatabase>
+# the program does not work.
+
+test;jdbc:sqlite:hourreporterNewTestDB.db
+prod;jdbc:sqlite:hourreporter.db

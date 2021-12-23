@@ -3,7 +3,6 @@ package hourreporter.ui;
 import hourreporter.domain.UserService;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -40,36 +39,42 @@ public class UserCreationController {
     private Label errorMessage;
 
     public void handleUserCreation() throws Exception {
-        us.createUser(firstName.getText(), lastName.getText(), username.getText(), role.getText(), team.getText());
-        if (us.getUser() != null) {
+        String result = us.createUser(firstName.getText(), lastName.getText(), username.getText(), role.getText(), team.getText());
+        if (result.equals("ok")) {
             firstName.setText("");
             lastName.setText("");
             username.setText("");
             role.setText("");
             team.setText("");
             proceedToMainPage();
-        } else {
-            // Could not work this threading in Java FX out myself.
-            // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
-            Task<Void> sleeper = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                    }
-                    return null;
-                }
-            };
-            sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                @Override
-                public void handle(WorkerStateEvent event) {
-                    errorMessage.setText("");
-                }
-            });
-            errorMessage.setText("Username exists already! Please use another one.");
-            new Thread(sleeper).start();
+        } else if (result.equals("checkInput")) {
+            printErrorMessage("First, last and username must be at least 2 characters long.");
+        } else if (result.equals("userExists")) {
+            printErrorMessage("Username exists already! Please use another one.");
         }
+    }
+
+    private void printErrorMessage(String error) {
+        // Could not work this threading in Java FX out myself.
+        // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                errorMessage.setText("");
+            }
+        });
+        errorMessage.setText(error);
+        new Thread(sleeper).start();
     }
 
     public void handleEnterPressed(KeyEvent k) throws Exception {

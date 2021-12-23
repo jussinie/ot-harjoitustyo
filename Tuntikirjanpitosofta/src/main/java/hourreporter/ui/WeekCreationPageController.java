@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
@@ -16,9 +18,6 @@ public class WeekCreationPageController {
 
     @FXML
     private Label errorMessage;
-
-    @FXML
-    private Label welcomeText;
 
     @FXML
     private TextField weekInput;
@@ -49,33 +48,44 @@ public class WeekCreationPageController {
 
     @FXML
     private void handleWeekCreation() throws Exception {
-        if (weekInput.getText().matches("-?\\d+")) {
+        if (weekInput.getText().matches("-?\\d+")
+                && Integer.valueOf(weekInput.getText()) > 0
+                && Integer.valueOf(weekInput.getText()) < 53) {
             int weekNumber = Integer.parseInt(weekInput.getText());
             userService.createWeek(weekNumber);
-            System.out.println("Week created!");
             application.initializeWeekModifyingScene();
             application.setWeekModificationScene();
         } else {
-            // Could not work this threading in Java FX out myself.
-            // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
-            Task<Void> sleeper = new Task<Void>() {
-                @Override
-                protected Void call() throws Exception {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                    }
-                    return null;
+            printErrorMessage("Invalid input or something went wrong.");
+        }
+    }
+
+    private void printErrorMessage(String error) {
+        // Could not work this threading in Java FX out myself.
+        // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
                 }
-            };
-            sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                @Override
-                public void handle(WorkerStateEvent event) {
-                    errorMessage.setText("");
-                }
-            });
-            errorMessage.setText("Invalid input or something went wrong.");
-            new Thread(sleeper).start();
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                errorMessage.setText("");
+            }
+        });
+        errorMessage.setText(error);
+        new Thread(sleeper).start();
+    }
+
+    public void handleEnterPressed(KeyEvent k) throws Exception {
+        if (k.getCode().equals(KeyCode.ENTER)) {
+            handleWeekCreation();
         }
     }
 

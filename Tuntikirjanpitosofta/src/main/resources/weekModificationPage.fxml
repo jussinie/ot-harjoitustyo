@@ -53,8 +53,8 @@
                   <Image url="@hourReporterLogo.png" />
                </image>
             </ImageView>
-            <Label fx:id="welcomeText" contentDisplay="CENTER" prefHeight="75.0" prefWidth="342.0" />
-            <Label fx:id="nowModifying" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="249.0" text="Label" />
+            <Label fx:id="welcomeText" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="342.0" text="Remember to save your progress before you leave this page!" />
+            <Label fx:id="nowModifying" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="249.0" />
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -79,25 +79,25 @@
                   <Label fx:id="friday" text="Fri" GridPane.columnIndex="5" />
                   <Label fx:id="saturday" text="Sat" GridPane.columnIndex="6" />
                   <Label fx:id="sunday" text="Sun" GridPane.columnIndex="7" />
-                  <TextField fx:id="tuesdayHours" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="mondayHours" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="wednesdayHours" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <TextField fx:id="thursdayHours" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <TextField fx:id="fridayHours" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <TextField fx:id="saturdayHours" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <TextField fx:id="sundayHours" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                  <TextField fx:id="tuesdayHours" GridPane.columnIndex="2" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed" />
+                  <TextField fx:id="mondayHours" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
+                  <TextField fx:id="wednesdayHours" GridPane.columnIndex="3" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
+                  <TextField fx:id="thursdayHours" GridPane.columnIndex="4" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
+                  <TextField fx:id="fridayHours" GridPane.columnIndex="5" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
+                  <TextField fx:id="saturdayHours" GridPane.columnIndex="6" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
+                  <TextField fx:id="sundayHours" GridPane.columnIndex="7" GridPane.rowIndex="1" onKeyPressed="#handleEnterPressed"/>
                   <Label text="Hours" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" />
                </padding>
             </GridPane>
-            <Label fx:id="summaryLabel" />
-            <Label fx:id="errorMessage" />
+            <Label fx:id="summaryLabel" maxHeight="-Infinity" maxWidth="-Infinity" />
             <Button mnemonicParsing="false" onAction="#saveWeeksHours" text="Save">
                <VBox.margin>
-                  <Insets top="15.0" />
+                  <Insets top="5.0" />
                </VBox.margin></Button>
+            <Label fx:id="errorMessage" />
          </children>
       </VBox>
    </center>

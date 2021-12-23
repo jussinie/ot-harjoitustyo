@@ -8,7 +8,6 @@ import java.util.List;
 
 public class WeekDao implements Dao<Week, Integer, Long> {
 
-    private String testOrProd;
     private Connection dbConn;
 
     public WeekDao() {
@@ -16,13 +15,8 @@ public class WeekDao implements Dao<Week, Integer, Long> {
     }
 
     public WeekDao(String testOrProd) {
-        this.testOrProd = testOrProd;
         try {
-            if (testOrProd.equals("test")) {
-                dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporterTest.db");
-            } else if (testOrProd.equals("prod")) {
-                dbConn = DriverManager.getConnection("jdbc:sqlite:hourreporter.db");
-            }
+            dbConn = DriverManager.getConnection(testOrProd);
             Statement s = dbConn.createStatement();
             s.execute("CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY, firstName TEXT, lastName TEXT, userNumber LONG, username TEXT, role TEXT, team TEXT, isTeamLead BOOLEAN)");
             s.execute("CREATE TABLE IF NOT EXISTS Weeks (id INTEGER PRIMARY KEY, userNumber LONG, weekNumber INTEGER, monday DOUBLE, tuesday DOUBLE, wednesday DOUBLE, thursday DOUBLE, friday DOUBLE, saturday DOUBLE, sunday DOUBLE)");
