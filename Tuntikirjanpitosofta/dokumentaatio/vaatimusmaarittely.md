@@ -1,5 +1,5 @@
 
-# Vaatimusmäärittely*
+# Vaatimusmäärittely
 
 ## Sovelluksen tarkoitus
 
@@ -8,6 +8,8 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt tuntin
 ### Suunnittelufilosofia
 
 Sovelluksessa on huomattavan paljon erilaisia luokkia ja monimutkaisia rakenteita tehtävien, tuntien, päivien, viikkojen ja vuosien hallintaan suhteessa siihen, mitä kurssin päättävässä releasessa käyttäjä voi tehdä. Tämä johtuu siitä, että sovellus on suunniteltu siten, että sitä on jatkossa helppo laajentaa, koska se sisältää kaikki rakenteet, joiden päälle voi rakentaa tuntikirjanpidon useille vuosille. Kaikkia arkkitehtuurin mahdollistavia featureja ei siis ole otettu vielä tässä vaiheessa käyttöön rajallisesta ohjelmointiajasta johtuen. 
+
+Sovelluksen juuresta löytyy myös konfiguraatiotiedosto config.txt, joka mahdollistaa käyttäjälle tietokantojen vaihtamisen niin testi- kuin tuotantotietokannan osalta. Testitiedosto sisältää ohjeet oikealle syntaksille.
 
 ### Käyttäjät
 
@@ -35,4 +37,3 @@ Sovelluksessa on tavallisia käyttäjiä, jotka kirjaavat omat tuntinsa sekä he
     * Esimies voi luoda projektin, johon kuuluu erilaisia tehtäviä
     * Tuntikirjaukseen voi lisätä, mihin projektiin ja tehtävään se kuuluu
     * Tuntikirjaukseen voi tarvittaessa lisätä kommentin
-
