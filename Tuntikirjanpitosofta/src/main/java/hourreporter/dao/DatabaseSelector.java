@@ -3,10 +3,21 @@ package hourreporter.dao;
 import java.util.Scanner;
 import java.nio.file.Paths;
 
+/**
+ * Utility class to enable usage of config file to let users freely select and create databases for the application.
+ */
 public class DatabaseSelector {
 
+    /**
+     * A string array to store the connection strings from config file.
+     */
     String[] connectionStrings;
 
+    /**
+     * Method to extract database connection strings from the config file.
+     * Looks for ; to separate strings. Line starting with test defines the test database connector,
+     * line starting with prod defines the connection string to the production database.
+     */
     private void getConnectionStringFromConfigFile() {
         connectionStrings = new String[2];
         try (Scanner fileReader = new Scanner(Paths.get("config.txt"))) {
@@ -28,6 +39,12 @@ public class DatabaseSelector {
         }
     }
 
+    /**
+     * Method to return the extracted connection string for the application to use.
+     * @param argument Command line argument given by the user. If the argument is "test" then connection to the test
+     * database defined in the config file is established.
+     * @return connection string for the database.
+     */
     public String getConnectionString(String argument) {
         getConnectionStringFromConfigFile();
         if (argument == null) {

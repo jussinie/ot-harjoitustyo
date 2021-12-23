@@ -77,7 +77,6 @@ public class WeekDaoTest {
         assertEquals(52, week.getWeekNumber());
     }
 
-
     @Test
     public void updateWeekReturnsUpdatedWeek() throws SQLException {
         testWeekForCreate.setDay("Sun", 7.5);

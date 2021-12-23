@@ -4,6 +4,9 @@ import hourreporter.domain.User;
 import java.sql.*;
 import java.util.List;
 
+/**
+ *Class that provides the methods to access and modify User objects in the database.
+ */
 public class UserDao implements Dao<User, String, Long> {
 
     private Connection dbConn;
@@ -12,6 +15,10 @@ public class UserDao implements Dao<User, String, Long> {
 
     }
 
+    /**
+     * Constructor to create connection to the database and create needed tables if they do not yet exist.
+     * @param testOrProd string parameter to define connection to either test or production database.
+     */
     public UserDao(String testOrProd) {
         try {
             dbConn = DriverManager.getConnection(testOrProd);
@@ -23,6 +30,11 @@ public class UserDao implements Dao<User, String, Long> {
         }
     }
 
+    /**
+     * Method to create new line in the database and populate it with User object data.
+     * @param user User object to store in the database.
+     * @throws SQLException if SQL query fails to execute for some reason.
+     */
     @Override
     public void create(User user) throws SQLException {
         PreparedStatement ps = dbConn.prepareStatement("INSERT INTO Users"
@@ -40,6 +52,13 @@ public class UserDao implements Dao<User, String, Long> {
         ps.close();
     }
 
+    /**
+     * Method to read a line from the database to be used in the application.
+     * @param username parameter to find the correct user (row) from the database.
+     * @param userNumber currently not used in the query.
+     * @return User object corresponding with the row data.
+     * @throws SQLException if SQL query fails to execute for some reason.
+     */
     @Override
     public User read(String username, Long userNumber) throws SQLException {
         PreparedStatement ps = dbConn.prepareStatement("SELECT * FROM Users WHERE username = ?");
@@ -55,16 +74,31 @@ public class UserDao implements Dao<User, String, Long> {
         return user;
     }
 
+    /**
+     * Method not in use but has to be defined because of DAO interface.
+     * @param user
+     * @param username
+     * @param userNumber
+     * @return
+     */
     @Override
     public User update(User user, String username, Long userNumber) {
         return null;
     }
 
+    /**
+     * Method not in use but has to be defined because of DAO interface.
+     * @return
+     */
     @Override
     public List<User> list() {
         return null;
     }
 
+    /**
+     * Method to return database connection.
+     * @return Connection object.
+     */
     public Connection getDbConn() {
         return this.dbConn;
     }

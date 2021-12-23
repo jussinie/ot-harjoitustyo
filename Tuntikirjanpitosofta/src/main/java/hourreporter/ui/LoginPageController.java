@@ -64,17 +64,27 @@ public class LoginPageController {
         this.userService = userService;
     }
 
+    /**
+     * Method to proceed to the main page of the application, i.e. setting the main page scene.
+     * @throws Exception
+     */
     @FXML
     public void proceedToMainPage() throws Exception {
         application.initializeMainPageScene();
         application.setMainPageScene();
     }
 
+    /**
+     * Method to return to the landing page.
+     */
     @FXML
     private void goBackToLandingPage() {
         application.setLandingPageScene();
     }
 
+    /**
+     * Method to open user manual in default browser.
+     */
     @FXML
     public void openWebpage() {
         String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
@@ -84,7 +94,9 @@ public class LoginPageController {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Method to quit the program.
+     */
     @FXML
     private void quitProgram() {
         System.exit(0);

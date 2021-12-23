@@ -4,7 +4,9 @@ import hourreporter.domain.Week;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ *Class that provides the methods to access and modify User objects in the database.
+ */
 public class WeekDao implements Dao<Week, Integer, Long> {
 
     private Connection dbConn;
@@ -13,6 +15,10 @@ public class WeekDao implements Dao<Week, Integer, Long> {
 
     }
 
+    /**
+     * Constructor to create connection to the database and create needed tables if they do not yet exist.
+     * @param testOrProd string parameter to define connection to either test or production database.
+     */
     public WeekDao(String testOrProd) {
         try {
             dbConn = DriverManager.getConnection(testOrProd);
@@ -23,7 +29,11 @@ public class WeekDao implements Dao<Week, Integer, Long> {
             System.out.println("WeekDao could not connect to DB.");
         }
     }
-
+    /**
+     * Method to create new line in the database and populate it with Week object data.
+     * @param week Week object to store in the database.
+     * @throws SQLException if SQL query fails to execute for some reason.
+     */
     @Override
     public void create(Week week) throws SQLException {
         PreparedStatement ps = dbConn.prepareStatement("INSERT INTO Weeks"
@@ -41,7 +51,13 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         ps.executeUpdate();
         ps.close();
     }
-
+    /**
+     * Method to read a line from the database to be used in the application.
+     * @param weekNumber parameter to find the correct Week from the database.
+     * @param userNumber parameter to get the correct Week amongst many that have the same week number.
+     * @return Week object corresponding with the row data.
+     * @throws SQLException if SQL query fails to execute for some reason.
+     */
     @Override
     public Week read(Integer weekNumber, Long userNumber) throws SQLException {
         PreparedStatement ps = dbConn.prepareStatement("SELECT * FROM Weeks WHERE weekNumber = ? AND userNumber = ?");
@@ -64,6 +80,14 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         return w;
     }
 
+    /**
+     * Method to update Week object, i.e read it from database, modify it and save it back to the database.
+     * @param week Week object to be updated.
+     * @param weekNumber Week number to identify the correct Week.
+     * @param userNumber User number to identify the correct row for the logged user.
+     * @return Week object.
+     * @throws SQLException if SQL query fails to execute for some reason.
+     */
     @Override
     public Week update(Week week, Integer weekNumber, Long userNumber) throws SQLException {
         PreparedStatement ps = dbConn.prepareStatement("UPDATE Weeks SET monday = ?, tuesday = ?, wednesday = ?, thursday = ?, friday = ?, saturday = ?, sunday = ? WHERE weekNumber = ? AND userNumber = ?");
@@ -81,6 +105,11 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         return week;
     }
 
+    /**
+     * Method to return all the saved weeks from databse.
+     * @return List of Week objects.
+     * @throws SQLException if SQL query fails to execute for some reason.
+     */
     @Override
     public List<Week> list() throws SQLException {
         ArrayList<Week> weeks = new ArrayList<>();
@@ -101,6 +130,10 @@ public class WeekDao implements Dao<Week, Integer, Long> {
         rs.close();
         return weeks;
     }
+    /**
+     * Method to return database connection.
+     * @return Connection object.
+     */
     public Connection getDbConn() {
         return this.dbConn;
     }
