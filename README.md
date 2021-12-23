@@ -20,10 +20,18 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 ## Komentorivitoiminnot
 
 ### Ohjelman suorittaminen
-Ohjelmasta voi luoda Jar-paketin komennolla. Huomaa, että kaikki mvn-komennot tulee antaa kansiossa, jossa on pom.xml-tiedosto (eli kansiossa Tuntikirjanpitosofta). 
+Ohjelmasta voi luoda Jar-paketin komennolla
+
 > mvn package
 
-Jar-paketti ajetaan komennolla
+Huomaa, että kaikki mvn-komennot tulee antaa kansiossa, jossa on pom.xml-tiedosto (eli kansiossa Tuntikirjanpitosofta). 
+Sovelluksen juuressa on myös konfiguraatiotiedosto config.txt. Siinä on määritelty oletustietokannat tuotannolle ja testaamiselle. Sovellus käynnistyy oletusarvoisesti tuotantotilaan, ellei käyttäjä anna käynnistyskomennossa parametriä test. Tällöin käynnistyskomento on
+
+> java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar test
+
+Mikäli haluat käynnistää sovelluksen tuotantotilassa, voit suorittaa koodin parametrin prod kanssa tai kokonaan ilman parametria. 
+
+> java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar test
 > java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar
 
 ### Testaus
