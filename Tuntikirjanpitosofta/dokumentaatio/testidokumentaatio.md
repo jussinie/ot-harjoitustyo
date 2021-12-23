@@ -2,11 +2,11 @@
 
 ### Testikattavuus ja testausmetodologia ###
 
-Testikattavuus on tällä hetkellä noin ~80% niin rivi- kuin haarautumakattavuuden osalta. Testit löytyvät kahdesta pakkauksesta. DomainTests sisältää sovelluslogiikkaan ja tavallisiin luokkiin liittyvät testit, siinä missä daoTests-pakkaus sisältää tietokannan toimintaa kontrolloivien luokkien testit. UserService-luokan testauksessa on käytetty mock up -komponentteja FakeUserDao ja FakeWeekDao, jotka tallentavat tarvittavat tiedot muistiin tietokannan sijaan. Tämän injektoinnin myötä testaaminen helpottuu, kun tietokantaa ei tarvitse käyttää sovelluslogiikan testaamisessa. 
+Testikattavuus on tällä hetkellä noin ~80% rivikattavuuden ja ~70% haarautumakattavuuden osalta. Testit löytyvät kahdesta pakkauksesta. DomainTests sisältää sovelluslogiikkaan ja tavallisiin luokkiin liittyvät testit, siinä missä daoTests-pakkaus sisältää tietokannan toimintaa kontrolloivien luokkien testit. UserService-luokan testauksessa on käytetty mock up -komponentteja FakeUserDao ja FakeWeekDao, jotka tallentavat tarvittavat tiedot muistiin tietokannan sijaan. Tämän injektoinnin myötä testaaminen helpottuu, kun tietokantaa ei tarvitse käyttää sovelluslogiikan testaamisessa. 
 
-![testCoverage](https://user-images.githubusercontent.com/64590570/147101747-aecbe3a8-864f-4546-8b27-2881e90f283e.png)
+![testCoverage](https://user-images.githubusercontent.com/64590570/147246109-b22efae0-3d64-454e-8fc3-05094d8a70fa.png)
 
-Testattaessa tietokannan toimintaa hallinnoivia luokkia käytössä on testitietokanta hourreporterTest.db, joka on erillään tuotantotietokannasta hourreporter.db. UserDao ja WeekDao -luokat saavat konstruktorinsa parametrinä joko merkkijonon test tai prod, joka määrittelee luodaanko yhteys testi- vai tuotantotietokantaan. Kun yhteys testitietokantaan muodostetaan ensimmäisen kerran, luodaan samalla taulut Users ja Weeks. 
+Testattaessa tietokannan toimintaa hallinnoivia luokkia käytössä on tuotantotietokannasta erillään oleva testitietokanta. Tietokantojen nimet on mahdollista määritellä uudestaan konfiguraatiotiedoston config.txt avulla. UserDao ja WeekDao -luokat saavat konstruktorinsa parametrinä tietokantayhteyden kuvaavan merkkijonon, joka määrittelee luodaanko yhteys testi- vai tuotantotietokantaan. Kun yhteys testitietokantaan muodostetaan ensimmäisen kerran, luodaan samalla taulut Users ja Weeks. 
 
 ### Testien ajaminen ja testiraportin tarkastelu ### 
 
