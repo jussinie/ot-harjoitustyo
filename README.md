@@ -15,7 +15,7 @@ Sovelluksen avulla käyttäjät voivat kirjata ylös viikon aikana tehdyt työtu
 
 [Testausdokumentaatio](https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/testidokumentaatio.md)
 
-[Release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/viikko5)
+[Release](https://github.com/jussinie/ot-harjoitustyo/releases/tag/loppupalautus)
 
 ## Komentorivitoiminnot
 
