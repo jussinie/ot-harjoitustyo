@@ -25,13 +25,13 @@ Ohjelmasta voi luoda Jar-paketin komennolla
 > mvn package
 
 Huomaa, että kaikki mvn-komennot tulee antaa kansiossa, jossa on pom.xml-tiedosto (eli kansiossa Tuntikirjanpitosofta). 
-Sovelluksen juuressa on myös konfiguraatiotiedosto config.txt. Siinä on määritelty oletustietokannat tuotannolle ja testaamiselle. Sovellus käynnistyy oletusarvoisesti tuotantotilaan, ellei käyttäjä anna käynnistyskomennossa parametriä test. Tällöin käynnistyskomento on
+Sovelluksen kansiossa /src/main/resources/ on konfiguraatiotiedosto config.txt. Siinä on määritelty oletustietokannat tuotannolle ja testaamiselle. Käyttäjän on mahdollista halutessaan vaihtaa käytettyä tietokantaa. Sovellus käynnistyy oletusarvoisesti tuotantotilaan, ellei käyttäjä anna käynnistyskomennossa parametriä test. Tällöin käynnistyskomento on
 
 > java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar test
 
 Mikäli haluat käynnistää sovelluksen tuotantotilassa, voit suorittaa koodin parametrin prod kanssa tai kokonaan ilman parametria. 
 
-> java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar test
+> java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar prod
 > java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar
 
 HUOM! Tietokannan valinta ei vielä täysin toimi, jos käytät [releasen](https://github.com/jussinie/ot-harjoitustyo/releases/tag/loppupalautus) valmista jar-pakettia. Ohjelma käyttää tällöin oletustietokantaa hourreporter.db. 
