@@ -28,4 +28,4 @@ Viikko | Tunnit | Mitä tein
 7 | 1 | Dokumentointi
 7| 0,5 | JavaDoc viimeistelty
 
-| | **Yhteensä 51,5** |
+| | **Yhteensä 51,0** |
