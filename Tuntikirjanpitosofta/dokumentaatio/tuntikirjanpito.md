@@ -27,4 +27,4 @@ Viikko | Tunnit | Mitä tein
 7 | 0,5 | Testien refaktorointi
 
 
-| | **Yhteensä 50,0** |
+**Yhteensä 50,0** 
