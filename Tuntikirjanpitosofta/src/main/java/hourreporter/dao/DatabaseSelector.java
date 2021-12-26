@@ -20,7 +20,7 @@ public class DatabaseSelector {
      */
     private void getConnectionStringFromConfigFile() {
         connectionStrings = new String[2];
-        try (Scanner fileReader = new Scanner(Paths.get("config.txt"))) {
+        try (Scanner fileReader = new Scanner(Paths.get("src/main/resources/config.txt"))) {
             while (fileReader.hasNextLine()) {
                 String row = fileReader.nextLine();
                 if (row.isEmpty() || row.charAt(0) == '#') {
@@ -36,6 +36,8 @@ public class DatabaseSelector {
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
+            System.out.println("Falling back to default: jdbc:sqlite:hourreporter.db");
+            connectionStrings[1] = "jdbc:sqlite:hourreporter.db";
         }
     }
 
