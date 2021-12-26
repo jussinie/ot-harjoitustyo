@@ -37,6 +37,7 @@ public class DatabaseSelector {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             System.out.println("Falling back to default: jdbc:sqlite:hourreporter.db");
+            connectionStrings[0] = "jdbc:sqlite:hourreporter.db";
             connectionStrings[1] = "jdbc:sqlite:hourreporter.db";
         }
     }
