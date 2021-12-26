@@ -34,6 +34,8 @@ Mikäli haluat käynnistää sovelluksen tuotantotilassa, voit suorittaa koodin 
 > java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar test
 > java -jar Tuntikirjanpitosofta-1.0-SNAPSHOT.jar
 
+HUOM! Tietokannan valinta ei vielä täysin toimi, jos käytät [releasen](https://github.com/jussinie/ot-harjoitustyo/releases/tag/loppupalautus) valmista jar-pakettia. Ohjelma käyttää tällöin oletustietokantaa hourreporter.db. 
+
 ### Testaus
 Testit voidaan suorittaa komennolla
 > mvn test
