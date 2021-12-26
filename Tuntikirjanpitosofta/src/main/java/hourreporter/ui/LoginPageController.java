@@ -12,6 +12,9 @@ import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
+/**
+ * This method is responsible of all the actions in the login page.
+ */
 public class LoginPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -22,6 +25,11 @@ public class LoginPageController {
     @FXML
     private TextField username;
 
+    /**
+     * This method takes user input (username) and tries to execute method login() in UserService.
+     * If the user is found method proceedToMainPage() is executed and main page is presented for the user.
+     * @throws Exception
+     */
     public void handleLogin() throws Exception {
         userService.login(username.getText());
         if (userService.getUser() != null) {
@@ -50,16 +58,29 @@ public class LoginPageController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Method to proceed with the input if Enter key is pressed.
+     * @param k
+     * @throws Exception
+     */
     public void handleEnterPressed(KeyEvent k) throws Exception {
         if (k.getCode().equals(KeyCode.ENTER)) {
             handleLogin();
         }
     }
 
+    /**
+     * Method to inject the ReporterGraphUI Application.
+     * @param application Instance of ReporterGraphUI.
+     */
     public void setApplication(ReporterGraphUI application) {
         this.application = application;
     }
 
+    /**
+     * Method to inject userService instance to this class.
+     * @param userService instance of UserService class.
+     */
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -94,6 +115,7 @@ public class LoginPageController {
             e.printStackTrace();
         }
     }
+
     /**
      * Method to quit the program.
      */

@@ -12,7 +12,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import java.io.IOException;
 import java.util.List;
-
+/**
+ * This class contains all the methods to present and modify week selection page.
+ */
 public class WeekSelectionPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -26,25 +28,45 @@ public class WeekSelectionPageController {
     @FXML
     private Label createdWeeks;
 
+    /**
+     * Method to inject the ReporterGraphUI Application.
+     * @param application Instance of ReporterGraphUI.
+     */
     public void setApplication(ReporterGraphUI application) {
         this.application = application;
     }
 
+    /**
+     * Method to inject userService instance to this class.
+     * @param userService instance of UserService class.
+     */
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Method to move to week creation page in the application.
+     * @throws Exception
+     */
     public void proceedToWeekCreation() throws Exception {
         application.initializeWeekCreationScene();
         application.setWeekCreationScene();
     }
 
+    /**
+     * Method to return to the landing page (and log out).
+     */
     @FXML
     private void goBackToLandingPage() {
         userService.logout();
         application.setLandingPageScene();
     }
 
+    /**
+     * This method tries to load week from the database, when user gives the week number as input.
+     * If week doesn't exist, error message gets printed.
+     * @throws Exception
+     */
     @FXML
     private void handleWeekSelection() throws Exception {
         if (weekInput.getText().matches("-?\\d+")
@@ -60,6 +82,12 @@ public class WeekSelectionPageController {
         }
     }
 
+    /**
+     * This method prints the possible error message in handleWeekSelection method.
+     * Another method is needed to keep the code clean and also to handle the threading -
+     * to make the error message to set as empty after defined time.
+     * @param error
+     */
     private void printErrorMessage(String error) {
         // Could not work this threading in Java FX out myself.
         // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
@@ -83,6 +111,10 @@ public class WeekSelectionPageController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * This method presents the created weeks to the user in the UI.
+     * @throws Exception
+     */
     public void setCreatedWeeks() throws Exception {
         List<Week> weeks = userService.getAllWeeks(userService.getUser().getUserNumber());
         String displayedString = "";
@@ -110,6 +142,9 @@ public class WeekSelectionPageController {
         }
     }
 
+    /**
+     * Method to open user manual in default browser.
+     */
     @FXML
     public void openWebpage() {
         String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
@@ -120,6 +155,11 @@ public class WeekSelectionPageController {
         }
     }
 
+    /**
+     * Method to proceed with the input if Enter key is pressed.
+     * @param k
+     * @throws Exception
+     */
     @FXML
     public void handleEnterPressed(KeyEvent k) throws Exception {
         if (k.getCode().equals(KeyCode.ENTER)) {
@@ -127,6 +167,9 @@ public class WeekSelectionPageController {
         }
     }
 
+    /**
+     * Method to quit the program.
+     */
     @FXML
     private void quitProgram() {
         System.exit(0);

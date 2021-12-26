@@ -12,7 +12,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
-
+/**
+ * This class contains all the methods and actions for the user creation page.
+ */
 public class UserCreationController {
     private ReporterGraphUI application;
     private UserService us;
@@ -33,11 +35,13 @@ public class UserCreationController {
     private TextField team;
 
     @FXML
-    private CheckBox isTeamLead;
-
-    @FXML
     private Label errorMessage;
 
+    /**
+     * This method takes user input and tries to create a new User instance using method createUser in UserService class.
+     * If succesful, main page is shown for the user. If not succesful, user sees an error message.
+     * @throws Exception
+     */
     public void handleUserCreation() throws Exception {
         String result = us.createUser(firstName.getText(), lastName.getText(), username.getText(), role.getText(), team.getText());
         if (result.equals("ok")) {
@@ -54,6 +58,10 @@ public class UserCreationController {
         }
     }
 
+    /**
+     * This method is used to print an error message if the user cannot be created.
+     * @param error parameter that is outputted from handleUserCreation() method.
+     */
     private void printErrorMessage(String error) {
         // Could not work this threading in Java FX out myself.
         // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
@@ -77,6 +85,11 @@ public class UserCreationController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Method to proceed with the input if Enter key is pressed.
+     * @param k
+     * @throws Exception
+     */
     public void handleEnterPressed(KeyEvent k) throws Exception {
         if (k.getCode().equals(KeyCode.ENTER)) {
             handleUserCreation();
@@ -91,6 +104,9 @@ public class UserCreationController {
         this.us = us;
     }
 
+    /**
+     * Method to return to the landing page.
+     */
     public void goBackToLandingPage() {
         application.setLandingPageScene();
     }
@@ -100,11 +116,17 @@ public class UserCreationController {
         application.setMainPageScene();
     }
 
+    /**
+     * Method to quit the program.
+     */
     @FXML
     private void quitProgram() {
         System.exit(0);
     }
 
+    /**
+     * Method to open user manual in default browser.
+     */
     @FXML
     public void openWebpage() {
         String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains all the methods and actions for the week modification page.
+ */
 public class WeekModificationPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -45,10 +48,18 @@ public class WeekModificationPageController {
     @FXML
     private Label errorMessage;
 
+    /**
+     * Method to inject the ReporterGraphUI Application.
+     * @param application Instance of ReporterGraphUI.
+     */
     public void setApplication(ReporterGraphUI application) {
         this.application = application;
     }
 
+    /**
+     * Method to inject userService instance to this class.
+     * @param userService instance of UserService class.
+     */
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -64,6 +75,9 @@ public class WeekModificationPageController {
         application.setWeekSelectionScene();
     }
 
+    /**
+     * Method to return to the landing page (and log out).
+     */
     @FXML
     private void goBackToLandingPage() {
         setErrorMessageToEmpty();
@@ -71,6 +85,9 @@ public class WeekModificationPageController {
         application.setLandingPageScene();
     }
 
+    /**
+     * This method is used to present data in the user interface by setting the week's values to different text fields and labels.
+     */
     public void showWeeksHours() {
         nowModifying.setText("Now modifying Week " + userService.getWeek().getWeekNumber());
         mondayHours.setText(String.valueOf(userService.getWeek().getDaysHoursForWeek("Mon")));
@@ -83,6 +100,11 @@ public class WeekModificationPageController {
         summaryLabel.setText("Your total hours for the week: " + userService.getWeek().countWorkHours() + " | Balance: " + (userService.getWeek().countWorkHours()-37.5));
     }
 
+    /**
+     * This method takes the user input and saves it to the database using methods provided in UserService class.
+     * User input is validated with method inspectInput.
+     * @throws Exception
+     */
     public void saveWeeksHours() throws Exception {
         Week week = userService.getWeek();
         HashMap<String, String> hourInputForInspection = new HashMap<>();
@@ -107,6 +129,9 @@ public class WeekModificationPageController {
         }
     }
 
+    /**
+     * Method to open user manual in default browser.
+     */
     @FXML
     public void openWebpage() {
         String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";
@@ -124,6 +149,9 @@ public class WeekModificationPageController {
         }
     }
 
+    /**
+     * Method to quit the program.
+     */
     @FXML
     private void quitProgram() {
         System.exit(0);

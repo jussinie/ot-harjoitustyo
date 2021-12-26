@@ -10,6 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Class for the graphical UI.
+ */
 public class ReporterGraphUI extends Application {
     private Stage window;
     private Scene landingPageScene;

@@ -12,6 +12,9 @@ import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
 
+/**
+ * This class contains all the methods and actions for the week creation page.
+ */
 public class WeekCreationPageController {
     private ReporterGraphUI application;
     private UserService userService;
@@ -22,20 +25,34 @@ public class WeekCreationPageController {
     @FXML
     private TextField weekInput;
 
+    /**
+     * Method to inject the ReporterGraphUI Application.
+     * @param application Instance of ReporterGraphUI.
+     */
     public void setApplication(ReporterGraphUI application) {
         this.application = application;
     }
 
+    /**
+     * Method to inject userService instance to this class.
+     * @param userService instance of UserService class.
+     */
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * Method to return to the landing page.
+     */
     @FXML
     private void goBackToLandingPage() {
         userService.logout();
         application.setLandingPageScene();
     }
 
+    /**
+     * Method to quit the program.
+     */
     @FXML
     private void quitProgram() {
         System.exit(0);
@@ -46,6 +63,10 @@ public class WeekCreationPageController {
         application.setWeekSelectionScene();
     }
 
+    /**
+     * Tries to create a new week using user input. If succesful, user is redirected to the week modification screen.
+     * @throws Exception
+     */
     @FXML
     private void handleWeekCreation() throws Exception {
         if (weekInput.getText().matches("-?\\d+")
@@ -60,6 +81,10 @@ public class WeekCreationPageController {
         }
     }
 
+    /**
+     * This method is used to print error message in handleWeekCreation() nethod.
+     * @param error
+     */
     private void printErrorMessage(String error) {
         // Could not work this threading in Java FX out myself.
         // This technique for waiting was loaned from here: https://stackoverflow.com/questions/26454149/make-javafx-wait-and-continue-with-code
@@ -83,12 +108,20 @@ public class WeekCreationPageController {
         new Thread(sleeper).start();
     }
 
+    /**
+     * Method to proceed with the input if Enter key is pressed.
+     * @param k
+     * @throws Exception
+     */
     public void handleEnterPressed(KeyEvent k) throws Exception {
         if (k.getCode().equals(KeyCode.ENTER)) {
             handleWeekCreation();
         }
     }
 
+    /**
+     * Method to open user manual in default browser.
+     */
     @FXML
     public void openWebpage() {
         String url = "https://github.com/jussinie/ot-harjoitustyo/blob/master/Tuntikirjanpitosofta/dokumentaatio/kayttoohje.md";

@@ -25,6 +25,7 @@ Viikko | Tunnit | Mitä tein
 7 | 1 | Käyttöliittymän hiominen, bugien poistaminen, syötteiden tarkistukset
 7 | 1 | Konfiguraatiotiedoston lisääminen tietokantaan yhdistämiseksi
 7 | 0,5 | Testien refaktorointi
+7 | 1 | Dokumentointi
+7| 0,5 | JavaDoc viimeistelty
 
-
-| | **Yhteensä 50,0** |
+| | **Yhteensä 51,5** |
